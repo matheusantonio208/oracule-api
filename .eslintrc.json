@@ -11,6 +11,24 @@
   },
   "plugins": ["@typescript-eslint", "prettier", "eslint-plugin-import-helpers"],
   "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "import/extensions": ["error", "always"],
+    "class-methods-use-this": "off",
+    "no-param-reassign": "off",
+    "camelcase": "off",
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "next"
+      }
+    ],
+    "import-helpers/order-imports": [],
+
     "no-new": "off",
     "no-prototype-builtins": "off",
     "no-restricted-syntax": "off",
@@ -44,28 +62,7 @@
       }
     ],
     "no-underscore-dangle": "off",
-    "@typescript-eslint/camelcase": "off",
-    "class-methods-use-this": "off",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "ts": "never"
-      }
-    ],
-    "import-helpers/order-imports": [
-      "warn",
-      {
-        "newlinesBetween": "always", // new line between groups
-        "groups": [
-          "module",
-          "/^@server/shared/",
-          "/^@/",
-          ["parent", "sibling", "index"]
-        ],
-        "alphabetize": { "order": "asc", "ignoreCase": true }
-      }
-    ]
+    "@typescript-eslint/camelcase": "off"
   },
   "settings": {
     "node": {
