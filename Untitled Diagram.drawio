@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-05-26T01:34:43.766Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36" etag="XTVBFbODK92XIEkSml2n" version="18.1.2" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2022-05-26T01:38:41.781Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36" etag="8Ntq1dH_5T3aTQ7Yj9KH" version="18.1.2" type="github" pages="2">
   <diagram id="vCUuViBtyJCsyu-AjxXu" name="Tabelas">
-    <mxGraphModel dx="2918" dy="557" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2678" dy="557" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -159,7 +159,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="oDekR_zHLFmKbgKl4XFu-68" value="Produto" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-          <mxGeometry x="960" y="80" width="160" height="1230" as="geometry" />
+          <mxGeometry x="960" y="80" width="160" height="1260" as="geometry" />
         </mxCell>
         <mxCell id="oDekR_zHLFmKbgKl4XFu-69" value="nome" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=0" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="30" width="160" height="30" as="geometry" />
@@ -191,95 +191,98 @@
         <mxCell id="oDekR_zHLFmKbgKl4XFu-84" value="operador_responsável" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="300" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-83" value="aquivos_produção" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="1Oszknq3GVxiLIP5hmBy-1" value="Manual de Criação" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" vertex="1" parent="oDekR_zHLFmKbgKl4XFu-68">
           <mxGeometry y="330" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-92" value="aquivos_metaprodutos" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-83" value="aquivos_produção" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="360" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-86" value="matéria_primas (ex: Caneca Cerâmica Rosa)" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-92" value="aquivos_metaprodutos" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="390" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-87" value="máquinas" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-86" value="matéria_primas (ex: Caneca Cerâmica Rosa)" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="420" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-88" value="ferramentas (beckers, panelas)" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-87" value="máquinas" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="450" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-89" value="insumos (tintas, papeis, ingredientes)" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-88" value="ferramentas (beckers, panelas)" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="480" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-91" value="info_adicional (conteúdo como tutoriais, manuais, procedimentos, de como produzir ou embalar esse produto)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-89" value="insumos (tintas, papeis, ingredientes)" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="510" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-94" value="tempo_produção" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-91" value="info_adicional (conteúdo como tutoriais, manuais, procedimentos, de como produzir ou embalar esse produto)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="540" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mXWzdU9Wzd1N36tSL-_R-1" value="tempo_para_produção" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-94" value="tempo_produção" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="570" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mXWzdU9Wzd1N36tSL-_R-2" value="tempo_para_envio" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="mXWzdU9Wzd1N36tSL-_R-1" value="tempo_para_produção" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="600" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-74" value="custeio (custo de produção)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="mXWzdU9Wzd1N36tSL-_R-2" value="tempo_para_envio" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="630" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-75" value="variações" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-74" value="custeio (custo de produção)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="660" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-79" value="estoque" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-75" value="variações" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="690" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-80" value="composição?" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-79" value="estoque" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="720" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-81" value="produtos_composição" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-80" value="composição?" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="750" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-82" value="sku (sku matéria-prima + codigo produto + variação) " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-81" value="produtos_composição" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="780" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-76" value="ficha_tecninca_produto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-82" value="sku (sku matéria-prima + codigo produto + variação) " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="810" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-95" value="status" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-76" value="ficha_tecninca_produto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="840" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-100" value="largura_produto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-95" value="status" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="870" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-101" value="altura_produto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-100" value="largura_produto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="900" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-102" value="profundidade_produto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-101" value="altura_produto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="930" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-138" value="largura_metaproduto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-102" value="profundidade_produto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="960" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="nfHbHCJHgqCDm1bMXmoA-3" value="profundidade_metaproduto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-138" value="largura_metaproduto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="990" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="nfHbHCJHgqCDm1bMXmoA-2" value="altura_metaproduto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="nfHbHCJHgqCDm1bMXmoA-3" value="profundidade_metaproduto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="1020" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-96" value="peso_liquido (refere-se ao peso do produto isolado, sem incluir o recipiente ou embalagem. Ex: o peso das sardinhas antes de serem colocadas em latas)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="nfHbHCJHgqCDm1bMXmoA-2" value="altura_metaproduto" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="1050" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-97" value="peso_bruto_produto (significa o peso total, incluindo o produto, a embalagem ou qualquer outro invólucro necessário para o transporte. Ex: o peso dos biscoitos somado ao pacote no qual eles foram embalados.)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-96" value="peso_liquido (refere-se ao peso do produto isolado, sem incluir o recipiente ou embalagem. Ex: o peso das sardinhas antes de serem colocadas em latas)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="1080" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-104" value="ean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-97" value="peso_bruto_produto (significa o peso total, incluindo o produto, a embalagem ou qualquer outro invólucro necessário para o transporte. Ex: o peso dos biscoitos somado ao pacote no qual eles foram embalados.)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="1110" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-106" value="ean_tributária" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-104" value="ean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="1140" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-109" value="tributação" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-106" value="ean_tributária" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="1170" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="oDekR_zHLFmKbgKl4XFu-210" value="histórico_comercial" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-109" value="tributação" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
           <mxGeometry y="1200" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oDekR_zHLFmKbgKl4XFu-210" value="histórico_comercial" style="text;strokeColor=none;fillColor=#FFD4A8;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1" parent="oDekR_zHLFmKbgKl4XFu-68" vertex="1">
+          <mxGeometry y="1230" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="oDekR_zHLFmKbgKl4XFu-183" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="oDekR_zHLFmKbgKl4XFu-68" source="oDekR_zHLFmKbgKl4XFu-68" target="oDekR_zHLFmKbgKl4XFu-81" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -840,6 +843,9 @@
         <mxCell id="tdj8PFWuCU0hiTkZt9-2-3" value="Cadastrar Funções Operacionais" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-56" y="1231" width="120" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="-ZvxtnGD4EmSpBtCJkfZ-43" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=1 1;strokeWidth=1;" edge="1" parent="1" source="rVLN2LPYF8Zunwq3snvZ-1" target="-ZvxtnGD4EmSpBtCJkfZ-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="rVLN2LPYF8Zunwq3snvZ-1" value="Cadastrar Operador" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="128" y="1231" width="120" height="60" as="geometry" />
         </mxCell>
@@ -953,6 +959,9 @@
         </mxCell>
         <mxCell id="-ZvxtnGD4EmSpBtCJkfZ-38" value="Gerenciar Pedidos" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
           <mxGeometry x="344" y="671" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-ZvxtnGD4EmSpBtCJkfZ-42" value="Cadastrar Conteúdo Educacional" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="328" y="1231" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
