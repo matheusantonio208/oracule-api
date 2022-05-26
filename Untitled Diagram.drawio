@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-05-26T16:05:11.903Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" etag="m4twmh_7lljIEDdYyBrT" version="18.1.2" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-05-26T16:08:03.246Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" etag="rcgRqHAB5jw1UF0OxPaT" version="18.1.2" type="github" pages="3">
   <diagram id="Zud_ueIcR6ASc4H9fNq8" name="Fluxo">
     <mxGraphModel dx="1424" dy="557" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -960,7 +960,7 @@
         <mxCell id="hC3of_r0Ax6fPR6HMzZb-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=0;endArrow=none;endFill=0;" edge="1" parent="1" source="e7vfTkE2oTO4CBz25p2M-2" target="hC3of_r0Ax6fPR6HMzZb-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <UserObject label="&lt;b&gt;[post] /factory/create-factory&lt;/b&gt;&lt;br&gt;&lt;br&gt;{ name, product_model }" lucidchartObjectId="9_ShsK29GTZY" id="e7vfTkE2oTO4CBz25p2M-2">
+        <UserObject label="&lt;b&gt;[post] /factory/create-factory&lt;/b&gt;" lucidchartObjectId="9_ShsK29GTZY" id="e7vfTkE2oTO4CBz25p2M-2">
           <mxCell style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;fontSize=16.7;fontColor=#3a414a;spacing=9;strokeColor=#3a414a;strokeOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9;strokeWidth=0.8;" parent="1" vertex="1">
             <mxGeometry x="236" y="99" width="165" height="138" as="geometry" />
           </mxCell>
