@@ -1,12 +1,12 @@
-import { Request, Response } from 'express';
 import { Document } from 'mongoose';
 
+import { IRequest, IResponse } from '../../@types/index';
 import { FactoryCreateDto } from './dto/factory-create-dto';
 import { IFactory } from './factory-interface';
 import FactoryRepository from './factory-repository';
 
 class FactoryController {
-  async store(req: Request, res: Response) {
+  async store(req: IRequest, res: IResponse) {
     try {
       const factoryCreateDto: FactoryCreateDto = new FactoryCreateDto(req.body);
       const factoryCreated: Document<IFactory> = await FactoryRepository.create(

@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 
 import { IMachine } from '#controllers/Machine/machine-interface';
 
-const factorySchema = new Schema<IMachine>(
+const machineSchema = new Schema<IMachine>(
   {
     name: {
       type: String,
@@ -29,4 +29,4 @@ const factorySchema = new Schema<IMachine>(
   { timestamps: true },
 );
 
-export default model<IMachine>('factories', factorySchema);
+export default model<IMachine>('machines', machineSchema);
