@@ -1,0 +1,25 @@
+import { Request, Response } from 'express';
+import { Document } from 'mongoose';
+
+import { FactoryCreateDto } from './dto/factory-create-dto';
+import { IFactory } from './factory-interface';
+import FactoryRepository from './factory-repository';
+
+class FactoryController {
+  async store(req: Request, res: Response) {
+    try {
+      const factoryCreateDto: FactoryCreateDto = new FactoryCreateDto(req.body);
+      const factoryCreated: Document<IFactory> = await FactoryRepository.create(
+        factoryCreateDto,
+      );
+
+      return res
+        .status(201)
+        .json({ success_msg: `Success! Your object is ${factoryCreated}` });
+    } catch (error) {
+      return res.status(401).json({ error_msg: `Error! ${error}` });
+    }
+  }
+}
+
+export default new FactoryController();

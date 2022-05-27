@@ -1,7 +1,8 @@
 import '#config/env-loader.js';
-import express from 'express';
 import cors from 'cors';
-import YouchLogs from '#config/debug/youch-config.js'
+import express from 'express';
+
+import YouchLogs from '#config/debug/youch-config.js';
 
 // After installing the database layer, add a new variable as in the example:
 // import DatabaseDB from '#config/db-database/db-connect.js';
@@ -17,7 +18,7 @@ class ApiConfig {
 
     // DatabaseDB.start();
   }
-  
+
   middlewares() {
     this.server.use(cors());
     this.server.use(YouchLogs);

@@ -16,6 +16,7 @@ class MongoConnect {
     mongoose.connection.on('error', () =>
       console.error('Mongo connection error:'),
     );
+
     mongoose.connection.once('open', () =>
       console.log('Mongo database connected!'),
     );
