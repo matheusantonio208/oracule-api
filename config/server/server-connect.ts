@@ -2,6 +2,8 @@
 import server from '#config/server/api-config.js';
 
 class Server {
+  port: number;
+
   constructor() {
     const port = this.normalizePort(process.env.SERVER_PORT || '3000');
 
@@ -11,7 +13,7 @@ class Server {
     this.start(port);
   }
 
-  normalizePort(port) {
+  normalizePort(port): Boolean | Number {
     const numberPort = parseInt(port, 10);
 
     if (numberPort >= 0) {
@@ -21,13 +23,13 @@ class Server {
     return false;
   }
 
-  onError(error) {
+  onError(error): void {
     if (error.syscall !== 'listen') {
       throw error;
     }
 
     const bind =
-      typeof port === 'string' ? `Pipe ${this.port}` : `Port ${this.port}`;
+      typeof this.port === 'string' ? `Pipe ${this.port}` : `Port ${this.port}`;
 
     switch (error.code) {
       case 'EACCES':
@@ -45,7 +47,7 @@ class Server {
     }
   }
 
-  start(serverPort) {
+  start(serverPort): void {
     server.listen(serverPort, () => {
       console.info(`Server is running in port ${serverPort}`);
     });

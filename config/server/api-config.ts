@@ -1,31 +1,32 @@
 import '#config/env-loader.js';
 import cors from 'cors';
 import express from 'express';
+import * as core from 'express-serve-static-core';
 
+import DatabaseDB from '#config/db-mongo/mongo-connect.js';
 import YouchLogs from '#config/debug/youch-config.js';
-
-// After installing the database layer, add a new variable as in the example:
-// import DatabaseDB from '#config/db-database/db-connect.js';
 
 import routes from '#controllers/routes-api.js';
 
 class ApiConfig {
+  server: core.Express;
+
   constructor() {
     this.server = express();
 
     this.middlewares();
     this.routes();
 
-    // DatabaseDB.start();
+    DatabaseDB.start();
   }
 
-  middlewares() {
+  middlewares(): void {
     this.server.use(cors());
     this.server.use(YouchLogs);
     this.server.use(express.json());
   }
 
-  routes() {
+  routes(): void {
     this.server.use(routes);
   }
 }
