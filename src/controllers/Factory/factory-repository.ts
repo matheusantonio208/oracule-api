@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-import Factory from '#schemas/Factory';
+import Factory from '../../schemas/Factory';
 
 import { FactoryCreateDto } from './dto/factory-create-dto';
 import { IFactory } from './factory-interface';

@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-import { IProvider } from '#controllers/Provider/provider-interface';
+import { IProvider } from '../controllers/Provider/provider-interface';
 
 const providerSchema = new Schema<IProvider>(
   {

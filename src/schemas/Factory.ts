@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-import { IFactory } from '#controllers/Factory/factory-interface';
+import { IFactory } from '../controllers/Factory/factory-interface';
 
 const factorySchema = new Schema<IFactory>(
   {

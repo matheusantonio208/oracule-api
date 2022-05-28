@@ -1,12 +1,12 @@
-import { Request, Response } from 'express';
 import { Document } from 'mongoose';
+import { IRequest, IResponse } from '../../@types';
 
 import { ProviderCreateDto } from './dto/provider-create-dto';
 import { IProvider } from './provider-interface';
 import ProviderRepository from './provider-repository';
 
 class ProviderController {
-  async store(req: Request, res: Response) {
+  async store(req: IRequest, res: IResponse) {
     try {
       const providerCreateDto: ProviderCreateDto = new ProviderCreateDto(
         req.body,

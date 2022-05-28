@@ -1,12 +1,12 @@
-import { Request, Response } from 'express';
 import { Document } from 'mongoose';
+import { IRequest, IResponse } from '../../@types';
 
 import { MachineCreateDto } from './dto/machine-create-dto';
 import { IMachine } from './machine-interface';
 import MachineRepository from './machine-repository';
 
 class MachineController {
-  async store(req: Request, res: Response) {
+  async store(req: IRequest, res: IResponse) {
     try {
       const machineCreateDto: MachineCreateDto = new MachineCreateDto(req.body);
       const machineCreated: Document<IMachine> = await MachineRepository.create(

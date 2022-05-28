@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-import Provider from '#schemas/Provider';
+import Provider from '../../schemas/Provider';
 
 import { ProviderCreateDto } from './dto/provider-create-dto';
 import { IProvider } from './provider-interface';

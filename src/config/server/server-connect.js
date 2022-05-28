@@ -1,9 +1,7 @@
 /* eslint no-console: "off" */
-import server from '#config/server/api-config.js';
+import server from './api-config.js';
 
 class Server {
-  port: number;
-
   constructor() {
     const port = this.normalizePort(process.env.SERVER_PORT || '3000');
 
@@ -13,7 +11,7 @@ class Server {
     this.start(port);
   }
 
-  normalizePort(port): Boolean | Number {
+  normalizePort(port) {
     const numberPort = parseInt(port, 10);
 
     if (numberPort >= 0) {
@@ -23,13 +21,13 @@ class Server {
     return false;
   }
 
-  onError(error): void {
+  onError(error) {
     if (error.syscall !== 'listen') {
       throw error;
     }
 
     const bind =
-      typeof this.port === 'string' ? `Pipe ${this.port}` : `Port ${this.port}`;
+      typeof port === 'string' ? `Pipe ${this.port}` : `Port ${this.port}`;
 
     switch (error.code) {
       case 'EACCES':
@@ -47,7 +45,7 @@ class Server {
     }
   }
 
-  start(serverPort): void {
+  start(serverPort) {
     server.listen(serverPort, () => {
       console.info(`Server is running in port ${serverPort}`);
     });

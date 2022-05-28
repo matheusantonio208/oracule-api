@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-import Machine from '#schemas/Machine';
+import Machine from '../../schemas/Machine';
 
 import { MachineCreateDto } from './dto/machine-create-dto';
 import { IMachine } from './machine-interface';
