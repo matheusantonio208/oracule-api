@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import adService from './Ad/ad-service';
 
 class Routes {
   route: any;
@@ -9,10 +10,11 @@ class Routes {
   }
 
   exampleRoute(baseRoute) {
-    this.route.get(`${baseRoute}`, (req, res) => {
+    this.route.get(`${baseRoute}`, async (req, res) => {
+      const ean = await adService.generateEan13();
+
       return res.status(200).json({
-        success_msg:
-          'Welcome to Atlantjs. Onde sua criatividade vira realidade.',
+        success_msg: `${ean}`,
       });
     });
 

@@ -2076,6 +2076,11 @@ binary-extensions@^2.0.0:
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
+bitgener@^1.2.10:
+  version "1.2.10"
+  resolved "https://registry.yarnpkg.com/bitgener/-/bitgener-1.2.10.tgz#0f9857deec8306dbff1898d07457a4ade2dcc66d"
+  integrity sha512-fWIFVD89MBWbhJL3MuFEAPTMzUY/tyPo98J8B/pPEV6xsPcncN7bO0E4Bt2/gRAjeV8+H1t7nGup0cvU1nGWfg==
+
 bl@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/bl/-/bl-2.2.1.tgz#8c11a7b730655c5d56898cdc871224f40fd901d5"
@@ -2746,6 +2751,11 @@ dynamic-dedupe@^0.3.0:
   integrity sha1-BuRMIj9eTpTXjvnbI6ZRXOL5YqE=
   dependencies:
     xtend "^4.0.0"
+
+ean-check@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/ean-check/-/ean-check-0.1.1.tgz#c069b70b93e0dd203bee24dad912034d129f7c81"
+  integrity sha512-V9JoEPWahwGlpTmqBXtm+8HTvEX6O3X+yMFKDPAObPmAdwBxExqvvmaace+4qV2/YlsYKk1NZfHL0WW91++AgQ==
 
 eastasianwidth@^0.2.0:
   version "0.2.0"
