@@ -11,7 +11,15 @@ class Routes {
 
   exampleRoute(baseRoute) {
     this.route.get(`${baseRoute}`, async (req, res) => {
-      const ean = await adService.generateEan13();
+      const ean = await adService.generateTitles(
+        ['Caneca', 'Xícara'],
+        ['Cerâmica', 'Porcelana'],
+        ['Avatar', 'A lenda de eng'],
+        ['Poster'],
+        ['Azul', 'Verde'],
+        ['Filmes', 'Anime'],
+        60,
+      );
 
       return res.status(200).json({
         success_msg: `${ean}`,
