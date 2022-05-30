@@ -1,9 +1,9 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
-import { PersonCreateDto } from './dto/person-create-dto';
-import { IPerson } from './person-interface';
-import PersonRepository from './person-repository';
+import { PersonCreateDto } from './dto/person-create.dto';
+import { IPerson } from './person.interface';
+import PersonRepository from './person.repository';
 
 class PersonController {
   async store(req: IRequest, res: IResponse) {

@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-import { IAd } from '../ad-interface';
+import { IAd } from '../ad.interface';
 
 export class AdCreateDto implements IAd {
   person_id: {

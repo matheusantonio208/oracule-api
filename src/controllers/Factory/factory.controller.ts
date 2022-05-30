@@ -1,9 +1,9 @@
 import { Document } from 'mongoose';
 
 import { IRequest, IResponse } from '../../@types/index';
-import { FactoryCreateDto } from './dto/factory-create-dto';
-import { IFactory } from './factory-interface';
-import FactoryRepository from './factory-repository';
+import { FactoryCreateDto } from './dto/factory-create.dto';
+import { IFactory } from './factory.interface';
+import FactoryRepository from './factory.repository';
 
 class FactoryController {
   async store(req: IRequest, res: IResponse) {

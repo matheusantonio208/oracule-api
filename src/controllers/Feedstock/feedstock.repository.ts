@@ -2,8 +2,8 @@ import { Document } from 'mongoose';
 
 import Feedstock from '../../schemas/Feedstock';
 
-import { FeedstockCreateDto } from './dto/feedstock-create-dto';
-import { IFeedstock } from './feedstock-interface';
+import { FeedstockCreateDto } from './dto/feedstock-create.dto';
+import { IFeedstock } from './feedstock.interface';
 
 class FeedstockRepository {
   async create(feedstock: FeedstockCreateDto): Promise<Document<IFeedstock>> {

@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-import { IFactory } from '../factory-interface';
+import { IFactory } from '../factory.interface';
 
 export class FactoryCreateDto implements IFactory {
   name: string;

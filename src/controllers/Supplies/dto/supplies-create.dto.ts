@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-import { ISupplies } from '../supplies-interface';
+import { ISupplies } from '../supplies.interface';
 
 export class SuppliesCreateDto implements ISupplies {
   image_id: [

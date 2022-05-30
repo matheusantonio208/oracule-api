@@ -1,9 +1,9 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
-import { AdCreateDto } from './dto/ad-create-dto';
-import { IAd } from './ad-interface';
-import AdRepository from './ad-repository';
+import { AdCreateDto } from './dto/ad-create.dto';
+import { IAd } from './ad.interface';
+import AdRepository from './ad.repository';
 
 class AdController {
   async store(req: IRequest, res: IResponse) {

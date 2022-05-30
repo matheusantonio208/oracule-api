@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-import { IPerson } from '../controllers/Person/person-interface';
+import { IPerson } from '../controllers/Person/person.interface';
 
 const personSchema = new Schema<IPerson>(
   {

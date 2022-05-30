@@ -3,10 +3,9 @@ import express from 'express';
 import cors from 'cors';
 import YouchLogs from '../debug/youch-config.js';
 
-// After installing the database layer, add a new variable as in the example:
-// import DatabaseDB from '#config/db-database/db-connect.js';
+import MongoDB from '../db-mongo/mongo-connect';
 
-import routes from '../../controllers/routes-api';
+import routes from '../../controllers/routes';
 
 class ApiConfig {
   constructor() {
@@ -15,7 +14,7 @@ class ApiConfig {
     this.middlewares();
     this.routes();
 
-    // DatabaseDB.start();
+    MongoDB.start();
   }
 
   middlewares() {

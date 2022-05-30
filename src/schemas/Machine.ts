@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-import { IMachine } from '../controllers/Machine/machine-interface';
+import { IMachine } from '../controllers/Machine/machine.interface';
 
 const machineSchema = new Schema<IMachine>(
   {

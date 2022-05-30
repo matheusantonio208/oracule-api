@@ -2,8 +2,8 @@ import { Document } from 'mongoose';
 
 import Supplies from '../../schemas/Supplies';
 
-import { SuppliesCreateDto } from './dto/supplies-create-dto';
-import { ISupplies } from './supplies-interface';
+import { SuppliesCreateDto } from './dto/supplies-create.dto';
+import { ISupplies } from './supplies.interface';
 
 class SuppliesRepository {
   async create(supplies: SuppliesCreateDto): Promise<Document<ISupplies>> {

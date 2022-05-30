@@ -1,9 +1,9 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
-import { MachineCreateDto } from './dto/machine-create-dto';
-import { IMachine } from './machine-interface';
-import MachineRepository from './machine-repository';
+import { MachineCreateDto } from './dto/machine-create.dto';
+import { IMachine } from './machine.interface';
+import MachineRepository from './machine.repository';
 
 class MachineController {
   async store(req: IRequest, res: IResponse) {

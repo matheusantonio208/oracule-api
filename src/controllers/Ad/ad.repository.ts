@@ -2,8 +2,8 @@ import { Document } from 'mongoose';
 
 import Ad from '../../schemas/Ad';
 
-import { AdCreateDto } from './dto/ad-create-dto';
-import { IAd } from './ad-interface';
+import { AdCreateDto } from './dto/ad-create.dto';
+import { IAd } from './ad.interface';
 
 class AdRepository {
   async create(ad: AdCreateDto): Promise<Document<IAd>> {

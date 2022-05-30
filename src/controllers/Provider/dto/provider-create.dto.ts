@@ -1,8 +1,8 @@
 import { Schema } from 'mongoose';
 
-import { IFeedstock } from '../feedstock-interface';
+import { IProvider } from '../provider.interface';
 
-export class FeedstockCreateDto implements IFeedstock {
+export class ProviderCreateDto implements IProvider {
   person_id: {
     type: Schema.Types.ObjectId;
     ref: 'persons';
@@ -18,7 +18,7 @@ export class FeedstockCreateDto implements IFeedstock {
     },
   ];
 
-  constructor(body: IFeedstock) {
+  constructor(body: IProvider) {
     this.person_id = body?.person_id;
     this.categories = body?.categories;
     this.products_id = body?.products_id;

@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-import { IStock } from '../stock-interface';
+import { IStock } from '../stock.interface';
 
 export class StockCreateDto implements IStock {
   input_amount: number;

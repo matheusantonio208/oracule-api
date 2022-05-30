@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-import { IPerson } from '../person-interface';
+import { IPerson } from '../person.interface';
 
 export class PersonCreateDto implements IPerson {
   image_profile_id: [

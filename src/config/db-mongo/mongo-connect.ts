@@ -3,23 +3,27 @@ import mongoose from 'mongoose';
 
 class MongoConnect {
   start(): void {
-    mongoose.connect(
-      `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB_NAME}?authSource=admin`,
-      {
+    const connectionUri: string = this.getConnectionUri();
+
+    mongoose.Promise = global.Promise;
+
+    mongoose
+      .connect(connectionUri, {
         useNewUrlParser: true,
         useFindAndModify: false,
         useCreateIndex: true,
         useUnifiedTopology: true,
-      },
-    );
+      })
+      .then((result) => console.log(`Connect with Mongo in ${connectionUri}`))
+      .catch((error) => console.log(error));
+  }
 
-    mongoose.connection.on('error', () =>
-      console.error('Mongo connection error:'),
-    );
+  getConnectionUri(): string {
+    if (process.env.MONGO_HOST) {
+      return `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB_NAME}`;
+    }
 
-    mongoose.connection.once('open', () =>
-      console.log('Mongo database connected!'),
-    );
+    return `mongodb://localhost:${process.env.MONGO_PORT}/${process.env.MONGO_DB_NAME}`;
   }
 }
 

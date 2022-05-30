@@ -9,7 +9,27 @@
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
     "node_modules": true,
+    "dist": true,
+    "config": true,
     ".husky": true,
-    "__tests__": true
+    "__tests__": true,
+    "/c:/Users/mathe/OneDrive/Área de Trabalho/projects/Blintch/oracule-api/src/config": true,
+    ".prettierrc": true,
+    ".dockerignore": true,
+    ".editorconfig": true,
+    ".env": true,
+    ".eslintignore": true,
+    ".eslintrc.json": true,
+    ".gitignore": true,
+    "babel.config.js": true,
+    "docker-compose.yml": true,
+    "jest.config.js": true,
+    "makefile": true,
+    "package.json": true,
+    "README.md": true,
+    "tsconfig.json": true,
+    "yarn.lock": true,
+    "src/config": true,
+    "src/@types": true
   }
 }

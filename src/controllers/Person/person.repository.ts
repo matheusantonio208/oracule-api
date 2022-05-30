@@ -2,8 +2,8 @@ import { Document } from 'mongoose';
 
 import Person from '../../schemas/Person';
 
-import { PersonCreateDto } from './dto/person-create-dto';
-import { IPerson } from './person-interface';
+import { PersonCreateDto } from './dto/person-create.dto';
+import { IPerson } from './person.interface';
 
 class PersonRepository {
   async create(person: PersonCreateDto): Promise<Document<IPerson>> {

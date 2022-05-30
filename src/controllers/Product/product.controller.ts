@@ -1,9 +1,9 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
-import { ProductCreateDto } from './dto/product-create-dto';
-import { IProduct } from './product-interface';
-import ProductRepository from './product-repository';
+import { ProductCreateDto } from './dto/product-create.dto';
+import { IProduct } from './product.interface';
+import ProductRepository from './product.repository';
 
 class ProductController {
   async store(req: IRequest, res: IResponse) {

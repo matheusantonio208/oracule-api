@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-import { ISupplies } from '../controllers/Supplies/supplies-interface';
+import { ISupplies } from '../controllers/Supplies/supplies.interface';
 
 const suppliesSchema = new Schema<ISupplies>(
   {

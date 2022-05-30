@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-import { IMachine } from '../machine-interface';
+import { IMachine } from '../machine.interface';
 
 export class MachineCreateDto implements IMachine {
   name: string;

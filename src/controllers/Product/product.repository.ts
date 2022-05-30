@@ -2,8 +2,8 @@ import { Document } from 'mongoose';
 
 import Product from '../../schemas/Product';
 
-import { ProductCreateDto } from './dto/product-create-dto';
-import { IProduct } from './product-interface';
+import { ProductCreateDto } from './dto/product-create.dto';
+import { IProduct } from './product.interface';
 
 class ProductRepository {
   async create(product: ProductCreateDto): Promise<Document<IProduct>> {
