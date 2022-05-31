@@ -5,4 +5,5 @@ jsconfig.json
 docker*
 android
 ios
+.dev
 __tests__

@@ -1,22 +1,22 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
-import { ProductCreateDto } from './dto/product-create.dto';
-import { IProduct } from './product.interface';
-import ProductRepository from './product.repository';
+import { XxxxCreateDto } from './dto/xxxx-create.dto';
+import { IXxxx } from './xxxx.interface';
+import XxxxRepository from './xxxx.repository';
 
-class ProductController {
+class XxxxController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const productCreateDto: ProductCreateDto = new ProductCreateDto(req.body);
+      const xxxxCreateDto: XxxxCreateDto = new XxxxCreateDto(req.body);
 
-      const productCreated: Document<IProduct> = await ProductRepository.create(
-        productCreateDto,
+      const xxxxCreated: Document<IXxxx> = await XxxxRepository.create(
+        xxxxCreateDto,
       );
 
       return res
         .status(201)
-        .json({ success_msg: `Success! Your object is ${productCreated}` });
+        .json({ success_msg: `Success! Your object is ${xxxxCreated}` });
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
@@ -48,4 +48,4 @@ class ProductController {
   }
 }
 
-export default new ProductController();
+export default new XxxxController();

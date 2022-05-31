@@ -1,10 +1,6 @@
 import { Schema } from 'mongoose';
 
 export interface IProduct {
-  icon_id: {
-    type: Schema.Types.ObjectId;
-    ref: 'icons_products';
-  };
   images_id: [
     {
       type: Schema.Types.ObjectId;
@@ -16,15 +12,18 @@ export interface IProduct {
     ref: 'videos_product';
   };
   name: string;
+  product_code: number;
   sku: string;
   brand_id: {
     type: Schema.Types.ObjectId;
     ref: 'brands';
   };
-  categories_id: {
-    type: Schema.Types.ObjectId;
-    ref: 'categories_product';
-  };
+  categories_id: [
+    {
+      type: Schema.Types.ObjectId;
+      ref: 'categories_product';
+    },
+  ];
   tags: [
     {
       type: string;
@@ -34,45 +33,58 @@ export interface IProduct {
     type: string;
     enum: ['own', 'outsourced'];
   };
-  provider_id: {
+  provider_id?: {
     type: Schema.Types.ObjectId;
     ref: 'providers';
   };
-  production_time_in_minutes: number;
-  feedstock_id: [
+  production_procedure: [
     {
-      type: Schema.Types.ObjectId;
-      ref: 'feedstock';
+      order_step: number;
+      name_step: string;
+      description_step: string;
+
+      time_in_minutes: number;
+
+      machine_id: {
+        type: Schema.Types.ObjectId;
+        ref: 'machines';
+      };
+
+      tools_id: [
+        {
+          type: Schema.Types.ObjectId;
+          ref: 'tools';
+        },
+      ];
+
+      employee_id: [
+        {
+          type: Schema.Types.ObjectId;
+          ref: 'employees';
+        },
+      ];
+      feedstock_id: [
+        {
+          type: Schema.Types.ObjectId;
+          ref: 'feedstock';
+        },
+      ];
+      supplies: [
+        {
+          supplies_id: {
+            type: Schema.Types.ObjectId;
+            ref: 'supplies';
+          };
+          amount: number;
+        },
+      ];
     },
   ];
-  supplies_id: [
-    {
-      type: Schema.Types.ObjectId;
-      ref: 'supplies';
-    },
-  ];
-  employee_id: [
-    {
-      type: Schema.Types.ObjectId;
-      ref: 'employees';
-    },
-  ];
+
   files_production: [
     {
       name: string;
       path: string;
-    },
-  ];
-  machines_id: [
-    {
-      type: Schema.Types.ObjectId;
-      ref: 'machines';
-    },
-  ];
-  products_id: [
-    {
-      type: Schema.Types.ObjectId;
-      ref: 'products';
     },
   ];
   production_cost: number;
@@ -82,6 +94,6 @@ export interface IProduct {
     height_in_cm: number;
     depth_in_cm: number;
     material: string;
+    expiration_time_in_days?: Number;
   };
-  expiration_date: Date;
 }
