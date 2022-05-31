@@ -4,12 +4,12 @@ import { IXxxx } from '../controllers/XXXX/xxxx.interface';
 
 const xxxxSchema = new Schema<IXxxx>(
   {
-    name: {
-      type: String,
-      required: true,
+    property_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'schemaRef',
     },
   },
   { timestamps: true },
 );
 
-export default model<IXxxx>('categories', xxxxSchema);
+export default model<IXxxx>('xxxxs', xxxxSchema);

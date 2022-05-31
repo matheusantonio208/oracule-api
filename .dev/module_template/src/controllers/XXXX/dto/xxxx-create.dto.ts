@@ -5,7 +5,7 @@ import { IXxxx } from '../xxxx.interface';
 export class XxxxCreateDto implements IXxxx {
   property_id: {
     type: Schema.Types.ObjectId;
-    ref: 'persons';
+    ref: 'schemaRef';
   };
 
   constructor(body: IXxxx) {

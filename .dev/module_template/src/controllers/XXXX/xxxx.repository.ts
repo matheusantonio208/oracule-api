@@ -24,15 +24,24 @@ class XxxxRepository {
   }
 
   async listAll(): Promise<Array<Document<IXxxx>>> {
-    const xxxxs = await Xxxx.find();
+    const categories = await Xxxx.find({}, (err, docs) => {
+      if (!err) return docs;
+    });
 
-    if (xxxxs) return xxxxs;
+    if (categories) return categories;
 
-    throw new Error(`Error to list xxxxs`);
+    throw new Error(`Error to list categories`);
   }
 
   async updateById(id: string, data: any): Promise<Document<IXxxx>> {
-    const updatedXxxx = await Xxxx.findByIdAndUpdate(id, data);
+    const updatedXxxx = await Xxxx.findByIdAndUpdate(
+      id,
+      data,
+      (error, document) => {
+        if (!error) return document;
+      },
+    );
+
     if (updatedXxxx) return updatedXxxx;
 
     throw new Error(`Error to update xxxx`);
