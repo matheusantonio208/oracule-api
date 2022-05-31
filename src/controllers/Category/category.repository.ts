@@ -1,4 +1,4 @@
-import { Document } from 'mongoose';
+import { Document, Model } from 'mongoose';
 
 import Category from '../../schemas/Category';
 
@@ -17,16 +17,19 @@ class CategoryRepository {
   }
 
   async getOneById(id: string): Promise<Document<ICategory>> {
-    const category = await Category.findById(id);
+    const category: Document<ICategory> = await Category.findById(id);
     if (category) return category;
 
     throw new Error(`Error to get category`);
   }
 
   async listAll(): Promise<Array<Document<ICategory>>> {
-    const categories = await Category.find({}, (err, docs) => {
-      if (!err) return docs;
-    });
+    const categories: Array<Document<ICategory>> = await Category.find(
+      {},
+      (err, docs) => {
+        if (!err) return docs;
+      },
+    );
 
     if (categories) return categories;
 
@@ -34,13 +37,10 @@ class CategoryRepository {
   }
 
   async updateById(id: string, data: any): Promise<Document<ICategory>> {
-    const updatedCategory = await Category.findByIdAndUpdate(
-      id,
-      data,
-      (error, document) => {
+    const updatedCategory: Document<ICategory> =
+      await Category.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
-      },
-    );
+      });
 
     if (updatedCategory) return updatedCategory;
 

@@ -1,4 +1,4 @@
-import { Document } from 'mongoose';
+import { Document, Model } from 'mongoose';
 
 import Xxxx from '../../schemas/Xxxx';
 
@@ -17,24 +17,24 @@ class XxxxRepository {
   }
 
   async getOneById(id: string): Promise<Document<IXxxx>> {
-    const xxxx = await Xxxx.findById(id);
+    const xxxx: Document<IXxxx> = await Xxxx.findById(id);
     if (xxxx) return xxxx;
 
     throw new Error(`Error to get xxxx`);
   }
 
   async listAll(): Promise<Array<Document<IXxxx>>> {
-    const categories = await Xxxx.find({}, (err, docs) => {
+    const xxxxs: Array<Document<IXxxx>> = await Xxxx.find({}, (err, docs) => {
       if (!err) return docs;
     });
 
-    if (categories) return categories;
+    if (xxxxs) return xxxxs;
 
     throw new Error(`Error to list categories`);
   }
 
   async updateById(id: string, data: any): Promise<Document<IXxxx>> {
-    const updatedXxxx = await Xxxx.findByIdAndUpdate(
+    const updatedXxxx: Document<IXxxx> = await Xxxx.findByIdAndUpdate(
       id,
       data,
       (error, document) => {

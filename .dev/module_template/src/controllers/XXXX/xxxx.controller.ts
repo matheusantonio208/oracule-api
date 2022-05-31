@@ -25,6 +25,7 @@ class XxxxController {
       const { id } = req.params;
 
       const xxxx: Document<IXxxx> = await XxxxRepository.getOneById(id);
+
       return res.status(201).json(xxxx);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
@@ -32,7 +33,8 @@ class XxxxController {
   }
   async show(req: IRequest, res: IResponse) {
     try {
-      const xxxx = await XxxxRepository.listAll();
+      const xxxx: Array<Document<IXxxx>> = await XxxxRepository.listAll();
+
       return res.status(201).json(xxxx);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
@@ -41,7 +43,9 @@ class XxxxController {
   async delete(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
+
       await XxxxRepository.deleteById(id);
+
       return res
         .status(201)
         .json({ success_msg: `Success! Your xxxx was deleted` });
@@ -53,7 +57,9 @@ class XxxxController {
     try {
       const { id } = req.params;
       const data = req.body;
+
       const xxxxUpdated = await XxxxRepository.updateById(id, data);
+
       return res.status(201).json(xxxxUpdated);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
