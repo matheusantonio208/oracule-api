@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-import { IXxxx } from '../controllers/XXXX/xxxx.interface';
+import { IXxxx } from '../controllers/Xxxx/xxxx.interface';
 
 const xxxxSchema = new Schema<IXxxx>(
   {

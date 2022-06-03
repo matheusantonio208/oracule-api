@@ -1,17 +1,25 @@
 import { Router } from 'express';
+import multer from 'multer';
 import Product from './Product/product.controller';
 import Category from './Category/category.controller';
+import File from './File/file.controller';
 
+import fileUploadService from './File/file.service';
 class Routes {
   route: any;
+  upload: any;
+
   constructor() {
     this.route = Router();
 
+    this.upload = multer(fileUploadService);
+
     this.product('/product');
     this.category('/category');
+    this.file('/file');
   }
 
-  product(baseRoute) {
+  product(baseRoute): void {
     this.route.post(`${baseRoute}/create`, Product.store);
     this.route.get(`${baseRoute}/:id`, Product.index);
     this.route.get(`${baseRoute}/list`, Product.show);
@@ -19,12 +27,24 @@ class Routes {
     this.route.put(`${baseRoute}/:id`, Product.update);
   }
 
-  category(baseRoute) {
+  category(baseRoute): void {
     this.route.post(`${baseRoute}/create`, Category.store);
     this.route.get(`${baseRoute}/:id`, Category.index);
     this.route.get(`${baseRoute}/list/all-categories`, Category.show);
     this.route.delete(`${baseRoute}/:id`, Category.delete);
     this.route.put(`${baseRoute}/:id`, Category.update);
+  }
+
+  file(baseRoute): void {
+    this.route.post(
+      `${baseRoute}/upload`,
+      this.upload.single('file'),
+      File.store,
+    );
+    this.route.get(`${baseRoute}/:id`, File.index);
+    this.route.get(`${baseRoute}/list/all-file`, File.show);
+    this.route.delete(`${baseRoute}/:id`, File.delete);
+    this.route.put(`${baseRoute}/:id`, File.update);
   }
 
   // exampleRoute(baseRoute) {

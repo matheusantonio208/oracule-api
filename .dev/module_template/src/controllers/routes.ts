@@ -5,7 +5,7 @@ class Routes {
     this.xxxx('/xxxx');
   }
 
-  xxxx(baseRoute) {
+  xxxx(baseRoute): void {
     this.route.post(`${baseRoute}/create`, Xxxx.store);
     this.route.get(`${baseRoute}/:id`, Xxxx.index);
     this.route.get(`${baseRoute}/list/all-xxxx`, Xxxx.show);
