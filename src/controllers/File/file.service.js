@@ -1,0 +1,25 @@
+import multer from 'multer';
+const sharp = require('sharp');
+const fs = require('fs');
+
+import { resolve, parse } from 'path';
+
+class FileService {
+  createNameImageProduct(file) {
+    return parse(file).name + '.webp';
+  }
+
+  async sharpImage(buffer, name, quality) {
+    fs.access(process.env.UPLOAD_DIRECTORY, (error) => {
+      if (error) {
+        fs.mkdirSync(process.env.UPLOAD_DIRECTORY);
+      }
+    });
+
+    await sharp(buffer)
+      .webp({ quality })
+      .toFile(process.env.UPLOAD_DIRECTORY + name);
+  }
+}
+
+export default new FileService();

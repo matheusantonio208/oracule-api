@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import multer from 'multer';
+import multer, { memoryStorage } from 'multer';
 import Product from './Product/product.controller';
 import Category from './Category/category.controller';
 import File from './File/file.controller';
@@ -13,7 +13,7 @@ class Routes {
   constructor() {
     this.route = Router();
 
-    this.upload = multer(FileService.getMemoryStorage());
+    this.upload = multer(memoryStorage());
 
     this.product('/product');
     this.category('/category');
