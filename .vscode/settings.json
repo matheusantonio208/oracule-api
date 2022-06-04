@@ -17,7 +17,6 @@
     ".prettierrc": true,
     ".dockerignore": true,
     ".editorconfig": true,
-    ".env": true,
     ".eslintignore": true,
     ".eslintrc.json": true,
     ".gitignore": true,

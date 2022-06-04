@@ -4,7 +4,8 @@ import Product from './Product/product.controller';
 import Category from './Category/category.controller';
 import File from './File/file.controller';
 
-import fileUploadService from './File/file.service';
+import FileService from './File/file.service';
+
 class Routes {
   route: any;
   upload: any;
@@ -12,7 +13,7 @@ class Routes {
   constructor() {
     this.route = Router();
 
-    this.upload = multer(fileUploadService);
+    this.upload = multer(FileService.getMemoryStorage());
 
     this.product('/product');
     this.category('/category');

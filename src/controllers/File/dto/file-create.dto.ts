@@ -4,10 +4,10 @@ import { IFile } from '../file.interface';
 
 export class FileCreateDto implements IFile {
   name: string;
-  path: string;
+  link: string;
 
   constructor(body: IFile) {
     this.name = body?.name;
-    this.path = body?.path;
+    this.link = body?.link;
   }
 }

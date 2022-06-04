@@ -3,17 +3,25 @@ import { IRequest, IResponse } from '../../@types';
 
 import { IFile } from './file.interface';
 import FileRepository from './file.repository';
+import FileService from './file.service';
 
 class FileController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const { originalName: name, filename: path } = req.file;
+      const { buffer, originalname: name } = req.file;
+      const nameFile = FileService.createNameImageProduct(name);
+      await FileService.sharpImage(buffer, nameFile, 20);
 
-      const file = await FileRepository.create({
-        name,
-        path,
-      });
-      return res.json(file);
+      return res.json({ nameFile });
+
+      // const link = `http://localhost:3000/upload/${nameFile}`;
+
+      // const file = await FileRepository.create({
+      //   name,
+      //   link,
+      // });
+
+      // return res.json(file);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
