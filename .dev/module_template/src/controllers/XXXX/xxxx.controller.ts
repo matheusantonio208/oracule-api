@@ -31,6 +31,7 @@ class XxxxController {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
+
   async show(req: IRequest, res: IResponse) {
     try {
       const xxxx: Array<Document<IXxxx>> = await XxxxRepository.listAll();
@@ -40,6 +41,7 @@ class XxxxController {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
+
   async delete(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
@@ -53,6 +55,7 @@ class XxxxController {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
+
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;

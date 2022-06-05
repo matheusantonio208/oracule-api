@@ -3,19 +3,23 @@ import { IRequest, IResponse } from '../../@types';
 import { ProductCreateDto } from './dto/product-create.dto';
 import { IProduct } from './product.interface';
 import ProductRepository from './product.repository';
+import ProductService from './product.service';
 
 class ProductController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const productCreateDto: ProductCreateDto = new ProductCreateDto(req.body);
+      const product: ProductCreateDto = new ProductCreateDto(req.body);
+      const productCode = await ProductService.generateProductCode();
+      const productSku = await ProductService.generateSku(product, productCode);
 
       const productCreated: Document<IProduct> = await ProductRepository.create(
-        productCreateDto,
+        { ...product, product_code: productCode, sku: productSku },
       );
 
-      return res
-        .status(201)
-        .json({ success_msg: `Success! Your object is ${productCreated}` });
+      return res.status(201).json({
+        success_msg: `Success! Your product was created`,
+        productCreated,
+      });
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
@@ -34,6 +38,7 @@ class ProductController {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
+
   async show(req: IRequest, res: IResponse) {
     try {
       const product: Array<Document<IProduct>> =
@@ -44,6 +49,7 @@ class ProductController {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
+
   async delete(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
@@ -57,6 +63,7 @@ class ProductController {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
+
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;

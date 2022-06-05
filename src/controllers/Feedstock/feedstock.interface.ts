@@ -1,12 +1,11 @@
 import { Schema } from 'mongoose';
 
 export interface IFeedstock {
-  icon_id: {
-    type: Schema.Types.ObjectId;
-    ref: 'persons';
-  };
-
   name: string;
+
+  synonyms: Array<string>;
+
+  variation: string;
 
   sku: string;
 
@@ -14,10 +13,18 @@ export interface IFeedstock {
 
   ncm: string;
 
-  weight: string;
+  weight_in_grams: number;
+}
 
-  stock_movement_id: {
+/* === Feedstock Fields
+  icon_id: {
+    type: Schema.Types.ObjectId;
+    ref: 'persons';
+  };
+
+    stock_movement_id: {
     type: Schema.Types.ObjectId;
     ref: 'stock';
   };
-}
+
+  */

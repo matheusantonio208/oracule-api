@@ -6,10 +6,10 @@ class Routes {
   }
 
   xxxx(baseRoute): void {
-    this.route.post(`${baseRoute}/create`, Xxxx.store);
-    this.route.get(`${baseRoute}/:id`, Xxxx.index);
-    this.route.get(`${baseRoute}/list/all-xxxx`, Xxxx.show);
-    this.route.delete(`${baseRoute}/:id`, Xxxx.delete);
-    this.route.put(`${baseRoute}/:id`, Xxxx.update);
+    this.route.post(`${baseRoute}/store`, Xxxx.store);
+    this.route.get(`${baseRoute}/index/:id`, Xxxx.index);
+    this.route.get(`${baseRoute}/show`, Xxxx.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Xxxx.delete);
+    this.route.put(`${baseRoute}/update/:id`, Xxxx.update);
   }
 }

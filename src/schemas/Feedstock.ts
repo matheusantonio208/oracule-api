@@ -1,21 +1,50 @@
 import { model, Schema } from 'mongoose';
+import { IFeedstock } from '../controllers/Feedstock/feedstock.interface';
 
-import { IProvider } from '../controllers/Provider/provider.interface';
-
-const providerSchema = new Schema<IProvider>(
+const providerSchema = new Schema<IFeedstock>(
   {
     name: {
       type: String,
       required: true,
+      unique: true,
     },
-    products_id: [
+
+    synonyms: [
       {
-        type: Schema.Types.ObjectId,
-        ref: 'products',
+        type: String,
+        required: true,
+        unique: true,
       },
     ],
+
+    variation: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+
+    sku: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+
+    material: {
+      type: String,
+      required: true,
+    },
+
+    ncm: {
+      type: String,
+      required: true,
+    },
+
+    weight_in_grams: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true },
 );
 
-export default model<IProvider>('feedstock', providerSchema);
+export default model<IFeedstock>('feedstock', providerSchema);

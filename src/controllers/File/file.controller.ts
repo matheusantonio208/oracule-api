@@ -7,20 +7,40 @@ import FileService from './file.service';
 
 class FileController {
   async store(req: IRequest, res: IResponse) {
-    try {
-      const { buffer, originalname: name } = req.file;
+    let buffers = [];
+    let names = [];
 
-      const nameFile = FileService.createNameImageProduct(name);
-      await FileService.sharpImage(buffer, nameFile, 20);
+    const getBuffers = () => {
+      req.files.map((file) => buffers.push(file.buffer));
+    };
 
-      const link = `/file/${nameFile}`;
+    const createNamesImageProduct = () => {
+      req.files.map((file) =>
+        names.push(FileService.createNameImageProduct(file.originalname)),
+      );
+    };
 
-      const file = await FileRepository.create({
-        name: nameFile,
-        link,
+    const uploadImage = async () => {
+      buffers.forEach(async (_, index) => {
+        const link = `/file/${names[index]}`;
+        await FileService.sharpImage(buffers[index], names[index], 20);
+
+        const teste = await FileRepository.create({
+          name: names[index],
+          link,
+        });
       });
+    };
 
-      return res.json(file);
+    try {
+      getBuffers();
+      createNamesImageProduct();
+
+      await uploadImage();
+
+      return res
+        .status(201)
+        .json({ success_msg: 'Congratulations! Upload completed' });
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }

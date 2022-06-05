@@ -9,7 +9,6 @@ class FileService {
   }
 
   async sharpImage(buffer, name, quality) {
-    console.log(buffer);
     fs.access(process.env.UPLOAD_DIRECTORY, (error) => {
       if (error) {
         fs.mkdirSync(process.env.UPLOAD_DIRECTORY);

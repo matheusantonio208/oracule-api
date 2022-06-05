@@ -6,7 +6,7 @@ import { ProductCreateDto } from './dto/product-create.dto';
 import { IProduct } from './product.interface';
 
 class ProductRepository {
-  async create(product: ProductCreateDto): Promise<Document<IProduct>> {
+  async create(product: IProduct): Promise<Document<IProduct>> {
     const productCreate = new Product(product);
 
     if (await productCreate.save()) {
