@@ -6,14 +6,12 @@ import File from './File/file.controller';
 
 class Routes {
   route: any;
-  uploadMiddle: any;
-  uploadMockupsMiddle: any;
+  uploadMiddleware: any;
 
   constructor() {
     this.route = Router();
 
-    this.uploadMiddle = multer(memoryStorage()).single('file');
-    this.uploadMockupsMiddle = multer(memoryStorage()).array('mockup');
+    this.uploadMiddleware = multer(memoryStorage()).single('file');
 
     this.product('/product');
     this.category('/category');
@@ -21,11 +19,7 @@ class Routes {
   }
 
   product(baseRoute): void {
-    this.route.post(
-      `${baseRoute}/create`,
-      this.uploadMockupsMiddle,
-      Product.store,
-    );
+    this.route.post(`${baseRoute}/create`, Product.store);
     this.route.get(`${baseRoute}/:id`, Product.index);
     this.route.get(`${baseRoute}/list`, Product.show);
     this.route.delete(`${baseRoute}/:id`, Product.delete);
@@ -41,7 +35,7 @@ class Routes {
   }
 
   file(baseRoute): void {
-    this.route.post(`${baseRoute}/upload`, this.uploadMiddle, File.store);
+    this.route.post(`${baseRoute}/upload`, this.uploadMiddleware, File.store);
     this.route.get(`${baseRoute}/:name`, File.index);
     this.route.get(`${baseRoute}/list/all-file`, File.show);
     this.route.delete(`${baseRoute}/:id`, File.delete);
