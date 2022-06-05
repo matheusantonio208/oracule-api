@@ -4,16 +4,16 @@ import Product from './Product/product.controller';
 import Category from './Category/category.controller';
 import File from './File/file.controller';
 
-import FileService from './File/file.service';
-
 class Routes {
   route: any;
-  upload: any;
+  uploadMiddle: any;
+  uploadMockupsMiddle: any;
 
   constructor() {
     this.route = Router();
 
-    this.upload = multer(memoryStorage());
+    this.uploadMiddle = multer(memoryStorage()).single('file');
+    this.uploadMockupsMiddle = multer(memoryStorage()).array('mockup');
 
     this.product('/product');
     this.category('/category');
@@ -21,7 +21,11 @@ class Routes {
   }
 
   product(baseRoute): void {
-    this.route.post(`${baseRoute}/create`, Product.store);
+    this.route.post(
+      `${baseRoute}/create`,
+      this.uploadMockupsMiddle,
+      Product.store,
+    );
     this.route.get(`${baseRoute}/:id`, Product.index);
     this.route.get(`${baseRoute}/list`, Product.show);
     this.route.delete(`${baseRoute}/:id`, Product.delete);
@@ -37,12 +41,8 @@ class Routes {
   }
 
   file(baseRoute): void {
-    this.route.post(
-      `${baseRoute}/upload`,
-      this.upload.single('file'),
-      File.store,
-    );
-    this.route.get(`${baseRoute}/:id`, File.index);
+    this.route.post(`${baseRoute}/upload`, this.uploadMiddle, File.store);
+    this.route.get(`${baseRoute}/:name`, File.index);
     this.route.get(`${baseRoute}/list/all-file`, File.show);
     this.route.delete(`${baseRoute}/:id`, File.delete);
     this.route.put(`${baseRoute}/:id`, File.update);
@@ -65,10 +65,6 @@ class Routes {
   //       success_msg: ean,
   //       qtd: ean.length,
   //     });
-  //   });
-
-  //   this.route.post(`${baseRoute}/db`, (req, res) => {
-  //     return res.status(201).json({ success_msg: 'Already!' });
   //   });
 }
 export default new Routes().route;

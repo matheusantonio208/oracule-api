@@ -24,7 +24,6 @@
     "docker-compose.yml": true,
     "jest.config.js": true,
     "makefile": true,
-    "package.json": true,
     "README.md": true,
     "tsconfig.json": true,
     "yarn.lock": true,

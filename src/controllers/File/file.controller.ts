@@ -9,19 +9,18 @@ class FileController {
   async store(req: IRequest, res: IResponse) {
     try {
       const { buffer, originalname: name } = req.file;
+
       const nameFile = FileService.createNameImageProduct(name);
       await FileService.sharpImage(buffer, nameFile, 20);
 
-      return res.json({ nameFile });
+      const link = `/file/${nameFile}`;
 
-      // const link = `http://localhost:3000/upload/${nameFile}`;
+      const file = await FileRepository.create({
+        name: nameFile,
+        link,
+      });
 
-      // const file = await FileRepository.create({
-      //   name,
-      //   link,
-      // });
-
-      // return res.json(file);
+      return res.json(file);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
@@ -29,15 +28,16 @@ class FileController {
 
   async index(req: IRequest, res: IResponse) {
     try {
-      const { id } = req.params;
+      const { name } = req.params;
 
-      const file: Document<IFile> = await FileRepository.getOneById(id);
+      const file = await FileRepository.getOneByName(name);
 
       return res.status(201).json(file);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
+
   async show(req: IRequest, res: IResponse) {
     try {
       const file: Array<Document<IFile>> = await FileRepository.listAll();
@@ -47,6 +47,7 @@ class FileController {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
+
   async delete(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
@@ -60,6 +61,7 @@ class FileController {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
+
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;

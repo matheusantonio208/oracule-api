@@ -16,8 +16,9 @@ class FileRepository {
     throw new Error(`Error to create file`);
   }
 
-  async getOneById(id: string): Promise<Document<IFile>> {
-    const file: Document<IFile> = await File.findById(id);
+  async getOneByName(name: string): Promise<any> {
+    const file: any = await File.find({ name });
+
     if (file) return file;
 
     throw new Error(`Error to get file`);

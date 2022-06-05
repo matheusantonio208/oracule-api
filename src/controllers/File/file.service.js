@@ -1,8 +1,7 @@
-import multer from 'multer';
 const sharp = require('sharp');
 const fs = require('fs');
 
-import { resolve, parse } from 'path';
+import { parse } from 'path';
 
 class FileService {
   createNameImageProduct(file) {
@@ -10,6 +9,7 @@ class FileService {
   }
 
   async sharpImage(buffer, name, quality) {
+    console.log(buffer);
     fs.access(process.env.UPLOAD_DIRECTORY, (error) => {
       if (error) {
         fs.mkdirSync(process.env.UPLOAD_DIRECTORY);
