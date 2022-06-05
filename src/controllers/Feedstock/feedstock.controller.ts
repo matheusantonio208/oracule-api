@@ -25,8 +25,7 @@ class FeedstockController {
     try {
       const { id } = req.params;
 
-      const feedstock: Document<IFeedstock> =
-        await FeedstockRepository.getOneById(id);
+      const feedstock: IFeedstock = await FeedstockRepository.getOneById(id);
 
       return res.status(201).json(feedstock);
     } catch (error) {
