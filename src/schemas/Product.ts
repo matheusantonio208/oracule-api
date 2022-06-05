@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose';
-import { string } from 'yargs';
 
 import { IProduct } from '../controllers/Product/product.interface';
 
