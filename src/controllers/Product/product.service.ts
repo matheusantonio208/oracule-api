@@ -1,8 +1,6 @@
-import { Document } from 'mongoose';
 import ProductRepository from './product.repository';
-import { IProduct, IProductCreate } from './product.interface';
+import { IProductCreate } from './product.interface';
 import FeedstockRepository from '../Feedstock/feedstock.repository';
-import { IFeedstock } from '../Feedstock/feedstock.interface';
 
 class ProductService {
   async generateProductCode() {

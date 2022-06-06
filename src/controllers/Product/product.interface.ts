@@ -20,6 +20,45 @@ export interface IProductCreate {
     },
   ];
   production_cost: number;
+
+  production_procedure: [
+    {
+      order_step: number;
+      name_step: string;
+      description_step: string;
+
+      time_in_minutes: number;
+
+      machine_id: {
+        type: Schema.Types.ObjectId;
+        ref: 'machines';
+      };
+
+      // tools_id: [
+      //   {
+      //     type: Schema.Types.ObjectId;
+      //     ref: 'tools';
+      //   },
+      // ];
+
+      // employee_id: [
+      //   {
+      //     type: Schema.Types.ObjectId;
+      //     ref: 'employees';
+      //   },
+      // ];
+
+      supplies: [
+        {
+          supplies_id: {
+            type: Schema.Types.ObjectId;
+            ref: 'supplies';
+          };
+          amount: number;
+        },
+      ];
+    },
+  ];
 }
 export interface IProduct {
   name: string;
