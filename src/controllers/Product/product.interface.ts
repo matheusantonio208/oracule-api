@@ -8,12 +8,9 @@ export interface IProductCreate {
       ref: 'categories';
     },
   ];
-  feedstock_id: [
-    {
-      type: Schema.Types.ObjectId;
-      ref: 'feedstock';
-    },
-  ];
+
+  theme: string;
+
   tags: [
     {
       type: string;
@@ -29,64 +26,12 @@ export interface IProductCreate {
 
       time_in_minutes: number;
 
-      machine_id: {
-        type: Schema.Types.ObjectId;
-        ref: 'machines';
-      };
-
-      // tools_id: [
-      //   {
-      //     type: Schema.Types.ObjectId;
-      //     ref: 'tools';
-      //   },
-      // ];
-
-      // employee_id: [
-      //   {
-      //     type: Schema.Types.ObjectId;
-      //     ref: 'employees';
-      //   },
-      // ];
-
-      supplies: [
+      feedstock_id: [
         {
-          supplies_id: {
-            type: Schema.Types.ObjectId;
-            ref: 'supplies';
-          };
-          amount: number;
+          type: Schema.Types.ObjectId;
+          ref: 'feedstock';
         },
       ];
-    },
-  ];
-}
-export interface IProduct {
-  name: string;
-  product_code: number;
-  feedstock_id: [
-    {
-      type: Schema.Types.ObjectId;
-      ref: 'feedstock';
-    },
-  ];
-  sku: {
-    type: String;
-    unique: true;
-  };
-  tags: [
-    {
-      type: string;
-    },
-  ];
-  production_cost: number;
-
-  production_procedure: [
-    {
-      order_step: number;
-      name_step: string;
-      description_step: string;
-
-      time_in_minutes: number;
 
       machine_id: {
         type: Schema.Types.ObjectId;
@@ -118,6 +63,82 @@ export interface IProduct {
       ];
     },
   ];
+  datasheet: {
+    weight_in_grams: number;
+    width_in_cm: number;
+    height_in_cm: number;
+    depth_in_cm: number;
+    material: string;
+    expiration_time_in_days?: Number;
+  };
+}
+export interface IProduct {
+  name: string;
+  product_code: number;
+  sku: {
+    type: String;
+    unique: true;
+  };
+  tags: [
+    {
+      type: string;
+    },
+  ];
+  production_cost: number;
+
+  production_procedure: [
+    {
+      order_step: number;
+      name_step: string;
+      description_step: string;
+
+      time_in_minutes: number;
+
+      feedstock_id: [
+        {
+          type: Schema.Types.ObjectId;
+          ref: 'feedstock';
+        },
+      ];
+
+      machine_id: {
+        type: Schema.Types.ObjectId;
+        ref: 'machines';
+      };
+
+      tools_id: [
+        {
+          type: Schema.Types.ObjectId;
+          ref: 'tools';
+        },
+      ];
+
+      employee_id: [
+        {
+          type: Schema.Types.ObjectId;
+          ref: 'employees';
+        },
+      ];
+
+      supplies: [
+        {
+          supplies_id: {
+            type: Schema.Types.ObjectId;
+            ref: 'supplies';
+          };
+          amount: number;
+        },
+      ];
+    },
+  ];
+  datasheet: {
+    weight_in_grams: number;
+    width_in_cm: number;
+    height_in_cm: number;
+    depth_in_cm: number;
+    material: string;
+    expiration_time_in_days?: Number;
+  };
 
   // images_id: [
   //   {
@@ -149,14 +170,6 @@ export interface IProduct {
   //     path: string;
   //   },
   // ];
-  // datasheet: {
-  //   weight_in_grams: number;
-  //   width_in_cm: number;
-  //   height_in_cm: number;
-  //   depth_in_cm: number;
-  //   material: string;
-  //   expiration_time_in_days?: Number;
-  // };
 }
 
 /* === Req Body Example ===

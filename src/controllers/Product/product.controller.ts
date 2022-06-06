@@ -8,10 +8,16 @@ import ProductService from './product.service';
 class ProductController {
   async store(req: IRequest, res: IResponse) {
     try {
+      const otherTransactions = [12.4, 24.4];
+
       const product: ProductCreateDto = new ProductCreateDto(req.body);
+
       const productCode = await ProductService.generateProductCode();
       const productSku = await ProductService.generateSku(product, productCode);
-      const productCost = await ProductService.generatePrice(product);
+      const productCost = await ProductService.generateCost(
+        product,
+        otherTransactions,
+      );
 
       const productCreated: Document<IProduct> = await ProductRepository.create(
         {

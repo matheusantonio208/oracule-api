@@ -16,7 +16,7 @@ class ProductService {
 
   async generateSku(product: IProductCreate, productCode): Promise<any> {
     const feedStock = await FeedstockRepository.getOneById(
-      String(product.feedstock_id),
+      String(product.production_procedure[0].feedstock_id),
     );
 
     const feedStockSku = feedStock.sku;
@@ -24,9 +24,27 @@ class ProductService {
     return `${feedStockSku}${productCode}`;
   }
 
-  async generatePrice(product): Promise<number> {
-    return 10;
-    console.log('Soma o preço de custo');
+  async generateCost(
+    product,
+    otherTransactions: Array<number>,
+  ): Promise<number> {
+    const feedstocksTransaction: Array<number> = product.feedstock_id;
+    const suppliesTransaction: Array<number> = product.supplies_id;
+    const machinesTransaction: Array<number> = product.machines_id;
+    const otherTransaction: Array<number> = otherTransactions;
+
+    // const productsTransaction: Array<number> = product.products_id;
+    // const employeersTransaction: Array<number> = product.employeers_id;
+    // const logisticsTransaction: Array<number> = product.logistics_id;
+
+    const cost =
+      feedstocksTransaction.reduce((x, y) => x + y)[0] +
+      suppliesTransaction.reduce((x, y) => x + y)[0] +
+      machinesTransaction.reduce((x, y) => x + y)[0] +
+      machinesTransaction.reduce((x, y) => x + y)[0] +
+      otherTransaction.reduce((x, y) => x + y)[0];
+
+    return cost;
   }
 }
 

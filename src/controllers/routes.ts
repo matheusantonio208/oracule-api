@@ -21,58 +21,17 @@ class Routes {
 
     this.uploadMiddleware = multer(memoryStorage()).array('files', 12);
 
-    this.file('/file');
-    this.product('/product');
-    this.product('/product');
-    this.category('/category');
-    this.feedstock('/feedstock');
     this.person('/person');
     this.provider('/provider');
+    this.transaction('/transaction');
     this.stock('/stock');
+    this.feedstock('/feedstock');
     this.machine('/machine');
     this.supplies('/supplies');
+    this.category('/category');
+    this.file('/file');
+    this.product('/product');
     this.ad('/ad');
-    this.transaction('/transaction');
-  }
-
-  product(baseRoute): void {
-    this.route.post(`${baseRoute}/store`, Product.store);
-    this.route.get(`${baseRoute}/index/:id`, Product.index);
-    this.route.get(`${baseRoute}/show`, Product.show);
-    this.route.delete(`${baseRoute}/delete/:id`, Product.delete);
-    this.route.put(`${baseRoute}/update/:id`, Product.update);
-  }
-
-  category(baseRoute): void {
-    this.route.post(`${baseRoute}/store`, Category.store);
-    this.route.get(`${baseRoute}/index/:id`, Category.index);
-    this.route.get(`${baseRoute}/show`, Category.show);
-    this.route.delete(`${baseRoute}/delete/:id`, Category.delete);
-    this.route.put(`${baseRoute}/update/:id`, Category.update);
-  }
-
-  feedstock(baseRoute): void {
-    this.route.post(`${baseRoute}/store`, Feedstock.store);
-    this.route.get(`${baseRoute}/index/:id`, Feedstock.index);
-    this.route.get(`${baseRoute}/show`, Feedstock.show);
-    this.route.delete(`${baseRoute}/delete/:id`, Feedstock.delete);
-    this.route.put(`${baseRoute}/update/:id`, Feedstock.update);
-  }
-
-  file(baseRoute): void {
-    this.route.post(`${baseRoute}/store`, this.uploadMiddleware, File.store);
-    this.route.get(`${baseRoute}/index/:name`, File.index);
-    this.route.get(`${baseRoute}/show`, File.show);
-    this.route.delete(`${baseRoute}/delete/:id`, File.delete);
-    this.route.put(`${baseRoute}/update/:id`, File.update);
-  }
-
-  transaction(baseRoute): void {
-    this.route.post(`${baseRoute}/store`, Transaction.store);
-    this.route.get(`${baseRoute}/index/:id`, Transaction.index);
-    this.route.get(`${baseRoute}/show`, Transaction.show);
-    this.route.delete(`${baseRoute}/delete/:id`, Transaction.delete);
-    this.route.put(`${baseRoute}/update/:id`, Transaction.update);
   }
 
   person(baseRoute): void {
@@ -91,6 +50,14 @@ class Routes {
     this.route.put(`${baseRoute}/update/:id`, Provider.update);
   }
 
+  transaction(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Transaction.store);
+    this.route.get(`${baseRoute}/index/:id`, Transaction.index);
+    this.route.get(`${baseRoute}/show`, Transaction.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Transaction.delete);
+    this.route.put(`${baseRoute}/update/:id`, Transaction.update);
+  }
+
   stock(baseRoute): void {
     this.route.post(`${baseRoute}/store`, Stock.store);
     this.route.get(`${baseRoute}/index/:id`, Stock.index);
@@ -99,12 +66,44 @@ class Routes {
     this.route.put(`${baseRoute}/update/:id`, Stock.update);
   }
 
+  feedstock(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Feedstock.store);
+    this.route.get(`${baseRoute}/index/:id`, Feedstock.index);
+    this.route.get(`${baseRoute}/show`, Feedstock.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Feedstock.delete);
+    this.route.put(`${baseRoute}/update/:id`, Feedstock.update);
+  }
+
   machine(baseRoute): void {
     this.route.post(`${baseRoute}/store`, Machine.store);
     this.route.get(`${baseRoute}/index/:id`, Machine.index);
     this.route.get(`${baseRoute}/show`, Machine.show);
     this.route.delete(`${baseRoute}/delete/:id`, Machine.delete);
     this.route.put(`${baseRoute}/update/:id`, Machine.update);
+  }
+
+  product(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Product.store);
+    this.route.get(`${baseRoute}/index/:id`, Product.index);
+    this.route.get(`${baseRoute}/show`, Product.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Product.delete);
+    this.route.put(`${baseRoute}/update/:id`, Product.update);
+  }
+
+  category(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Category.store);
+    this.route.get(`${baseRoute}/index/:id`, Category.index);
+    this.route.get(`${baseRoute}/show`, Category.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Category.delete);
+    this.route.put(`${baseRoute}/update/:id`, Category.update);
+  }
+
+  file(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, this.uploadMiddleware, File.store);
+    this.route.get(`${baseRoute}/index/:name`, File.index);
+    this.route.get(`${baseRoute}/show`, File.show);
+    this.route.delete(`${baseRoute}/delete/:id`, File.delete);
+    this.route.put(`${baseRoute}/update/:id`, File.update);
   }
 
   supplies(baseRoute): void {
