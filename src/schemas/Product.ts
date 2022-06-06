@@ -4,19 +4,12 @@ import { IProduct } from '../controllers/Product/product.interface';
 
 const productSchema = new Schema<IProduct>(
   {
-    name: String,
-    product_code: {
-      type: Number,
-      unique: true,
-    },
+    name: { type: String, unique: true },
+    product_code: { type: Number, unique: true },
 
     sku: String,
     theme: String,
-    tags: [
-      {
-        type: String,
-      },
-    ],
+    tags: [{ type: String }],
     production_cost: Number,
 
     production_procedure: [

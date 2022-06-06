@@ -36,6 +36,7 @@ class ProductService {
     // const productsTransaction: Array<number> = product.products_id;
     // const employeersTransaction: Array<number> = product.employeers_id;
     // const logisticsTransaction: Array<number> = product.logistics_id;
+    // const metaproductsTransaction: Array<number> = product.metaproducts_id;
 
     const cost =
       feedstocksTransaction.reduce((x, y) => x + y)[0] +
