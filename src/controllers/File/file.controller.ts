@@ -7,36 +7,24 @@ import FileService from './file.service';
 
 class FileController {
   async store(req: IRequest, res: IResponse) {
-    let buffers = [];
-    let names = [];
-
-    const getBuffers = () => {
-      req.files.map((file) => buffers.push(file.buffer));
-    };
-
-    const createNamesImageProduct = () => {
-      req.files.map((file) =>
-        names.push(FileService.createNameImageProduct(file.originalname)),
-      );
-    };
-
-    const uploadImage = async () => {
-      buffers.forEach(async (_, index) => {
-        const link = `/file/${names[index]}`;
-        await FileService.sharpImage(buffers[index], names[index], 20);
-
-        const teste = await FileRepository.create({
-          name: names[index],
-          link,
-        });
-      });
-    };
-
     try {
-      getBuffers();
-      createNamesImageProduct();
+      const { mockups, art, psd } = req;
+      const mockupBuffers = FileService.getBuffers(mockups);
 
-      await uploadImage();
+      if (mockupBuffers) {
+        const names = FileService.createNamesFiles(mockups, '.webp');
+        await FileService.uploadMockupImage(mockupBuffers, names, 20);
+      }
+
+      if (art) {
+        const name = FileService.createNamesFiles(art, '.jpg');
+        await FileService.uploadProductionFile(art, name);
+      }
+
+      if (psd) {
+        const name = FileService.createNamesFiles(psd, '.psd');
+        await FileService.uploadProductionFile(psd, name);
+      }
 
       return res
         .status(201)

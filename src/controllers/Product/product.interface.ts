@@ -2,6 +2,12 @@ import { Schema } from 'mongoose';
 
 export interface IProductCreate {
   name: string;
+  mockups_id: [
+    {
+      type: Schema.Types.ObjectId;
+      ref: 'files';
+    },
+  ];
   categories_id: [
     {
       type: Schema.Types.ObjectId;
@@ -16,12 +22,25 @@ export interface IProductCreate {
       type: string;
     },
   ];
+
+  production_type: {
+    type: string;
+    enum: ['own', 'outsourced'];
+  };
+
+  provider_id?: {
+    type: Schema.Types.ObjectId;
+    ref: 'providers';
+  };
+
   production_cost: number;
 
   production_procedure: [
     {
       order_step: number;
+
       name_step: string;
+
       description_step: string;
 
       time_in_minutes: number;
@@ -61,35 +80,63 @@ export interface IProductCreate {
           amount: number;
         },
       ];
+
+      files_production: [
+        {
+          type: Schema.Types.ObjectId;
+          ref: 'files';
+        },
+      ];
     },
   ];
   datasheet: {
     weight_in_grams: number;
+
     width_in_cm: number;
+
     height_in_cm: number;
+
     depth_in_cm: number;
+
     material: string;
+
     expiration_time_in_days?: Number;
   };
 }
 export interface IProduct {
   name: string;
+
   product_code: number;
+
   sku: {
     type: String;
     unique: true;
   };
+
   tags: [
     {
       type: string;
     },
   ];
+
+  production_type: {
+    type: string;
+    enum: ['own', 'outsourced'];
+  };
+
+  provider_id?: {
+    type: Schema.Types.ObjectId;
+    ref: 'providers';
+  };
+
   production_cost: number;
 
   production_procedure: [
     {
       order_step: number;
+
       name_step: string;
+
       description_step: string;
 
       time_in_minutes: number;
@@ -126,26 +173,34 @@ export interface IProduct {
             type: Schema.Types.ObjectId;
             ref: 'supplies';
           };
+
           amount: number;
+        },
+      ];
+
+      files_production: [
+        {
+          type: Schema.Types.ObjectId;
+          ref: 'files';
         },
       ];
     },
   ];
+
   datasheet: {
     weight_in_grams: number;
+
     width_in_cm: number;
+
     height_in_cm: number;
+
     depth_in_cm: number;
+
     material: string;
+
     expiration_time_in_days?: Number;
   };
 
-  // images_id: [
-  //   {
-  //     type: Schema.Types.ObjectId;
-  //     ref: 'images_product';
-  //   },
-  // ];
   // video_id: {
   //   type: Schema.Types.ObjectId;
   //   ref: 'videos_product';
@@ -154,22 +209,6 @@ export interface IProduct {
   //   type: Schema.Types.ObjectId;
   //   ref: 'brands';
   // };
-
-  // production_type: {
-  //   type: string;
-  //   enum: ['own', 'outsourced'];
-  // };
-  // provider_id?: {
-  //   type: Schema.Types.ObjectId;
-  //   ref: 'providers';
-  // };
-
-  // files_production: [
-  //   {
-  //     name: string;
-  //     path: string;
-  //   },
-  // ];
 }
 
 /* === Req Body Example ===
