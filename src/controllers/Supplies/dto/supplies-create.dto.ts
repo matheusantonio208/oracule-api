@@ -20,7 +20,7 @@ export class SuppliesCreateDto implements ISupplies {
   ];
   stock_movement_id: {
     type: Schema.Types.ObjectId;
-    ref: 'stock';
+    ref: 'stocks';
   };
 
   constructor(body: ISupplies) {

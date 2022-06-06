@@ -7,20 +7,15 @@ export class ProviderCreateDto implements IProvider {
     type: Schema.Types.ObjectId;
     ref: 'persons';
   };
-  categories: {
-    type: string;
-    enum: ['feedstock', 'product', 'input', 'machine'];
-  };
-  products_id: [
+  itens_id: [
     {
       type: Schema.Types.ObjectId;
-      ref: 'products';
+      ref: ['products', 'machines', 'feedstocks', 'supplies'];
     },
   ];
 
   constructor(body: IProvider) {
     this.person_id = body?.person_id;
-    this.categories = body?.categories;
-    this.products_id = body?.products_id;
+    this.itens_id = body?.itens_id;
   }
 }

@@ -14,6 +14,11 @@ export interface IFeedstock {
   ncm: string;
 
   weight_in_grams: number;
+
+  stock_movement_id: {
+    type: Schema.Types.ObjectId;
+    ref: 'stock';
+  };
 }
 
 /* === Feedstock Fields
@@ -22,9 +27,6 @@ export interface IFeedstock {
     ref: 'persons';
   };
 
-    stock_movement_id: {
-    type: Schema.Types.ObjectId;
-    ref: 'stock';
-  };
+
 
   */

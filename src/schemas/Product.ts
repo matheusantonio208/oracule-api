@@ -24,6 +24,7 @@ const productSchema = new Schema<IProduct>(
         type: String,
       },
     ],
+    production_cost: Number,
 
     //   images_id: [
     //     {

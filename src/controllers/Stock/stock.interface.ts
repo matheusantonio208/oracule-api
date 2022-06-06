@@ -8,4 +8,8 @@ export interface IStock {
       exit_amount: number;
     },
   ];
+  transaction_id: {
+    type: Schema.Types.ObjectId;
+    ref: 'transactions';
+  };
 }

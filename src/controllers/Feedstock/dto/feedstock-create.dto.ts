@@ -1,3 +1,4 @@
+import { Schema } from 'mongoose';
 import { IFeedstock } from '../feedstock.interface';
 
 export class FeedstockCreateDto implements IFeedstock {
@@ -14,6 +15,11 @@ export class FeedstockCreateDto implements IFeedstock {
   ncm: string;
 
   weight_in_grams: number;
+
+  stock_movement_id: {
+    type: Schema.Types.ObjectId;
+    ref: 'stock';
+  };
 
   constructor(body: IFeedstock) {
     this.name = body?.name;

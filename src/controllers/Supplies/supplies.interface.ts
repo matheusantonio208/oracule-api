@@ -18,6 +18,6 @@ export interface ISupplies {
   ];
   stock_movement_id: {
     type: Schema.Types.ObjectId;
-    ref: 'stock';
+    ref: 'stocks';
   };
 }

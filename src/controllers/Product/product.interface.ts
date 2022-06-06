@@ -2,21 +2,27 @@ import { Schema } from 'mongoose';
 
 export interface IProductCreate {
   name: string;
-
+  categories_id: [
+    {
+      type: Schema.Types.ObjectId;
+      ref: 'categories';
+    },
+  ];
   feedstock_id: [
     {
       type: Schema.Types.ObjectId;
       ref: 'feedstock';
     },
   ];
-
   tags: [
     {
       type: string;
     },
   ];
+  production_cost: number;
 }
 export interface IProduct {
+  name: string;
   product_code: number;
   feedstock_id: [
     {
@@ -28,10 +34,49 @@ export interface IProduct {
     type: String;
     unique: true;
   };
-
   tags: [
     {
       type: string;
+    },
+  ];
+  production_cost: number;
+
+  production_procedure: [
+    {
+      order_step: number;
+      name_step: string;
+      description_step: string;
+
+      time_in_minutes: number;
+
+      machine_id: {
+        type: Schema.Types.ObjectId;
+        ref: 'machines';
+      };
+
+      tools_id: [
+        {
+          type: Schema.Types.ObjectId;
+          ref: 'tools';
+        },
+      ];
+
+      employee_id: [
+        {
+          type: Schema.Types.ObjectId;
+          ref: 'employees';
+        },
+      ];
+
+      supplies: [
+        {
+          supplies_id: {
+            type: Schema.Types.ObjectId;
+            ref: 'supplies';
+          };
+          amount: number;
+        },
+      ];
     },
   ];
 
@@ -45,22 +90,11 @@ export interface IProduct {
   //   type: Schema.Types.ObjectId;
   //   ref: 'videos_product';
   // };
-  // product_code: number;
   // brand_id: {
   //   type: Schema.Types.ObjectId;
   //   ref: 'brands';
   // };
-  // categories_id: [
-  //   {
-  //     type: Schema.Types.ObjectId;
-  //     ref: 'categories_product';
-  //   },
-  // ];
-  // tags: [
-  //   {
-  //     type: string;
-  //   },
-  // ];
+
   // production_type: {
   //   type: string;
   //   enum: ['own', 'outsourced'];
@@ -69,44 +103,6 @@ export interface IProduct {
   //   type: Schema.Types.ObjectId;
   //   ref: 'providers';
   // };
-  // production_procedure: [
-  //   {
-  //     order_step: number;
-  //     name_step: string;
-  //     description_step: string;
-
-  //     time_in_minutes: number;
-
-  //     machine_id: {
-  //       type: Schema.Types.ObjectId;
-  //       ref: 'machines';
-  //     };
-
-  //     tools_id: [
-  //       {
-  //         type: Schema.Types.ObjectId;
-  //         ref: 'tools';
-  //       },
-  //     ];
-
-  //     employee_id: [
-  //       {
-  //         type: Schema.Types.ObjectId;
-  //         ref: 'employees';
-  //       },
-  //     ];
-
-  //     supplies: [
-  //       {
-  //         supplies_id: {
-  //           type: Schema.Types.ObjectId;
-  //           ref: 'supplies';
-  //         };
-  //         amount: number;
-  //       },
-  //     ];
-  //   },
-  // ];
 
   // files_production: [
   //   {
@@ -114,7 +110,6 @@ export interface IProduct {
   //     path: string;
   //   },
   // ];
-  // production_cost: number;
   // datasheet: {
   //   weight_in_grams: number;
   //   width_in_cm: number;
@@ -129,7 +124,7 @@ export interface IProduct {
 {
 	"images_id": "123",
 	"video_id": "123",
-	"name": "Caneca Velozos e Furiosos em Tóquio",
+	"name": "Caneca Velozes e Furiosos em Tóquio",
 	"product_code": "0001",
 	"brand_id": "123",
 	"categories_id": "1",
@@ -150,7 +145,7 @@ export interface IProduct {
 		}],
 		"files_production" : [{
 			"name": "arte",
-			"path": "src/assets/images/products/canecas/filmes/velozos e furiosos/ Caneca Velozos e Furiosos em Tóquio"
+			"path": "src/assets/images/products/canecas/filmes/Velozes e furiosos/ Caneca Velozes e Furiosos em Tóquio"
 		}],
 		"datasheet": [{
 			"weight_in_grams": 420,

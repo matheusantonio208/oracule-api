@@ -16,10 +16,12 @@ export class ProductCreateDto implements IProductCreate {
       type: string;
     },
   ];
+  production_cost: number;
 
   constructor(body: IProductCreate) {
     this.name = body.name;
     this.feedstock_id = body.feedstock_id;
     this.tags = body.tags;
+    this.production_cost = body.production_cost;
   }
 }

@@ -1,21 +1,22 @@
 import { model, Schema } from 'mongoose';
 
-import { IPerson } from '../controllers/Person/person.interface';
+import { IStock } from '../controllers/Stock/stock.interface';
 
-const personSchema = new Schema<IPerson>(
+const stockSchema = new Schema<IStock>(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    products_id: [
+    input_amount: Number,
+    exits: [
       {
-        type: Schema.Types.ObjectId,
-        ref: 'products',
+        exit_date: Date,
+        exit_amount: Number,
       },
     ],
+    transaction_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'transactions',
+    },
   },
   { timestamps: true },
 );
 
-export default model<IPerson>('persons', personSchema);
+export default model<IStock>('stocks', stockSchema);

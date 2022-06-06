@@ -5,14 +5,10 @@ export interface IProvider {
     type: Schema.Types.ObjectId;
     ref: 'persons';
   };
-  categories: {
-    type: string;
-    enum: ['feedstock', 'product', 'input', 'machine'];
-  };
-  products_id: [
+  itens_id: [
     {
       type: Schema.Types.ObjectId;
-      ref: 'products';
+      ref: ['products', 'machines', 'feedstocks', 'supplies'];
     },
   ];
 }

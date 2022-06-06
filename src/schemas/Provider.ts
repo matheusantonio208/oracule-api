@@ -4,14 +4,18 @@ import { IProvider } from '../controllers/Provider/provider.interface';
 
 const providerSchema = new Schema<IProvider>(
   {
+    person_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'persons',
+    },
     name: {
       type: String,
       required: true,
     },
-    products_id: [
+    itens_id: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'products',
+        ref: ['products', 'machines', 'feedstocks', 'supplies'],
       },
     ],
   },

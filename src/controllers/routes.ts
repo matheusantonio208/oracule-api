@@ -4,6 +4,13 @@ import Product from './Product/product.controller';
 import Category from './Category/category.controller';
 import File from './File/file.controller';
 import Feedstock from './Feedstock/feedstock.controller';
+import Transaction from './Transaction/transaction.controller';
+import Person from './Person/person.controller';
+import Provider from './Provider/provider.controller';
+import Stock from './Stock/stock.controller';
+import Machine from './Machine/machine.controller';
+import Supplies from './Supplies/supplies.controller';
+import Ad from './Ad/ad.controller';
 
 class Routes {
   route: any;
@@ -14,10 +21,18 @@ class Routes {
 
     this.uploadMiddleware = multer(memoryStorage()).array('files', 12);
 
+    this.file('/file');
+    this.product('/product');
     this.product('/product');
     this.category('/category');
-    this.file('/file');
     this.feedstock('/feedstock');
+    this.person('/person');
+    this.provider('/provider');
+    this.stock('/stock');
+    this.machine('/machine');
+    this.supplies('/supplies');
+    this.ad('/ad');
+    this.transaction('/transaction');
   }
 
   product(baseRoute): void {
@@ -45,13 +60,68 @@ class Routes {
   }
 
   file(baseRoute): void {
-    this.route.post(`${baseRoute}/upload`, this.uploadMiddleware, File.store);
-    this.route.get(`${baseRoute}/:name`, File.index);
-    this.route.get(`${baseRoute}/list/all-file`, File.show);
-    this.route.delete(`${baseRoute}/:id`, File.delete);
-    this.route.put(`${baseRoute}/:id`, File.update);
+    this.route.post(`${baseRoute}/store`, this.uploadMiddleware, File.store);
+    this.route.get(`${baseRoute}/index/:name`, File.index);
+    this.route.get(`${baseRoute}/show`, File.show);
+    this.route.delete(`${baseRoute}/delete/:id`, File.delete);
+    this.route.put(`${baseRoute}/update/:id`, File.update);
   }
 
+  transaction(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Transaction.store);
+    this.route.get(`${baseRoute}/index/:id`, Transaction.index);
+    this.route.get(`${baseRoute}/show`, Transaction.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Transaction.delete);
+    this.route.put(`${baseRoute}/update/:id`, Transaction.update);
+  }
+
+  person(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Person.store);
+    this.route.get(`${baseRoute}/index/:id`, Person.index);
+    this.route.get(`${baseRoute}/show`, Person.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Person.delete);
+    this.route.put(`${baseRoute}/update/:id`, Person.update);
+  }
+
+  provider(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Provider.store);
+    this.route.get(`${baseRoute}/index/:id`, Provider.index);
+    this.route.get(`${baseRoute}/show`, Provider.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Provider.delete);
+    this.route.put(`${baseRoute}/update/:id`, Provider.update);
+  }
+
+  stock(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Stock.store);
+    this.route.get(`${baseRoute}/index/:id`, Stock.index);
+    this.route.get(`${baseRoute}/show`, Stock.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Stock.delete);
+    this.route.put(`${baseRoute}/update/:id`, Stock.update);
+  }
+
+  machine(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Machine.store);
+    this.route.get(`${baseRoute}/index/:id`, Machine.index);
+    this.route.get(`${baseRoute}/show`, Machine.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Machine.delete);
+    this.route.put(`${baseRoute}/update/:id`, Machine.update);
+  }
+
+  supplies(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Supplies.store);
+    this.route.get(`${baseRoute}/index/:id`, Supplies.index);
+    this.route.get(`${baseRoute}/show`, Supplies.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Supplies.delete);
+    this.route.put(`${baseRoute}/update/:id`, Supplies.update);
+  }
+
+  ad(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Ad.store);
+    this.route.get(`${baseRoute}/index/:id`, Ad.index);
+    this.route.get(`${baseRoute}/show`, Ad.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Ad.delete);
+    this.route.put(`${baseRoute}/update/:id`, Ad.update);
+  }
   // exampleRoute(baseRoute) {
   //   this.route.get(`${baseRoute}`, async (req, res) => {
   //     const ean = await adService.generateTitles(

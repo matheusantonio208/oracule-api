@@ -25,6 +25,11 @@ class ProductService {
 
     return `${feedStockSku}${productCode}`;
   }
+
+  async generatePrice(product): Promise<number> {
+    return 10;
+    console.log('Soma o preço de custo');
+  }
 }
 
 export default new ProductService();

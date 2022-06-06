@@ -11,9 +11,15 @@ class ProductController {
       const product: ProductCreateDto = new ProductCreateDto(req.body);
       const productCode = await ProductService.generateProductCode();
       const productSku = await ProductService.generateSku(product, productCode);
+      const productCost = await ProductService.generatePrice(product);
 
       const productCreated: Document<IProduct> = await ProductRepository.create(
-        { ...product, product_code: productCode, sku: productSku },
+        {
+          ...product,
+          product_code: productCode,
+          sku: productSku,
+          production_cost: productCost,
+        },
       );
 
       return res.status(201).json({
