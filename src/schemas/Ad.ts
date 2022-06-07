@@ -6,18 +6,18 @@ const adSchema = new Schema<IAd>(
   {
     title: String,
     description: String,
-    // additional_img_id: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'images_products',
-    //   },
-    // ],
-    // additional_vid_id: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'videos_products',
-    //   },
-    // ],
+    additional_img_id: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'files',
+      },
+    ],
+    additional_vid_id: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'files',
+      },
+    ],
     status: {
       type: String,
       enum: ['created', 'stopped', 'active', 'disabled'],
@@ -41,29 +41,29 @@ const adSchema = new Schema<IAd>(
     //   type: Schema.Types.ObjectId,
     //   ref: 'stores',
     // },
-    // price: number,
-    // price_history: [
-    //   {
-    //     date_set_price: Date,
-    //     set_price: number,
-    //   },
-    // ],
-    // purchase_history: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'purchases',
-    //   },
-    // ],
-    // feedbacks_history: [
-    //   {
-    //     customer_id: {
-    //       type: Schema.Types.ObjectId,
-    //       ref: 'customers',
-    //     },
-    //     feedback: String,
-    //     assessment: number,
-    //   },
-    // ],
+    price: Number,
+    price_history: [
+      {
+        date_set_price: Date,
+        set_price: Number,
+      },
+    ],
+    purchase_history: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'purchases',
+      },
+    ],
+    feedbacks_history: [
+      {
+        customer_id: {
+          type: Schema.Types.ObjectId,
+          ref: 'customers',
+        },
+        feedback: String,
+        assessment: Number,
+      },
+    ],
   },
   { timestamps: true },
 );

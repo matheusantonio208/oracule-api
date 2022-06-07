@@ -8,7 +8,7 @@ import FileService from './file.service';
 class FileController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const { mockups, art, psd } = req;
+      const { mockups, art, psd, video } = req;
       const mockupBuffers = FileService.getBuffers(mockups);
 
       if (mockupBuffers) {
@@ -24,6 +24,11 @@ class FileController {
       if (psd) {
         const name = FileService.createNamesFiles(psd, '.psd');
         await FileService.uploadProductionFile(psd, name);
+      }
+
+      if (video) {
+        const name = FileService.createNamesFiles(video, '.mp4');
+        await FileService.uploadProductionFile(video, name);
       }
 
       return res

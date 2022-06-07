@@ -5,6 +5,7 @@ export interface IRequest extends Request {
   mockups?: any;
   art?: any;
   psd?: any;
+  video?: any;
   buffer?: any;
 }
 export interface IResponse extends Response {
