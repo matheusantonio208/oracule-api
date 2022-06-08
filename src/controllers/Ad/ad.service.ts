@@ -18,13 +18,10 @@ class AdService {
     let currentIndex = array.length,
       randomIndex;
 
-    // While there remain elements to shuffle.
     while (currentIndex != 0) {
-      // Pick a remaining element.
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
 
-      // And swap it with the current element.
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex],
         array[currentIndex],
@@ -92,11 +89,11 @@ class AdService {
       });
     });
 
-    const keys = titles.filter(function (item, index, inputArray) {
+    const generatedTitles = titles.filter(function (item, index, inputArray) {
       return inputArray.indexOf(item) == index;
     });
 
-    const titleList = this.shuffle(keys).slice(
+    const titleList = this.shuffle(generatedTitles).slice(
       0,
       qtdAd < titles.length ? qtdAd : titles.length,
     );
