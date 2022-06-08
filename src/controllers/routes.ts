@@ -11,6 +11,11 @@ import Stock from './Stock/stock.controller';
 import Machine from './Machine/machine.controller';
 import Supplies from './Supplies/supplies.controller';
 import Ad from './Ad/ad.controller';
+import Shop from './Shop/shop.controller';
+import Promotion from './Promotion/promotion.controller';
+import Order from './Order/order.controller';
+import Customer from './Customer/customer.controller';
+import Employee from './Employee/employee.controller';
 
 class Routes {
   route: any;
@@ -32,6 +37,11 @@ class Routes {
     this.file('/file');
     this.product('/product');
     this.ad('/ad');
+    this.shop('/shop');
+    this.promotion('/promotion');
+    this.order('/order');
+    this.customer('/customer');
+    this.employee('/employee');
   }
 
   person(baseRoute): void {
@@ -120,6 +130,46 @@ class Routes {
     this.route.get(`${baseRoute}/show`, Ad.show);
     this.route.delete(`${baseRoute}/delete/:id`, Ad.delete);
     this.route.put(`${baseRoute}/update/:id`, Ad.update);
+  }
+
+  shop(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Shop.store);
+    this.route.get(`${baseRoute}/index/:id`, Shop.index);
+    this.route.get(`${baseRoute}/show`, Shop.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Shop.delete);
+    this.route.put(`${baseRoute}/update/:id`, Shop.update);
+  }
+
+  promotion(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Promotion.store);
+    this.route.get(`${baseRoute}/index/:id`, Promotion.index);
+    this.route.get(`${baseRoute}/show`, Promotion.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Promotion.delete);
+    this.route.put(`${baseRoute}/update/:id`, Promotion.update);
+  }
+
+  order(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Order.store);
+    this.route.get(`${baseRoute}/index/:id`, Order.index);
+    this.route.get(`${baseRoute}/show`, Order.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Order.delete);
+    this.route.put(`${baseRoute}/update/:id`, Order.update);
+  }
+
+  customer(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Customer.store);
+    this.route.get(`${baseRoute}/index/:id`, Customer.index);
+    this.route.get(`${baseRoute}/show`, Customer.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Customer.delete);
+    this.route.put(`${baseRoute}/update/:id`, Customer.update);
+  }
+
+  employee(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Employee.store);
+    this.route.get(`${baseRoute}/index/:id`, Employee.index);
+    this.route.get(`${baseRoute}/show`, Employee.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Employee.delete);
+    this.route.put(`${baseRoute}/update/:id`, Employee.update);
   }
   // exampleRoute(baseRoute) {
   //   this.route.get(`${baseRoute}`, async (req, res) => {

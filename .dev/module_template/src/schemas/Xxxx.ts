@@ -4,10 +4,7 @@ import { IXxxx } from '../controllers/Xxxx/xxxx.interface';
 
 const xxxxSchema = new Schema<IXxxx>(
   {
-    property_id: {
-      type: Schema.Types.ObjectId,
-      ref: 'schemaRef',
-    },
+    property: String,
   },
   { timestamps: true },
 );
