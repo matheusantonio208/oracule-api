@@ -44,7 +44,16 @@ class AdService {
       this.generateKeywords(keywords);
     }
   }
-
+  /*
+    models:         ['Caneca', 'Xícara', 'Copo'],
+    materials:      ['Cerâmica', 'Porcelana', 'Vidro'],
+    themes:         ['Superman', 'DC', 'Super Homem'],
+    names:          ['Rosto', 'Face'],
+    variations:     ['Azul Claro', 'Azul Escuro'],
+    keywords:       ['Filmes', 'Série', 'HQ', 'Premium'],
+    maxCharacters:  60,
+    qtdAd:          30,
+  */
   async generateTitles(
     models: Array<String>,
     materials: Array<String>,

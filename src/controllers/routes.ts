@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import multer, { memoryStorage } from 'multer';
+
 import Product from './Product/product.controller';
 import Category from './Category/category.controller';
 import File from './File/file.controller';
@@ -171,23 +172,5 @@ class Routes {
     this.route.delete(`${baseRoute}/delete/:id`, Employee.delete);
     this.route.put(`${baseRoute}/update/:id`, Employee.update);
   }
-  // exampleRoute(baseRoute) {
-  //   this.route.get(`${baseRoute}`, async (req, res) => {
-  //     const ean = await adService.generateTitles(
-  //       ['Caneca', 'Xícara', 'Copo'],
-  //       ['Cerâmica', 'Porcelana', 'Vidro'],
-  //       ['Superman', 'DC', 'Super Homem'],
-  //       ['Rosto', 'Face'],
-  //       ['Azul Claro', 'Azul Escuro'],
-  //       ['Filmes', 'Série', 'HQ', 'Quadrinhos', 'Premium'],
-  //       60,
-  //       30,
-  //     );
-
-  //     return res.status(200).json({
-  //       success_msg: ean,
-  //       qtd: ean.length,
-  //     });
-  //   });
 }
 export default new Routes().route;
