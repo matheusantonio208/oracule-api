@@ -2,11 +2,10 @@ import { Document } from 'mongoose';
 
 import Ad from '../../schemas/Ad';
 
-import { AdCreateDto } from './dto/ad-create.dto';
-import { IAd } from './ad.interface';
+import { AdDto, AdCreateDto } from './dto/index.dto';
 
 class AdRepository {
-  async create(ad: AdCreateDto): Promise<Document<IAd>> {
+  async create(ad: AdCreateDto): Promise<Document<AdDto>> {
     const adCreate = new Ad(ad);
 
     if (await adCreate.save()) {
@@ -16,15 +15,15 @@ class AdRepository {
     throw new Error(`Error to create ad`);
   }
 
-  async getOneById(id: string): Promise<Document<IAd>> {
-    const ad: Document<IAd> = await Ad.findById(id);
+  async getOneById(id: string): Promise<Document<AdDto>> {
+    const ad: Document<AdDto> = await Ad.findById(id);
     if (ad) return ad;
 
     throw new Error(`Error to get ad`);
   }
 
-  async listAll(): Promise<Array<Document<IAd>>> {
-    const ads: Array<Document<IAd>> = await Ad.find({}, (err, docs) => {
+  async listAll(): Promise<Array<Document<AdDto>>> {
+    const ads: Array<Document<AdDto>> = await Ad.find({}, (err, docs) => {
       if (!err) return docs;
     });
 
@@ -33,8 +32,8 @@ class AdRepository {
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: string, data: any): Promise<Document<IAd>> {
-    const updatedAd: Document<IAd> = await Ad.findByIdAndUpdate(
+  async updateById(id: string, data: any): Promise<Document<AdDto>> {
+    const updatedAd: Document<AdDto> = await Ad.findByIdAndUpdate(
       id,
       data,
       (error, document) => {

@@ -2,11 +2,10 @@ import { Document } from 'mongoose';
 
 import Xxxx from '../../schemas/Xxxx';
 
-import { XxxxCreateDto } from './dto/xxxx-create.dto';
-import { IXxxx } from './xxxx.interface';
+import { XxxxDto, XxxxCreateDto } from './dto/index.dto';
 
 class XxxxRepository {
-  async create(xxxx: XxxxCreateDto): Promise<Document<IXxxx>> {
+  async create(xxxx: XxxxCreateDto): Promise<Document<XxxxDto>> {
     const xxxxCreate = new Xxxx(xxxx);
 
     if (await xxxxCreate.save()) {
@@ -16,15 +15,15 @@ class XxxxRepository {
     throw new Error(`Error to create xxxx`);
   }
 
-  async getOneById(id: string): Promise<Document<IXxxx>> {
-    const xxxx: Document<IXxxx> = await Xxxx.findById(id);
+  async getOneById(id: string): Promise<Document<XxxxDto>> {
+    const xxxx: Document<XxxxDto> = await Xxxx.findById(id);
     if (xxxx) return xxxx;
 
     throw new Error(`Error to get xxxx`);
   }
 
-  async listAll(): Promise<Array<Document<IXxxx>>> {
-    const xxxxs: Array<Document<IXxxx>> = await Xxxx.find({}, (err, docs) => {
+  async listAll(): Promise<Array<Document<XxxxDto>>> {
+    const xxxxs: Array<Document<XxxxDto>> = await Xxxx.find({}, (err, docs) => {
       if (!err) return docs;
     });
 
@@ -33,8 +32,8 @@ class XxxxRepository {
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: string, data: any): Promise<Document<IXxxx>> {
-    const updatedXxxx: Document<IXxxx> = await Xxxx.findByIdAndUpdate(
+  async updateById(id: string, data: any): Promise<Document<XxxxDto>> {
+    const updatedXxxx: Document<XxxxDto> = await Xxxx.findByIdAndUpdate(
       id,
       data,
       (error, document) => {

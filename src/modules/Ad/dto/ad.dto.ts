@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-export interface IAd {
+export class AdDto {
   title: string;
   description: string;
   additional_img_id: [

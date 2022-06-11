@@ -1,12 +1,12 @@
 import { model, Schema } from 'mongoose';
 
-import { ICustomer } from '../controllers/Customer/customer.interface';
+import { IEmployee } from '../controllers/Employee/employee.interface';
 
-const customerSchema = new Schema<ICustomer>(
+const employeeSchema = new Schema<IEmployee>(
   {
     name: String,
   },
   { timestamps: true },
 );
 
-export default model<ICustomer>('customers', customerSchema);
+export default model<IEmployee>('employees', employeeSchema);

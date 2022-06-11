@@ -1,20 +1,17 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
-import { XxxxCreateDto } from './dto/xxxx-create.dto';
-import { IXxxx } from './xxxx.interface';
-import XxxxRepository from './xxxx.repository';
+import { AdCreateDto, AdDto } from './dto/index.dto';
+import AdRepository from './ad.repository';
 
-class XxxxController {
+class AdController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const xxxxCreateDto: XxxxCreateDto = new XxxxCreateDto(req.body);
+      const adCreateDto: AdCreateDto = new AdCreateDto(req.body);
 
-      const xxxxCreated: Document<IXxxx> = await XxxxRepository.create(
-        xxxxCreateDto,
-      );
+      const adCreated: Document<AdDto> = await AdRepository.create(adCreateDto);
 
-      return res.status(201).json(xxxxCreated);
+      return res.status(201).json(adCreated);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
@@ -24,9 +21,9 @@ class XxxxController {
     try {
       const { id } = req.params;
 
-      const xxxx: Document<IXxxx> = await XxxxRepository.getOneById(id);
+      const ad: Document<AdDto> = await AdRepository.getOneById(id);
 
-      return res.status(201).json(xxxx);
+      return res.status(201).json(ad);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
@@ -34,9 +31,9 @@ class XxxxController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const xxxx: Array<Document<IXxxx>> = await XxxxRepository.listAll();
+      const ad: Array<Document<AdDto>> = await AdRepository.listAll();
 
-      return res.status(201).json(xxxx);
+      return res.status(201).json(ad);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
@@ -46,11 +43,11 @@ class XxxxController {
     try {
       const { id } = req.params;
 
-      await XxxxRepository.deleteById(id);
+      await AdRepository.deleteById(id);
 
       return res
         .status(201)
-        .json({ success_msg: `Success! Your xxxx was deleted` });
+        .json({ success_msg: `Success! Your ad was deleted` });
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
@@ -61,13 +58,13 @@ class XxxxController {
       const { id } = req.params;
       const data = req.body;
 
-      const xxxxUpdated = await XxxxRepository.updateById(id, data);
+      const adUpdated = await AdRepository.updateById(id, data);
 
-      return res.status(201).json(xxxxUpdated);
+      return res.status(201).json(adUpdated);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
 }
 
-export default new XxxxController();
+export default new AdController();

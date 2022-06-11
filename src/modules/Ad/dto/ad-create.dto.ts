@@ -1,8 +1,6 @@
 import { Schema } from 'mongoose';
 
-import { IAd } from '../ad.interface';
-
-export class AdCreateDto implements IAd {
+export class AdCreateDto {
   title: string;
   description: string;
   // additional_img_id: [
@@ -64,7 +62,7 @@ export class AdCreateDto implements IAd {
   //   },
   // ];
 
-  constructor(body: IAd) {
+  constructor(body: AdCreateDto) {
     this.title = body?.title;
     this.description = body?.description;
     this.status = body?.status;

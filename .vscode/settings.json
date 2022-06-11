@@ -2,11 +2,11 @@
   "files.eol": "\n",
 
   "files.exclude": {
-    "**/.DS_Store": true,
     "**/.git": true,
-    "**/.hg": true,
     "**/.svn": true,
+    "**/.hg": true,
     "**/CVS": true,
+    "**/.DS_Store": true,
     "**/Thumbs.db": true,
     ".dev": false,
     ".dev/ArchFlow.drawio": true,
@@ -30,7 +30,7 @@
     "jest.config.js": true,
     "makefile": true,
     "node_modules": true,
-    "package.json": true,
+    "package.json": false,
     "src/@types": true,
     "src/config": true,
     "src/controllers/Ad": false,

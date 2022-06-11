@@ -8,7 +8,8 @@
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "start": "node dist/config/server/server-connect.js",
     "test": "jest --detectOpenHandles",
-    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/config/server/server-connect.js"
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/config/server/server-connect.js",
+    "dev:debug": "ts-node-dev --inspect -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/config/server/server-connect.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
