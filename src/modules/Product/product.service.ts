@@ -1,5 +1,4 @@
 import ProductRepository from './product.repository';
-import { IProductCreate } from './product.interface';
 import FeedstockRepository from '../Feedstock/feedstock.repository';
 
 class ProductService {
@@ -14,7 +13,7 @@ class ProductService {
     return 0;
   }
 
-  async generateSku(product: IProductCreate, productCode): Promise<any> {
+  async generateSku(product, productCode): Promise<any> {
     const feedStock = await FeedstockRepository.getOneById(
       String(product.production_procedure[0].feedstock_id),
     );

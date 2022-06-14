@@ -1,8 +1,8 @@
-export class ShopCreateDto {
+export class shopCreatedDto {
   name: string;
   sku_suffix: string;
 
-  constructor(body: ShopCreateDto) {
+  constructor(body: shopCreatedDto) {
     this.name = body?.name;
     this.sku_suffix = body?.sku_suffix;
   }
