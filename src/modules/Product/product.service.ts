@@ -39,11 +39,11 @@ class ProductService {
     // const metaproductsTransaction: Array<number> = product.metaproducts_id;
 
     const cost =
-      feedstocksTransaction.reduce((x, y) => x + y)[0] +
-      suppliesTransaction.reduce((x, y) => x + y)[0] +
-      machinesTransaction.reduce((x, y) => x + y)[0] +
-      machinesTransaction.reduce((x, y) => x + y)[0] +
-      otherTransaction.reduce((x, y) => x + y)[0];
+      feedstocksTransaction.reduce((a, b) => a + b)[0] +
+      suppliesTransaction.reduce((a, b) => a + b)[0] +
+      machinesTransaction.reduce((a, b) => a + b)[0] +
+      machinesTransaction.reduce((a, b) => a + b)[0] +
+      otherTransaction.reduce((a, b) => a + b)[0];
 
     return cost;
   }

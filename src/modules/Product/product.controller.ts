@@ -1,7 +1,5 @@
-import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
-import { ProductCreateDto } from './dto/product-create.dto';
-import { IProduct } from './product.interface';
+import { ProductCreatedDto, ProductCreateDto } from './dto/index.dto';
 import ProductRepository from './product.repository';
 import ProductService from './product.service';
 
@@ -19,14 +17,12 @@ class ProductController {
         otherTransactions,
       );
 
-      const productCreated: Document<IProduct> = await ProductRepository.create(
-        {
-          ...product,
-          product_code: productCode,
-          sku: productSku,
-          production_cost: productCost,
-        },
-      );
+      const productCreated: ProductCreatedDto = await ProductRepository.create({
+        ...product,
+        product_code: productCode,
+        sku: productSku,
+        production_cost: productCost,
+      });
 
       return res.status(201).json({
         success_msg: `Success! Your product was created`,
@@ -41,9 +37,7 @@ class ProductController {
     try {
       const { id } = req.params;
 
-      const product: Document<IProduct> = await ProductRepository.getOneById(
-        id,
-      );
+      const product: ProductCreatedDto = await ProductRepository.getOneById(id);
 
       return res.status(201).json(product);
     } catch (error) {
@@ -53,7 +47,7 @@ class ProductController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const product: Array<Document<IProduct>> =
+      const product: Array<ProductCreatedDto> =
         await ProductRepository.listAll();
 
       return res.status(201).json(product);

@@ -1,28 +1,20 @@
 import { Schema } from 'mongoose';
 
-export class AdCreateDto {
+export class AdToCreateDto {
   title: string;
   description: string;
   additional_img_id: Array<Schema.Types.ObjectId>;
   additional_vid_id: Array<Schema.Types.ObjectId>;
   status: string;
   ean_code: string;
-  sku: string;
   category_id: Schema.Types.ObjectId;
   promotions_id?: Array<Schema.Types.ObjectId>;
   product_id: Schema.Types.ObjectId;
   shop_id: Schema.Types.ObjectId;
   typeAd: string;
   profit: number;
-  price: number;
-  price_history: [
-    {
-      date: Date;
-      price: number;
-    },
-  ];
 
-  constructor(body: AdCreateDto) {
+  constructor(body: AdToCreateDto) {
     this.title = body?.title;
     this.description = body?.description;
     this.additional_img_id = body?.additional_img_id;
@@ -34,6 +26,5 @@ export class AdCreateDto {
     this.product_id = body?.product_id;
     this.shop_id = body?.shop_id;
     this.profit = body?.profit;
-    this.price = body?.price;
   }
 }

@@ -1,106 +1,44 @@
 import { Schema } from 'mongoose';
-import { IProductCreate } from '../product.interface';
 
-export class ProductCreateDto implements IProductCreate {
+export class ProductCreateDto {
   name: string;
-
-  categories_id: [
-    {
-      type: Schema.Types.ObjectId;
-      ref: 'categories';
-    },
-  ];
-
+  product_code: string;
+  sku: string;
+  categories_id: Array<Schema.Types.ObjectId>;
   theme: string;
-
-  tags: [
-    {
-      type: string;
-    },
-  ];
-
-  production_type: {
-    type: string;
-    enum: ['own', 'outsourced'];
-  };
-
-  provider_id?: {
-    type: Schema.Types.ObjectId;
-    ref: 'providers';
-  };
-
+  tags: Array<string>;
+  production_type: string; //['own', 'outsourced']
+  provider_id?: Schema.Types.ObjectId;
   production_cost: number;
-
   production_procedure: [
     {
       order_step: number;
-
       name_step: string;
-
       description_step: string;
-
       time_in_minutes: number;
-
-      feedstock_id: [
-        {
-          type: Schema.Types.ObjectId;
-          ref: 'feedstock';
-        },
-      ];
-
-      machine_id: {
-        type: Schema.Types.ObjectId;
-        ref: 'machines';
-      };
-
-      tools_id: [
-        {
-          type: Schema.Types.ObjectId;
-          ref: 'tools';
-        },
-      ];
-
-      employee_id: [
-        {
-          type: Schema.Types.ObjectId;
-          ref: 'employees';
-        },
-      ];
-
+      feedstock_id: Array<Schema.Types.ObjectId>;
+      machine_id: Schema.Types.ObjectId;
+      tools_id: Array<Schema.Types.ObjectId>;
+      employee_id: Array<Schema.Types.ObjectId>;
       supplies: [
         {
-          supplies_id: {
-            type: Schema.Types.ObjectId;
-            ref: 'supplies';
-          };
+          supplies_id: Schema.Types.ObjectId;
           amount: number;
         },
       ];
-
-      files_production: [
-        {
-          type: Schema.Types.ObjectId;
-          ref: 'files';
-        },
-      ];
+      files_production: Array<Schema.Types.ObjectId>;
     },
   ];
-
   datasheet: {
     weight_in_grams: number;
-
     width_in_cm: number;
-
     height_in_cm: number;
-
     depth_in_cm: number;
-
     material: string;
-
     expiration_time_in_days?: Number;
   };
 
-  constructor(body: IProductCreate) {
+  constructor(body) {
     this.name = body?.name;
     this.categories_id = body?.categories_id;
     this.theme = body?.theme;

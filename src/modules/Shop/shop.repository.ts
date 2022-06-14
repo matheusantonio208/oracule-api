@@ -1,4 +1,4 @@
-import { Document } from 'mongoose';
+import { Schema } from 'mongoose';
 
 import Shop from '../../schemas/Shop';
 
@@ -6,7 +6,7 @@ import { ShopCreateDto } from './dto/shop-create.dto';
 import { IShop } from './shop.interface';
 
 class ShopRepository {
-  async create(shop: ShopCreateDto): Promise<Document<IShop>> {
+  async create(shop: ShopCreateDto): Promise<IShop> {
     const shopCreate = new Shop(shop);
 
     if (await shopCreate.save()) {
@@ -16,15 +16,15 @@ class ShopRepository {
     throw new Error(`Error to create shop`);
   }
 
-  async getOneById(id: string): Promise<Document<IShop>> {
-    const shop: Document<IShop> = await Shop.findById(id);
+  async getOneById(id: Schema.Types.ObjectId): Promise<IShop> {
+    const shop: IShop = await Shop.findById(id);
     if (shop) return shop;
 
     throw new Error(`Error to get shop`);
   }
 
-  async listAll(): Promise<Array<Document<IShop>>> {
-    const shops: Array<Document<IShop>> = await Shop.find({}, (err, docs) => {
+  async listAll(): Promise<Array<IShop>> {
+    const shops: Array<IShop> = await Shop.find({}, (err, docs) => {
       if (!err) return docs;
     });
 
@@ -33,8 +33,8 @@ class ShopRepository {
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: string, data: any): Promise<Document<IShop>> {
-    const updatedShop: Document<IShop> = await Shop.findByIdAndUpdate(
+  async updateById(id: Schema.Types.ObjectId, data: any): Promise<IShop> {
+    const updatedShop: IShop = await Shop.findByIdAndUpdate(
       id,
       data,
       (error, document) => {
@@ -47,7 +47,7 @@ class ShopRepository {
     throw new Error(`Error to update shop`);
   }
 
-  async deleteById(id: string): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId): Promise<Boolean> {
     if (await Shop.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete shop`);

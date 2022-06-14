@@ -1,111 +1,7 @@
 import { Schema } from 'mongoose';
 
-export interface IProductCreate {
+export class ProductCreatedDto {
   name: string;
-  mockups_id: [
-    {
-      type: Schema.Types.ObjectId;
-      ref: 'files';
-    },
-  ];
-  categories_id: [
-    {
-      type: Schema.Types.ObjectId;
-      ref: 'categories';
-    },
-  ];
-
-  theme: string;
-
-  tags: [
-    {
-      type: string;
-    },
-  ];
-
-  production_type: {
-    type: string;
-    enum: ['own', 'outsourced'];
-  };
-
-  provider_id?: {
-    type: Schema.Types.ObjectId;
-    ref: 'providers';
-  };
-
-  production_cost: number;
-
-  production_procedure: [
-    {
-      order_step: number;
-
-      name_step: string;
-
-      description_step: string;
-
-      time_in_minutes: number;
-
-      feedstock_id: [
-        {
-          type: Schema.Types.ObjectId;
-          ref: 'feedstock';
-        },
-      ];
-
-      machine_id: {
-        type: Schema.Types.ObjectId;
-        ref: 'machines';
-      };
-
-      tools_id: [
-        {
-          type: Schema.Types.ObjectId;
-          ref: 'tools';
-        },
-      ];
-
-      employee_id: [
-        {
-          type: Schema.Types.ObjectId;
-          ref: 'employees';
-        },
-      ];
-
-      supplies: [
-        {
-          supplies_id: {
-            type: Schema.Types.ObjectId;
-            ref: 'supplies';
-          };
-          amount: number;
-        },
-      ];
-
-      files_production: [
-        {
-          type: Schema.Types.ObjectId;
-          ref: 'files';
-        },
-      ];
-    },
-  ];
-  datasheet: {
-    weight_in_grams: number;
-
-    width_in_cm: number;
-
-    height_in_cm: number;
-
-    depth_in_cm: number;
-
-    material: string;
-
-    expiration_time_in_days?: Number;
-  };
-}
-export interface IProduct {
-  name: string;
-
   product_code: number;
 
   sku: {
@@ -134,11 +30,8 @@ export interface IProduct {
   production_procedure: [
     {
       order_step: number;
-
       name_step: string;
-
       description_step: string;
-
       time_in_minutes: number;
 
       feedstock_id: [
@@ -173,7 +66,6 @@ export interface IProduct {
             type: Schema.Types.ObjectId;
             ref: 'supplies';
           };
-
           amount: number;
         },
       ];
@@ -189,27 +81,45 @@ export interface IProduct {
 
   datasheet: {
     weight_in_grams: number;
-
     width_in_cm: number;
-
     height_in_cm: number;
-
     depth_in_cm: number;
-
     material: string;
-
     expiration_time_in_days?: Number;
   };
 
-  // video_id: {
-  //   type: Schema.Types.ObjectId;
-  //   ref: 'videos_product';
-  // };
+  video_id: {
+    type: Schema.Types.ObjectId;
+    ref: 'files';
+  };
+
+  image_id: {
+    type: Schema.Types.ObjectId;
+    ref: 'files';
+  };
+
   // brand_id: {
   //   type: Schema.Types.ObjectId;
   //   ref: 'brands';
   // };
 }
+
+// purchase_history: [
+//   {
+//     type: Schema.Types.ObjectId;
+//     ref: 'purchases';
+//   },
+// ];
+// feedbacks_history: [
+//   {
+//     customer_id: {
+//       type: Schema.Types.ObjectId;
+//       ref: 'customers';
+//     };
+//     feedback: string;
+//     assessment: number;
+//   },
+// ];
 
 /* === Req Body Example ===
 {

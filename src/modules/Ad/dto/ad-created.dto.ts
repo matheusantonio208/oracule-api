@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-export class AdCreateDto {
+export class AdCreatedDto {
   title: string;
   description: string;
   additional_img_id: Array<Schema.Types.ObjectId>;
@@ -17,12 +17,12 @@ export class AdCreateDto {
   price: number;
   price_history: [
     {
-      date: Date;
-      price: number;
+      date_set_price: Date;
+      set_price: number;
     },
   ];
 
-  constructor(body: AdCreateDto) {
+  constructor(body: AdCreatedDto) {
     this.title = body?.title;
     this.description = body?.description;
     this.additional_img_id = body?.additional_img_id;
@@ -35,5 +35,6 @@ export class AdCreateDto {
     this.shop_id = body?.shop_id;
     this.profit = body?.profit;
     this.price = body?.price;
+    this.price_history = body?.price_history;
   }
 }

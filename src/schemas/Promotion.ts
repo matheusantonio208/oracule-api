@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-import { IPromotion } from '../controllers/Promotion/promotion.interface';
+import { IPromotion } from '../modules/Promotion/promotion.interface';
 
 const promotionSchema = new Schema<IPromotion>(
   {

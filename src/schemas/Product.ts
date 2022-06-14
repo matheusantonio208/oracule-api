@@ -1,8 +1,7 @@
 import { model, Schema } from 'mongoose';
+import { ProductCreatedDto } from '../modules/Product/dto/product.dto';
 
-import { IProduct } from '../controllers/Product/product.interface';
-
-const productSchema = new Schema<IProduct>(
+const productSchema = new Schema<ProductCreatedDto>(
   {
     name: { type: String, unique: true },
     product_code: { type: Number, unique: true },
@@ -11,7 +10,6 @@ const productSchema = new Schema<IProduct>(
     theme: String,
     tags: [{ type: String }],
     production_cost: Number,
-
     production_procedure: [
       {
         order_step: Number,
@@ -59,45 +57,42 @@ const productSchema = new Schema<IProduct>(
       material: String,
       expiration_time_in_days: Number,
     },
-
-    //   images_id: [
-    //     {
-    //       type: Schema.Types.ObjectId,
-    //       ref: 'images_product',
-    //     },
-    //   ],
-    //   video_id: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'videos_product',
-    //   },
-    //   brand_id: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'brands',
-    //   },
-    //   categories_id: [
-    //     {
-    //       type: Schema.Types.ObjectId,
-    //       ref: 'categories_product',
-    //     },
-    //   ],
-
-    //   production_type: {
-    //     type: String,
-    //     enum: ['own', 'outsourced'],
-    //   },
-    //   provider_id: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'providers',
-    //   },
-
-    //   files_production: [
-    //     {
-    //       name: String,
-    //       path: String,
-    //     },
-    //   ],
+    images_id: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'files',
+      },
+    ],
+    video_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'files',
+    },
+    // brand_id: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'brands',
+    // },
+    categories_id: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'categories',
+      },
+    ],
+    production_type: {
+      type: String,
+      enum: ['own', 'outsourced'],
+    },
+    provider_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'providers',
+    },
+    files_production: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'files',
+      },
+    ],
   },
   { timestamps: true },
 );
 
-export default model<IProduct>('products', productSchema);
+export default model<ProductCreatedDto>('products', productSchema);

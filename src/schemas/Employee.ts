@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-import { IEmployee } from '../controllers/Employee/employee.interface';
+import { IEmployee } from '../modules/Employee/employee.interface';
 
 const employeeSchema = new Schema<IEmployee>(
   {

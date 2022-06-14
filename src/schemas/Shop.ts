@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-import { IShop } from '../controllers/Shop/shop.interface';
+import { IShop } from '../modules/Shop/shop.interface';
 
 const shopSchema = new Schema<IShop>(
   {

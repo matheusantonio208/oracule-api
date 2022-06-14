@@ -1,9 +1,9 @@
-import { IShop } from '../shop.interface';
-
-export class ShopCreateDto implements IShop {
+export class ShopCreateDto {
   name: string;
+  sku_suffix: string;
 
-  constructor(body: IShop) {
+  constructor(body: ShopCreateDto) {
     this.name = body?.name;
+    this.sku_suffix = body?.sku_suffix;
   }
 }

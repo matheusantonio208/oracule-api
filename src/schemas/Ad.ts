@@ -1,8 +1,7 @@
 import { model, Schema } from 'mongoose';
+import { AdCreatedDto } from '../modules/Ad/dto/index.dto';
 
-import { IAd } from '../controllers/Ad/ad.interface';
-
-const adSchema = new Schema<IAd>(
+const adSchema = new Schema<AdCreatedDto>(
   {
     title: String,
     description: String,
@@ -23,29 +22,32 @@ const adSchema = new Schema<IAd>(
       enum: ['created', 'stopped', 'active', 'disabled'],
     },
     ean_code: String,
+    sku: String,
     category_id: {
       type: Schema.Types.ObjectId,
       ref: 'categories_product',
     },
-    // promotions_id: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'promotions',
-    //   },
-    // ],
+    promotions_id: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'promotions',
+      },
+    ],
     product_id: {
       type: Schema.Types.ObjectId,
       ref: 'products',
     },
-    // store_id: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'stores',
-    // },
+    shop_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'shops',
+    },
+    typeAd: String,
+    profit: Number,
     price: Number,
     price_history: [
       {
-        date_set_price: Date,
-        set_price: Number,
+        date: Date,
+        price: Number,
       },
     ],
     purchase_history: [
@@ -68,4 +70,4 @@ const adSchema = new Schema<IAd>(
   { timestamps: true },
 );
 
-export default model<IAd>('ads', adSchema);
+export default model<AdCreatedDto>('ads', adSchema);

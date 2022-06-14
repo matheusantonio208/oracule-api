@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-import { ICustomer } from '../controllers/Customer/customer.interface';
+import { ICustomer } from '../modules/Customer/customer.interface';
 
 const customerSchema = new Schema<ICustomer>(
   {

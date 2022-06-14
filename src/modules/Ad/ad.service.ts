@@ -51,7 +51,7 @@ class AdService {
     maxCharacters:  60,
     qtdAd:          30,
   */
-  async generateTitles(
+  generateTitles(
     models: Array<String>,
     materials: Array<String>,
     themes: Array<String>,
@@ -64,7 +64,6 @@ class AdService {
     this.generateKeywords(keywords);
 
     let titles = [];
-    console.log(this.keywordList);
 
     models.map((model) => {
       materials.map((material) => {
@@ -99,6 +98,16 @@ class AdService {
     );
 
     return titleList;
+  }
+
+  generatePriceWithoutCommissionShop(
+    profit: number,
+    costs: Array<number>,
+  ): number {
+    const costSum = costs.reduce((a, b) => a + b);
+    const price = costSum + (costSum * profit) / 100;
+
+    return price;
   }
 }
 
