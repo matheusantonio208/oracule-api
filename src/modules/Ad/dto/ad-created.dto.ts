@@ -17,8 +17,8 @@ export class AdCreatedDto {
   price: number;
   price_history: [
     {
-      date_set_price: Date;
-      set_price: number;
+      date: Date;
+      price: number;
     },
   ];
 
