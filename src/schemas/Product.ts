@@ -1,22 +1,35 @@
 import { model, Schema } from 'mongoose';
-import { ProductCreatedDto } from '../modules/Product/dto/product.dto';
+import { ProductCreatedDto } from '../modules/Product/dto/index.dto';
 
 const productSchema = new Schema<ProductCreatedDto>(
   {
     name: { type: String, unique: true },
     product_code: { type: Number, unique: true },
-
     sku: String,
     theme: String,
+    categories_id: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'categories',
+      },
+    ],
     tags: [{ type: String }],
+    production_type: {
+      type: String,
+      enum: ['own', 'outsourced'],
+    },
+    provider_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'providers',
+    },
     production_cost: Number,
     production_procedure: [
       {
-        order_step: Number,
-        name_step: String,
-        description_step: String,
+        order: Number,
+        name: String,
+        description: String,
         time_in_minutes: Number,
-        feedstock_id: [
+        feedstocks_id: [
           {
             type: Schema.Types.ObjectId,
             ref: 'feedstock',
@@ -26,25 +39,31 @@ const productSchema = new Schema<ProductCreatedDto>(
           type: Schema.Types.ObjectId,
           ref: 'machines',
         },
-        // tools_id: [
-        //   {
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'tools',
-        //   },
-        // ],
-        // employee_id: [
-        //   {
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'employees',
-        //   },
-        // ],
+        tools_id: [
+          {
+            type: Schema.Types.ObjectId,
+            ref: 'machines',
+          },
+        ],
+        employee_id: [
+          {
+            type: Schema.Types.ObjectId,
+            ref: 'employees',
+          },
+        ],
         supplies: [
           {
-            supplies_id: {
+            supply_id: {
               type: Schema.Types.ObjectId,
               ref: 'supplies',
             },
             amount: Number,
+          },
+        ],
+        files_production: [
+          {
+            type: Schema.Types.ObjectId,
+            ref: 'files',
           },
         ],
       },
@@ -57,40 +76,52 @@ const productSchema = new Schema<ProductCreatedDto>(
       material: String,
       expiration_time_in_days: Number,
     },
+    video_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'files',
+    },
     images_id: [
       {
         type: Schema.Types.ObjectId,
         ref: 'files',
       },
     ],
-    video_id: {
-      type: Schema.Types.ObjectId,
-      ref: 'files',
+
+    tax_information: {
+      origin: Number,
+      ncm: Number,
+      cest: Number,
+      item_type: String,
+      percentage_taxes: Number,
+      icms: {
+        base_value: Number,
+        value: Number,
+        owner_value: Number,
+      },
+      ipi: Number,
+      value_pis: Number,
+      value_cofins: Number,
     },
     // brand_id: {
     //   type: Schema.Types.ObjectId,
     //   ref: 'brands',
     // },
-    categories_id: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'categories',
-      },
-    ],
-    production_type: {
-      type: String,
-      enum: ['own', 'outsourced'],
-    },
-    provider_id: {
-      type: Schema.Types.ObjectId,
-      ref: 'providers',
-    },
-    files_production: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'files',
-      },
-    ],
+    // purchase_history: [
+    //   {
+    //     type: Schema.Types.ObjectId;
+    //     ref: 'purchases';
+    //   },
+    // ];
+    // feedbacks_history: [
+    //   {
+    //     customer_id: {
+    //       type: Schema.Types.ObjectId;
+    //       ref: 'customers';
+    //     };
+    //     feedback: string;
+    //     assessment: number;
+    //   },
+    // ];
   },
   { timestamps: true },
 );

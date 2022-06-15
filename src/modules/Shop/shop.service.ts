@@ -1,5 +1,9 @@
 class ShopService {
-  calculateCommissionCost(price: number, shopName: string, typeAd?: string) {
+  generatePriceWithCommissionShop(
+    price: number,
+    shopName: string,
+    typeAd?: string,
+  ) {
     switch (shopName) {
       case 'mercado_livre':
         return this.calculateCommissionMercadoLivre(price, typeAd);

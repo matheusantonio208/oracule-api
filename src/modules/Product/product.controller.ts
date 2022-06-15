@@ -1,28 +1,39 @@
 import { IRequest, IResponse } from '../../@types';
-import { ProductCreatedDto, ProductCreateDto } from './dto/index.dto';
+import {
+  ProductToCreateDto,
+  ProductCreatingDto,
+  ProductCreatedDto,
+} from './dto/index.dto';
 import ProductRepository from './product.repository';
 import ProductService from './product.service';
 
 class ProductController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const otherTransactions = [12.4, 24.4];
+      const { other_transactions } = req.body;
 
-      const product: ProductCreateDto = new ProductCreateDto(req.body);
+      const product: ProductToCreateDto = new ProductToCreateDto(req.body);
 
-      const productCode = await ProductService.generateProductCode();
-      const productSku = await ProductService.generateSku(product, productCode);
-      const productCost = await ProductService.generateCost(
+      const productCode: number = await ProductService.generateProductCode();
+      const productSku: string = await ProductService.generateSku(
         product,
-        otherTransactions,
+        productCode,
+      );
+      const productCost: number = await ProductService.generateProductionCost(
+        product,
+        other_transactions,
       );
 
-      const productCreated: ProductCreatedDto = await ProductRepository.create({
+      const productCreating: ProductCreatingDto = new ProductCreatingDto({
         ...product,
         product_code: productCode,
         sku: productSku,
         production_cost: productCost,
       });
+
+      const productCreated: ProductCreatedDto = await ProductRepository.create(
+        productCreating,
+      );
 
       return res.status(201).json({
         success_msg: `Success! Your product was created`,

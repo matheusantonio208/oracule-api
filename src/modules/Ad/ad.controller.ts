@@ -45,7 +45,7 @@ class AdController {
       const priceWithoutCommissionShop: number =
         adService.generatePriceWithoutCommissionShop(profit, [production_cost]);
 
-      const finalPrice: number = shopService.calculateCommissionCost(
+      const finalPrice: number = shopService.generatePriceWithCommissionShop(
         priceWithoutCommissionShop,
         shopName,
         typeAd,

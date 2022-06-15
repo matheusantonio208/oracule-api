@@ -1,20 +1,17 @@
 import { Schema } from 'mongoose';
 
-export class ProductCreateDto {
+export class ProductToCreateDto {
   name: string;
-  product_code: string;
-  sku: string;
-  categories_id: Array<Schema.Types.ObjectId>;
   theme: string;
+  categories_id: Array<Schema.Types.ObjectId>;
   tags: Array<string>;
-  production_type: string; //['own', 'outsourced']
+  production_type: string;
   provider_id?: Schema.Types.ObjectId;
-  production_cost: number;
   production_procedure: [
     {
-      order_step: number;
-      name_step: string;
-      description_step: string;
+      order: number;
+      name: string;
+      description: string;
       time_in_minutes: number;
       feedstock_id: Array<Schema.Types.ObjectId>;
       machine_id: Schema.Types.ObjectId;
@@ -22,7 +19,7 @@ export class ProductCreateDto {
       employee_id: Array<Schema.Types.ObjectId>;
       supplies: [
         {
-          supplies_id: Schema.Types.ObjectId;
+          supply_id: Schema.Types.ObjectId;
           amount: number;
         },
       ];
@@ -35,18 +32,38 @@ export class ProductCreateDto {
     height_in_cm: number;
     depth_in_cm: number;
     material: string;
-    expiration_time_in_days?: Number;
+    expiration_time_in_days?: number;
+  };
+  video_id?: Schema.Types.ObjectId;
+  image_id: Schema.Types.ObjectId;
+
+  tax_information: {
+    origin: number;
+    ncm: number;
+    cest: number;
+    item_type: string;
+    percentage_taxes: number;
+    icms: {
+      base_value: number;
+      value: number;
+      owner_value: number;
+    };
+    ipi: number;
+    value_pis: number;
+    value_cofins: number;
   };
 
-  constructor(body) {
+  constructor(body: ProductToCreateDto) {
     this.name = body?.name;
-    this.categories_id = body?.categories_id;
     this.theme = body?.theme;
+    this.categories_id = body?.categories_id;
     this.tags = body?.tags;
     this.production_type = body?.production_type;
     this.provider_id = body?.provider_id;
-    this.production_cost = body?.production_cost;
     this.production_procedure = body?.production_procedure;
     this.datasheet = body?.datasheet;
+    this.video_id = body?.video_id;
+    this.image_id = body?.image_id;
+    this.tax_information = body?.tax_information;
   }
 }

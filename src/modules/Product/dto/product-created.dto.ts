@@ -3,82 +3,32 @@ import { Schema } from 'mongoose';
 export class ProductCreatedDto {
   name: string;
   product_code: number;
-
-  sku: {
-    type: String;
-    unique: true;
-  };
-
-  tags: [
-    {
-      type: string;
-    },
-  ];
-
-  production_type: {
-    type: string;
-    enum: ['own', 'outsourced'];
-  };
-
-  provider_id?: {
-    type: Schema.Types.ObjectId;
-    ref: 'providers';
-  };
-
+  sku: string;
+  theme: string;
+  categories_id: Array<Schema.Types.ObjectId>;
+  tags: Array<string>;
+  production_type: Array<string>;
+  provider_id?: Schema.Types.ObjectId;
   production_cost: number;
-
   production_procedure: [
     {
-      order_step: number;
-      name_step: string;
-      description_step: string;
+      order: number;
+      name: string;
+      description: string;
       time_in_minutes: number;
-
-      feedstock_id: [
-        {
-          type: Schema.Types.ObjectId;
-          ref: 'feedstock';
-        },
-      ];
-
-      machine_id: {
-        type: Schema.Types.ObjectId;
-        ref: 'machines';
-      };
-
-      tools_id: [
-        {
-          type: Schema.Types.ObjectId;
-          ref: 'tools';
-        },
-      ];
-
-      employee_id: [
-        {
-          type: Schema.Types.ObjectId;
-          ref: 'employees';
-        },
-      ];
-
+      feedstock_id: Array<Schema.Types.ObjectId>;
+      machine_id: Schema.Types.ObjectId;
+      tools_id: Array<Schema.Types.ObjectId>;
+      employee_id: Array<Schema.Types.ObjectId>;
       supplies: [
         {
-          supplies_id: {
-            type: Schema.Types.ObjectId;
-            ref: 'supplies';
-          };
+          supply_id: Schema.Types.ObjectId;
           amount: number;
         },
       ];
-
-      files_production: [
-        {
-          type: Schema.Types.ObjectId;
-          ref: 'files';
-        },
-      ];
+      files_production: Array<Schema.Types.ObjectId>;
     },
   ];
-
   datasheet: {
     weight_in_grams: number;
     width_in_cm: number;
@@ -87,23 +37,46 @@ export class ProductCreatedDto {
     material: string;
     expiration_time_in_days?: Number;
   };
-
-  video_id: {
-    type: Schema.Types.ObjectId;
-    ref: 'files';
+  video_id?: Schema.Types.ObjectId;
+  image_id: Schema.Types.ObjectId;
+  tax_information: {
+    origin: number;
+    ncm: number;
+    cest: number;
+    item_type: string;
+    percentage_taxes: number;
+    icms: {
+      base_value: number;
+      value: number;
+      owner_value: number;
+    };
+    ipi: number;
+    value_pis: number;
+    value_cofins: number;
   };
 
-  image_id: {
-    type: Schema.Types.ObjectId;
-    ref: 'files';
-  };
-
-  // brand_id: {
-  //   type: Schema.Types.ObjectId;
-  //   ref: 'brands';
-  // };
+  constructor(body: ProductCreatedDto) {
+    this.name = body?.name;
+    this.product_code = body?.product_code;
+    this.sku = body?.sku;
+    this.theme = body?.theme;
+    this.categories_id = body?.categories_id;
+    this.tags = body?.tags;
+    this.production_type = body?.production_type;
+    this.provider_id = body?.provider_id;
+    this.production_cost = body?.production_cost;
+    this.production_procedure = body?.production_procedure;
+    this.datasheet = body?.datasheet;
+    this.video_id = body?.video_id;
+    this.image_id = body?.image_id;
+    this.tax_information = body?.tax_information;
+  }
 }
 
+// brand_id: {
+//   type: Schema.Types.ObjectId;
+//   ref: 'brands';
+// };
 // purchase_history: [
 //   {
 //     type: Schema.Types.ObjectId;
@@ -141,7 +114,7 @@ export class ProductCreatedDto {
 		"employee_id": ["123"],
 		"feedstock_id": ["123"],
 		"supplies": [{
-			"supplies_id": "123",
+			"supply": "123",
 			"amount": 1
 		}],
 		"files_production" : [{

@@ -23,12 +23,9 @@ class ProductService {
     return `${feedStockSku}${productCode}`;
   }
 
-  async generateCost(
-    product,
-    otherTransactions: Array<number>,
-  ): Promise<number> {
+  generateProductionCost(product, otherTransactions: Array<number>): number {
     const feedstocksTransaction: Array<number> = product.feedstock_id;
-    const suppliesTransaction: Array<number> = product.supplies_id;
+    const suppliesTransaction: Array<number> = product.supply;
     const machinesTransaction: Array<number> = product.machines_id;
     const otherTransaction: Array<number> = otherTransactions;
 
