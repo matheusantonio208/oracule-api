@@ -1,0 +1,4 @@
+/*
+ * generateCostOperation (Gasto Energético, Depreciação)
+ *
+ */

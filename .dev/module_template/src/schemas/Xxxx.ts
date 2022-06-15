@@ -1,12 +1,12 @@
 import { model, Schema } from 'mongoose';
 
-import { IXxxx } from '../controllers/Xxxx/xxxx.interface';
+import { XxxxCreatedDto } from '../modules/Xxxx/dto/index.dto';
 
-const xxxxSchema = new Schema<IXxxx>(
+const xxxxSchema = new Schema<XxxxCreatedDto>(
   {
     property: String,
   },
   { timestamps: true },
 );
 
-export default model<IXxxx>('xxxxs', xxxxSchema);
+export default model<XxxxCreatedDto>('xxxxs', xxxxSchema);

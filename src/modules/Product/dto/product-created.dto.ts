@@ -2,7 +2,7 @@ import { Schema } from 'mongoose';
 
 export class ProductCreatedDto {
   name: string;
-  product_code: number;
+  product_code: string;
   sku: string;
   theme: string;
   categories_id: Array<Schema.Types.ObjectId>;

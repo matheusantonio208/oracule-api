@@ -17,6 +17,8 @@ import Promotion from './Promotion/promotion.controller';
 import Order from './Order/order.controller';
 import Customer from './Customer/customer.controller';
 import Employee from './Employee/employee.controller';
+import Company from './Company/company.controller';
+import Ean from './Ean/ean.controller';
 
 class Routes {
   route: any;
@@ -43,6 +45,8 @@ class Routes {
     this.order('/order');
     this.customer('/customer');
     this.employee('/employee');
+    this.company('/company');
+    this.ean('/ean');
   }
 
   person(baseRoute): void {
@@ -171,6 +175,22 @@ class Routes {
     this.route.get(`${baseRoute}/show`, Employee.show);
     this.route.delete(`${baseRoute}/delete/:id`, Employee.delete);
     this.route.put(`${baseRoute}/update/:id`, Employee.update);
+  }
+
+  company(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Company.store);
+    this.route.get(`${baseRoute}/index/:id`, Company.index);
+    this.route.get(`${baseRoute}/show`, Company.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Company.delete);
+    this.route.put(`${baseRoute}/update/:id`, Company.update);
+  }
+
+  ean(baseRoute): void {
+    this.route.post(`${baseRoute}/store`, Ean.store);
+    this.route.get(`${baseRoute}/index/:id`, Ean.index);
+    this.route.get(`${baseRoute}/show`, Ean.show);
+    this.route.delete(`${baseRoute}/delete/:id`, Ean.delete);
+    this.route.put(`${baseRoute}/update/:id`, Ean.update);
   }
 }
 export default new Routes().route;

@@ -1,11 +1,14 @@
-import { Document } from 'mongoose';
-
+import { Schema } from 'mongoose';
 import Xxxx from '../../schemas/Xxxx';
 
-import { XxxxDto, XxxxCreateDto } from './dto/index.dto';
+import {
+  XxxxCreatingDto,
+  XxxxCreatedDto,
+  XxxxToUpdateDto,
+} from './dto/index.dto';
 
 class XxxxRepository {
-  async create(xxxx: XxxxCreateDto): Promise<Document<XxxxDto>> {
+  async create(xxxx: XxxxCreatingDto): Promise<XxxxCreatedDto> {
     const xxxxCreate = new Xxxx(xxxx);
 
     if (await xxxxCreate.save()) {
@@ -15,15 +18,15 @@ class XxxxRepository {
     throw new Error(`Error to create xxxx`);
   }
 
-  async getOneById(id: string): Promise<Document<XxxxDto>> {
-    const xxxx: Document<XxxxDto> = await Xxxx.findById(id);
+  async getOneById(id: Schema.Types.ObjectId): Promise<XxxxCreatedDto> {
+    const xxxx: XxxxCreatedDto = await Xxxx.findById(id);
     if (xxxx) return xxxx;
 
     throw new Error(`Error to get xxxx`);
   }
 
-  async listAll(): Promise<Array<Document<XxxxDto>>> {
-    const xxxxs: Array<Document<XxxxDto>> = await Xxxx.find({}, (err, docs) => {
+  async listAll(): Promise<Array<XxxxCreatedDto>> {
+    const xxxxs: Array<XxxxCreatedDto> = await Xxxx.find({}, (err, docs) => {
       if (!err) return docs;
     });
 
@@ -32,8 +35,11 @@ class XxxxRepository {
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: string, data: any): Promise<Document<XxxxDto>> {
-    const updatedXxxx: Document<XxxxDto> = await Xxxx.findByIdAndUpdate(
+  async updateById(
+    id: Schema.Types.ObjectId,
+    data: XxxxToUpdateDto,
+  ): Promise<XxxxCreatedDto> {
+    const updatedXxxx: XxxxCreatedDto = await Xxxx.findByIdAndUpdate(
       id,
       data,
       (error, document) => {
@@ -46,7 +52,7 @@ class XxxxRepository {
     throw new Error(`Error to update xxxx`);
   }
 
-  async deleteById(id: string): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId): Promise<Boolean> {
     if (await Xxxx.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete xxxx`);

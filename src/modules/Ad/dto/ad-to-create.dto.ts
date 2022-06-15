@@ -6,12 +6,11 @@ export class AdToCreateDto {
   additional_img_id: Array<Schema.Types.ObjectId>;
   additional_vid_id: Array<Schema.Types.ObjectId>;
   status: string;
-  ean_code: string;
   category_id: Schema.Types.ObjectId;
   promotions_id?: Array<Schema.Types.ObjectId>;
   product_id: Schema.Types.ObjectId;
   shop_id: Schema.Types.ObjectId;
-  typeAd: string;
+  typeAd?: string;
   profit: number;
 
   constructor(body: AdToCreateDto) {
@@ -20,7 +19,6 @@ export class AdToCreateDto {
     this.additional_img_id = body?.additional_img_id;
     this.additional_vid_id = body?.additional_vid_id;
     this.status = body?.status;
-    this.ean_code = body?.ean_code;
     this.category_id = body?.category_id;
     this.promotions_id = body?.promotions_id;
     this.product_id = body?.product_id;

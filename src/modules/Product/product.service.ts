@@ -4,13 +4,17 @@ import FeedstockRepository from '../Feedstock/feedstock.repository';
 class ProductService {
   async generateProductCode() {
     const products = await ProductRepository.listAll();
+
     if (products.length > 0) {
-      const lastProductCode =
-        products[Object.keys(products).sort().pop()].product_code;
-      return lastProductCode + 1;
+      const lastProductCode = Number(
+        products[Object.keys(products).sort().pop()].product_code,
+      );
+      const productCode = String(lastProductCode + 1).padStart(4, '0');
+
+      return productCode;
     }
 
-    return 0;
+    return '0000';
   }
 
   async generateSku(product, productCode): Promise<any> {

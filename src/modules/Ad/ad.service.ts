@@ -1,13 +1,14 @@
 import { ean13 } from 'ean-check';
+import countryCodeEan from './utils/country-code-ean-13.json';
 
 class AdService {
   keywordList = [];
 
   async generateEan13(
-    countryCode: number,
-    cnpjDigits: number,
-    productCode: number,
-  ) {
+    cnpjDigits: string,
+    productCode: string,
+  ): Promise<string> {
+    const countryCode = countryCodeEan.BRAZIL[1];
     const ean13Code = await ean13.generate(
       Number(`${countryCode}${cnpjDigits}${productCode}`),
     );

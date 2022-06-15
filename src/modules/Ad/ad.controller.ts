@@ -18,11 +18,17 @@
  */
 import { IRequest, IResponse } from '../../@types';
 
-import { AdToCreateDto, AdCreateDto, AdCreatedDto } from './dto/index.dto';
+import { AdToCreateDto, AdCreatingDto, AdCreatedDto } from './dto/index.dto';
+import { CompanyCreatedDto } from '../Company/dto/index.dto';
+import { ProductCreatedDto } from '../Product/dto/product-created.dto';
+import { EanCreatingDto, EanCreatedDto } from '../Ean/dto/index.dto';
+import { ShopCreatedDto } from '../Shop/dto/index.dto';
 
 import adRepository from './ad.repository';
 import productRepository from '../Product/product.repository';
 import shopRepository from '../Shop/shop.repository';
+import companyRepository from '../Company/company.repository';
+import eanRepository from '../Ean/ean.repository';
 
 import adService from './ad.service';
 import shopService from '../Shop/shop.service';
@@ -33,29 +39,49 @@ class AdController {
       const ad: AdToCreateDto = new AdToCreateDto(req.body);
       const { profit, product_id, shop_id, typeAd } = ad;
 
-      const { production_cost, sku } = await productRepository.getOneById(
+      const product: ProductCreatedDto = await productRepository.getOneById(
         product_id,
       );
-      const { name: shopName, sku_suffix } = await shopRepository.getOneById(
-        shop_id,
-      );
+      const { production_cost, product_code, sku } = product;
 
+      const shop: ShopCreatedDto = await shopRepository.getOneById(shop_id);
+      const { name: shopName, sku_suffix } = shop;
+
+      // === Create EAN ===
+      const { company_id } = req.body;
+      const company: CompanyCreatedDto = await companyRepository.getOneById(
+        company_id,
+      );
+      const cnpj = company.cnpj.replace(/[^\d]+/g, '');
+      const cnpjDigits: string = cnpj.slice(0, 5);
+
+      const ean: string = await adService.generateEan13(
+        cnpjDigits,
+        product_code,
+      );
+      const eanCreating = new EanCreatingDto({ ean });
+      const eanCreated: EanCreatedDto = await eanRepository.create(eanCreating);
+
+      // === Create SKU ===
       const skuAd: string = sku + sku_suffix;
 
+      // === Create Price ===
       const priceWithoutCommissionShop: number =
         adService.generatePriceWithoutCommissionShop(profit, [production_cost]);
+      const priceWithCommissionShop: number =
+        shopService.generatePriceWithCommissionShop(
+          priceWithoutCommissionShop,
+          shopName,
+          typeAd,
+        );
 
-      const finalPrice: number = shopService.generatePriceWithCommissionShop(
-        priceWithoutCommissionShop,
-        shopName,
-        typeAd,
-      );
-
-      const adCreate: AdCreateDto = new AdCreateDto({
+      // === Create Ad ===
+      const adCreate: AdCreatingDto = new AdCreatingDto({
         ...ad,
+        ean_code: eanCreated.ean,
         sku: skuAd,
-        price: finalPrice,
-        price_history: [{ date: new Date(), price: finalPrice }],
+        price: priceWithCommissionShop,
+        price_history: [{ date: new Date(), price: priceWithCommissionShop }],
       });
 
       const adCreated: AdCreatedDto = await adRepository.create(adCreate);

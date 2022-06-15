@@ -12,7 +12,7 @@ export class AdCreatedDto {
   promotions_id?: Array<Schema.Types.ObjectId>;
   product_id: Schema.Types.ObjectId;
   shop_id: Schema.Types.ObjectId;
-  typeAd: string;
+  typeAd?: string;
   profit: number;
   price: number;
   price_history: [

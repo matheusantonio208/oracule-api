@@ -1,37 +1,37 @@
 import { IRequest, IResponse } from '../../@types';
 
 import {
-  XxxxToCreateDto,
-  XxxxCreatingDto,
-  XxxxCreatedDto,
-  XxxxToUpdateDto,
+  EanToCreateDto,
+  EanCreatingDto,
+  EanCreatedDto,
+  EanToUpdateDto,
 } from './dto/index.dto';
 
-import XxxxRepository from './xxxx.repository';
+import EanRepository from './ean.repository';
 
-import XxxxService from './xxxx.service';
+import EanService from './ean.service';
 
-class XxxxController {
+class EanController {
   async store(req: IRequest, res: IResponse) {
     try {
       // === Get Vars === //
-      const xxxx: XxxxToCreateDto = new XxxxToCreateDto(req.body);
+      const ean: EanToCreateDto = new EanToCreateDto(req.body);
 
       // === Generate Vars === //
-      const xxxxProperty: number = await XxxxService.serviceFunction();
+      const eanProperty: number = await EanService.serviceFunction();
 
       // === Create Dto === //
-      const xxxxCreatingDto: XxxxCreatingDto = new XxxxCreatingDto({
-        ...xxxx,
-        //code: xxxxCode
+      const eanCreatingDto: EanCreatingDto = new EanCreatingDto({
+        ...ean,
+        //code: eanCode
       });
 
       // === Create Object === //
-      const xxxxCreated: XxxxCreatedDto = await XxxxRepository.create(
-        xxxxCreatingDto,
+      const eanCreated: EanCreatedDto = await EanRepository.create(
+        eanCreatingDto,
       );
 
-      return res.status(201).json(xxxxCreated);
+      return res.status(201).json(eanCreated);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
@@ -41,9 +41,9 @@ class XxxxController {
     try {
       const { id } = req.params;
 
-      const xxxx: XxxxCreatedDto = await XxxxRepository.getOneById(id);
+      const ean: EanCreatedDto = await EanRepository.getOneById(id);
 
-      return res.status(201).json(xxxx);
+      return res.status(201).json(ean);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
@@ -51,9 +51,9 @@ class XxxxController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const xxxx: Array<XxxxCreatedDto> = await XxxxRepository.listAll();
+      const ean: Array<EanCreatedDto> = await EanRepository.listAll();
 
-      return res.status(201).json(xxxx);
+      return res.status(201).json(ean);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
@@ -63,11 +63,11 @@ class XxxxController {
     try {
       const { id } = req.params;
 
-      await XxxxRepository.deleteById(id);
+      await EanRepository.deleteById(id);
 
       return res
         .status(201)
-        .json({ success_msg: `Success! Your xxxx was deleted` });
+        .json({ success_msg: `Success! Your ean was deleted` });
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
@@ -76,18 +76,18 @@ class XxxxController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data: XxxxToUpdateDto = new XxxxToUpdateDto(req.body);
+      const data: EanToUpdateDto = new EanToUpdateDto(req.body);
 
-      const xxxxUpdated: XxxxCreatedDto = await XxxxRepository.updateById(
+      const eanUpdated: EanCreatedDto = await EanRepository.updateById(
         id,
         data,
       );
 
-      return res.status(201).json(xxxxUpdated);
+      return res.status(201).json(eanUpdated);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
 }
 
-export default new XxxxController();
+export default new EanController();

@@ -14,7 +14,7 @@ class ProductController {
 
       const product: ProductToCreateDto = new ProductToCreateDto(req.body);
 
-      const productCode: number = await ProductService.generateProductCode();
+      const productCode: string = await ProductService.generateProductCode();
       const productSku: string = await ProductService.generateSku(
         product,
         productCode,
@@ -23,6 +23,9 @@ class ProductController {
         product,
         other_transactions,
       );
+
+      //=== Upload Images Minify ===
+      //=== Upload Files ===
 
       const productCreating: ProductCreatingDto = new ProductCreatingDto({
         ...product,

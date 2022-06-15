@@ -4,7 +4,7 @@ import { ProductCreatedDto } from '../modules/Product/dto/index.dto';
 const productSchema = new Schema<ProductCreatedDto>(
   {
     name: { type: String, unique: true },
-    product_code: { type: Number, unique: true },
+    product_code: { type: String, unique: true },
     sku: String,
     theme: String,
     categories_id: [

@@ -1,1 +1,1 @@
-export { shopCreatedDto } from './shop-created.dto';
+export { ShopCreatedDto } from './shop-created.dto';
