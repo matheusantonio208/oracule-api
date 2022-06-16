@@ -7,6 +7,7 @@ import FileService from './file.service';
 class FileController {
   async store(req: MulterRequest, res: IResponse) {
     try {
+      const { typeFile, path } = req.params;
       const { files } = req;
       const fileList = [];
 
@@ -14,32 +15,38 @@ class FileController {
         fileList.push(files[key]);
       });
 
-      const filesReduce = FileService.reduceFiles(fileList, '.webp');
-      await FileService.uploadMockupImage(filesReduce, 20, 'mockup');
+      switch (typeFile) {
+        case 'photo':
+          let commercialFile = FileService.getBufferAndName(fileList, '.webp');
 
-      // if (mockupBuffers) {
-      //   const names = FileService.createNamesFiles(files, '.webp');
-      // }
+          await FileService.uploadCommercialImage(
+            commercialFile,
+            20,
+            path,
+            typeFile,
+          );
+          break;
 
-      // if (art) {
-      //   const name = FileService.createNamesFiles(art, art.fieldname, '.jpg');
-      //   await FileService.uploadProductionFile(art, name);
-      // }
+        case 'video':
+          let videoFile = FileService.getBufferAndName(fileList, '.mp4');
+          await FileService.uploadFile(videoFile, path, typeFile);
+          break;
 
-      // if (psd) {
-      //   const name = FileService.createNamesFiles(psd, psd.fieldname, '.psd');
-      //   await FileService.uploadProductionFile(psd, name);
-      // }
+        case 'artwork':
+          let artworkFile = FileService.getBufferAndName(fileList, '.jpg');
+          await FileService.uploadFile(artworkFile, path, typeFile);
+          break;
 
-      // if (video) {
-      //   const name = FileService.createNamesFiles(
-      //     video,
-      //     video.fieldname,
-      //     '.mp4',
-      //   );
-      //   await FileService.uploadProductionFile(video, name);
-      // }
+        case 'edit_artwork':
+          let editArtworkFile = FileService.getBufferAndName(fileList, '.psd');
+          FileService.uploadFile(editArtworkFile, path, typeFile);
+          break;
 
+        default:
+          return res
+            .status(401)
+            .json({ error_msg: `Error! Type File don't exists` });
+      }
       return res
         .status(201)
         .json({ success_msg: 'Congratulations! Upload completed' });

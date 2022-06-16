@@ -116,7 +116,7 @@ class Routes {
 
   file(baseRoute): void {
     this.route.post(
-      `${baseRoute}/store`,
+      `${baseRoute}/store/:typeFile/:path`,
       this.uploadMiddleware([
         { name: 'mockup_frente', maxCount: 1 },
         { name: 'mockup_verso', maxCount: 1 },
