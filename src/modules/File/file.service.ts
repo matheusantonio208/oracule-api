@@ -31,7 +31,7 @@ class FileService {
     });
 
     files.forEach(async (_, index) => {
-      const link = `${process.env.UPLOAD_DIRECTORY}${files[index].name}`;
+      const link = `${files[index].name}`;
 
       console.log(link);
 

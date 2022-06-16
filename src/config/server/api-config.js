@@ -21,7 +21,7 @@ class ApiConfig {
     this.server.use(cors());
     this.server.use(YouchLogs);
     this.server.use(express.json());
-    this.server.use(express.static('upload'));
+    this.server.use(express.static('public'));
     //http://localhost:3550/caneca-branco-meio.webp
   }
 
