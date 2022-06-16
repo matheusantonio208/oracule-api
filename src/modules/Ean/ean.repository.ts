@@ -21,6 +21,14 @@ class EanRepository {
     throw new Error(`Error to get ean`);
   }
 
+  async getOneByEan(eanFind: string): Promise<string> {
+    const { ean } = await Ean.findOne({ ean: eanFind });
+
+    if (ean) return ean;
+
+    throw new Error(`Error to get ean`);
+  }
+
   async listAll(): Promise<Array<EanCreatedDto>> {
     const eans: Array<EanCreatedDto> = await Ean.find({}, (err, docs) => {
       if (!err) return docs;

@@ -1,47 +1,58 @@
+import { Schema } from 'mongoose';
 import { ean13 } from 'ean-check';
+
+import { CompanyCreatedDto } from '../Company/dto/company-created.dto';
+import { EanCreatingDto, EanCreatedDto } from '../Ean/dto/index.dto';
+
+import companyRepository from '../Company/company.repository';
+import eanRepository from '../Ean/ean.repository';
+
 import countryCodeEan from './utils/country-code-ean-13.json';
+import shopService from '../Shop/shop.service';
 
 class AdService {
   keywordList = [];
 
+  generateSku(sku_preffix: string, sku_suffix: string) {
+    return `${sku_preffix}${sku_suffix}`;
+  }
+
   async generateEan13(
-    cnpjDigits: string,
+    companyId: Schema.Types.ObjectId,
+    countryEanCode: string,
     productCode: string,
   ): Promise<string> {
-    const countryCode = countryCodeEan.BRAZIL[1];
+    let countryCode;
+
+    const company: CompanyCreatedDto = await companyRepository.getOneById(
+      companyId,
+    );
+    const cnpj = company.cnpj.replace(/[^\d]+/g, '');
+    const cnpjDigits: string = cnpj.slice(0, 5);
+
+    for (let i = 0; i < countryCodeEan[countryEanCode].length; i++) {
+      countryCode = countryCodeEan[countryEanCode][i];
+    }
     const ean13Code = await ean13.generate(
       Number(`${countryCode}${cnpjDigits}${productCode}`),
     );
-    return ean13Code;
-  }
+    const isValidEan13 = this.verifyEan(ean13Code);
 
-  shuffle(array) {
-    let currentIndex = array.length,
-      randomIndex;
-
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ];
+    if (isValidEan13) {
+      const eanCreating = new EanCreatingDto({ ean: ean13Code });
+      const eanCreated: EanCreatedDto = await eanRepository.create(eanCreating);
+      return eanCreated.ean;
     }
 
-    return array;
+    throw new Error('EAN13 is not valid! Try change country code');
   }
 
-  generateKeywords(keywords: Array<String>) {
-    this.keywordList.push([keywords.join(' ')]);
-    if (keywords.length === 1) {
-      return keywords[0];
-    }
-    for (var i = 0; i < keywords.length; i++) {
-      keywords.splice(i, 1);
-      this.generateKeywords(keywords);
-    }
+  async verifyEan(ean: string): Promise<boolean> {
+    const isValid = !!(await eanRepository.getOneByEan(ean));
+
+    return isValid;
   }
+
   /*
     models:         ['Caneca', 'Xícara', 'Copo'],
     materials:      ['Cerâmica', 'Porcelana', 'Vidro'],
@@ -101,7 +112,35 @@ class AdService {
     return titleList;
   }
 
-  generatePriceWithoutCommissionShop(
+  generateKeywords(keywords: Array<String>) {
+    this.keywordList.push([keywords.join(' ')]);
+    if (keywords.length === 1) {
+      return keywords[0];
+    }
+    for (var i = 0; i < keywords.length; i++) {
+      keywords.splice(i, 1);
+      this.generateKeywords(keywords);
+    }
+  }
+
+  shuffle(array) {
+    let currentIndex = array.length,
+      randomIndex;
+
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+
+    return array;
+  }
+
+  generateProductionCostWithProfit(
     profit: number,
     costs: Array<number>,
   ): number {
@@ -109,6 +148,25 @@ class AdService {
     const price = costSum + (costSum * profit) / 100;
 
     return price;
+  }
+
+  async createPrice(
+    profit: number,
+    costs: Array<number>,
+    shopName: string,
+    typeAd?: string,
+  ) {
+    const productionWithProfitCost: number =
+      this.generateProductionCostWithProfit(profit, costs);
+
+    const priceWithCommissionShop: number =
+      shopService.generatePriceWithCommissionShop(
+        productionWithProfitCost,
+        shopName,
+        typeAd,
+      );
+
+    return priceWithCommissionShop;
   }
 }
 

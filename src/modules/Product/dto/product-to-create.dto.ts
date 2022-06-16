@@ -23,7 +23,7 @@ export class ProductToCreateDto {
           amount: number;
         },
       ];
-      files_production: Array<Schema.Types.ObjectId>;
+      files_production: Array<Express.Multer.File>;
     },
   ];
   datasheet: {
@@ -34,8 +34,8 @@ export class ProductToCreateDto {
     material: string;
     expiration_time_in_days?: number;
   };
-  video_id?: Schema.Types.ObjectId;
-  image_id: Schema.Types.ObjectId;
+  video_id?: Express.Multer.File;
+  image_id: Express.Multer.File;
 
   tax_information: {
     origin: number;

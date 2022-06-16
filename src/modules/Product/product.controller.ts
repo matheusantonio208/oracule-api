@@ -61,8 +61,13 @@ class ProductController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const product: Array<ProductCreatedDto> =
-        await ProductRepository.listAll();
+      const { key, sort, itensPerPage, pagination } = req.params;
+      const product: Array<ProductCreatedDto> = await ProductRepository.listAll(
+        key,
+        sort,
+        itensPerPage,
+        pagination,
+      );
 
       return res.status(201).json(product);
     } catch (error) {

@@ -27,7 +27,8 @@ class Routes {
   constructor() {
     this.route = Router();
 
-    this.uploadMiddleware = multer(memoryStorage()).array('files', 12);
+    this.uploadMiddleware = (fields) =>
+      multer({ storage: memoryStorage() }).fields(fields);
 
     this.person('/person');
     this.provider('/provider');
@@ -114,7 +115,14 @@ class Routes {
   }
 
   file(baseRoute): void {
-    this.route.post(`${baseRoute}/store`, this.uploadMiddleware, File.store);
+    this.route.post(
+      `${baseRoute}/store`,
+      this.uploadMiddleware([
+        { name: 'mockup_frente', maxCount: 1 },
+        { name: 'mockup_verso', maxCount: 1 },
+      ]),
+      File.store,
+    );
     this.route.get(`${baseRoute}/index/:name`, File.index);
     this.route.get(`${baseRoute}/show`, File.show);
     this.route.delete(`${baseRoute}/delete/:id`, File.delete);

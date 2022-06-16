@@ -7,53 +7,55 @@ import fs from 'fs';
 import { parse, resolve } from 'path';
 
 class FileService {
-  createNamesFiles(files, extension) {
-    let names = [];
+  reduceFiles(fileList, extension, suffix?) {
+    let files = [];
 
-    files.map((file) => names.push(parse(file.originalname).name + extension));
+    for (var i = 0; i < fileList.length; i++) {
+      const fieldName = fileList[i][0].fieldname;
+      const fileName = parse(fileList[i][0].originalname).name;
+      const suffixText = suffix ? `_${suffix}` : '';
 
-    return names;
+      files.push({
+        name: `${fieldName}_${fileName}${suffixText}${extension}`,
+        buffer: fileList[i][0].buffer,
+      });
+    }
+    return files;
   }
 
-  getBuffers(files) {
-    let buffers = [];
-
-    files.map((file) => buffers.push(file.buffer));
-
-    return buffers;
-  }
-
-  uploadProductionFile(file, name) {
-    return {
-      storage: multer.diskStorage({
-        destination: resolve(__dirname, '..', '..', 'tmp', 'uploads'),
-        filename: (req, file, callback) => {
-          return callback(null, file.originalname);
-        },
-      }),
-    };
-  }
-
-  async uploadMockupImage(buffers, names, quality) {
+  async uploadMockupImage(files, quality, category) {
     fs.access(process.env.UPLOAD_DIRECTORY, (error) => {
       if (error) {
         fs.mkdirSync(process.env.UPLOAD_DIRECTORY);
       }
     });
 
-    buffers.forEach(async (_, index) => {
-      const link = `/file/${names[index]}`;
+    files.forEach(async (_, index) => {
+      const link = `${process.env.UPLOAD_DIRECTORY}${files[index].name}`;
 
-      await sharp(buffers[index])
+      console.log(link);
+
+      await sharp(files[index].buffer)
         .webp({ quality })
-        .toFile(process.env.UPLOAD_DIRECTORY + names[index]);
+        .toFile(process.env.UPLOAD_DIRECTORY + files[index].name);
 
       await FileRepository.create({
-        name: names[index],
+        name: files[index].name,
         link,
+        category,
       });
     });
   }
+  // uploadProductionFile(file, name) {
+  //   return {
+  //     storage: multer.diskStorage({
+  //       destination: resolve(__dirname, '..', '..', 'tmp', 'uploads'),
+  //       filename: (req, file, callback) => {
+  //         return callback(null, file.originalname);
+  //       },
+  //     }),
+  //   };
+  // }
 }
 
 export default new FileService();

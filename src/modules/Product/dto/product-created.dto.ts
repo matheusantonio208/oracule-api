@@ -5,6 +5,8 @@ export class ProductCreatedDto {
   product_code: string;
   sku: string;
   theme: string;
+  additional_img_id: Array<Schema.Types.ObjectId>;
+  additional_vid_id: Array<Schema.Types.ObjectId>;
   categories_id: Array<Schema.Types.ObjectId>;
   tags: Array<string>;
   production_type: Array<string>;

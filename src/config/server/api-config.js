@@ -5,7 +5,7 @@ import YouchLogs from '../debug/youch-config.js';
 
 import MongoDB from '../db-mongo/mongo-connect';
 
-import routes from '../../controllers/routes';
+import routes from '../../modules/routes';
 
 class ApiConfig {
   constructor() {
@@ -21,6 +21,8 @@ class ApiConfig {
     this.server.use(cors());
     this.server.use(YouchLogs);
     this.server.use(express.json());
+    this.server.use(express.static('upload'));
+    //http://localhost:3550/caneca-branco-meio.webp
   }
 
   routes() {

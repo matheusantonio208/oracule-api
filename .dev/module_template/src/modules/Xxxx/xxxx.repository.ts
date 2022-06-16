@@ -25,10 +25,19 @@ class XxxxRepository {
     throw new Error(`Error to get xxxx`);
   }
 
-  async listAll(): Promise<Array<XxxxCreatedDto>> {
+  async listAll(
+    key: string,
+    sort: string,
+    itensPerPage: number,
+    pagination: number,
+  ): Promise<Array<XxxxCreatedDto>> {
     const xxxxs: Array<XxxxCreatedDto> = await Xxxx.find({}, (err, docs) => {
       if (!err) return docs;
-    });
+    })
+      .sort([[key, sort]])
+      .skip(pagination)
+      .limit(itensPerPage)
+      .exec();
 
     if (xxxxs) return xxxxs;
 

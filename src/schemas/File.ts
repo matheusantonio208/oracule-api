@@ -1,13 +1,13 @@
 import { model, Schema } from 'mongoose';
 
-import { IFile } from '../controllers/File/file.interface';
-
-const fileSchema = new Schema<IFile>(
+import { FileCreatedDto } from '../modules/File/dto/index.dto';
+const fileSchema = new Schema<FileCreatedDto>(
   {
     name: String,
     link: String,
+    category: String,
   },
   { timestamps: true },
 );
 
-export default model<IFile>('files', fileSchema);
+export default model<FileCreatedDto>('files', fileSchema);

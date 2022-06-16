@@ -1,35 +1,44 @@
-import { Document } from 'mongoose';
-import { IRequest, IResponse } from '../../@types';
+import { IRequest, IResponse, MulterRequest } from '../../@types';
+import { FileCreatedDto } from './dto/file-created.dto';
 
-import { IFile } from './file.interface';
 import FileRepository from './file.repository';
 import FileService from './file.service';
 
 class FileController {
-  async store(req: IRequest, res: IResponse) {
+  async store(req: MulterRequest, res: IResponse) {
     try {
-      const { mockups, art, psd, video } = req;
-      const mockupBuffers = FileService.getBuffers(mockups);
+      const { files } = req;
+      const fileList = [];
 
-      if (mockupBuffers) {
-        const names = FileService.createNamesFiles(mockups, '.webp');
-        await FileService.uploadMockupImage(mockupBuffers, names, 20);
-      }
+      Object.keys(files).forEach((key) => {
+        fileList.push(files[key]);
+      });
 
-      if (art) {
-        const name = FileService.createNamesFiles(art, '.jpg');
-        await FileService.uploadProductionFile(art, name);
-      }
+      const filesReduce = FileService.reduceFiles(fileList, '.webp');
+      await FileService.uploadMockupImage(filesReduce, 20, 'mockup');
 
-      if (psd) {
-        const name = FileService.createNamesFiles(psd, '.psd');
-        await FileService.uploadProductionFile(psd, name);
-      }
+      // if (mockupBuffers) {
+      //   const names = FileService.createNamesFiles(files, '.webp');
+      // }
 
-      if (video) {
-        const name = FileService.createNamesFiles(video, '.mp4');
-        await FileService.uploadProductionFile(video, name);
-      }
+      // if (art) {
+      //   const name = FileService.createNamesFiles(art, art.fieldname, '.jpg');
+      //   await FileService.uploadProductionFile(art, name);
+      // }
+
+      // if (psd) {
+      //   const name = FileService.createNamesFiles(psd, psd.fieldname, '.psd');
+      //   await FileService.uploadProductionFile(psd, name);
+      // }
+
+      // if (video) {
+      //   const name = FileService.createNamesFiles(
+      //     video,
+      //     video.fieldname,
+      //     '.mp4',
+      //   );
+      //   await FileService.uploadProductionFile(video, name);
+      // }
 
       return res
         .status(201)
@@ -53,7 +62,7 @@ class FileController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const file: Array<Document<IFile>> = await FileRepository.listAll();
+      const file: Array<FileCreatedDto> = await FileRepository.listAll();
 
       return res.status(201).json(file);
     } catch (error) {

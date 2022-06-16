@@ -3,7 +3,12 @@ import FeedstockRepository from '../Feedstock/feedstock.repository';
 
 class ProductService {
   async generateProductCode() {
-    const products = await ProductRepository.listAll();
+    const products = await ProductRepository.listAll(
+      'product_code',
+      'asc',
+      null,
+      null,
+    );
 
     if (products.length > 0) {
       const lastProductCode = Number(

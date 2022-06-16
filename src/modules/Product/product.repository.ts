@@ -4,12 +4,12 @@ import Product from '../../schemas/Product';
 
 import {
   ProductCreatedDto,
-  ProductCreateDto,
+  ProductToCreateDto,
   ProductUpdateDto,
 } from './dto/index.dto';
 
 class ProductRepository {
-  async create(product: ProductCreateDto): Promise<ProductCreatedDto> {
+  async create(product: ProductToCreateDto): Promise<ProductCreatedDto> {
     const productCreate = new Product(product);
 
     if (await productCreate.save()) return productCreate;
@@ -25,19 +25,36 @@ class ProductRepository {
     throw new Error(`Error to get product`);
   }
 
-  async listAll(): Promise<Array<ProductCreatedDto>> {
-    const products = await Product.find();
+  async listAll(
+    key: string,
+    sort: string,
+    itensPerPage: number,
+    pagination: number,
+  ): Promise<Array<ProductCreatedDto>> {
+    const products: Array<ProductCreatedDto> = await Product.find(
+      {},
+      (err, docs) => {
+        if (!err) return docs;
+      },
+    )
+      .sort([[key, sort]])
+      .skip(pagination)
+      .limit(itensPerPage)
+      .exec();
 
     if (products) return products;
 
-    throw new Error(`Error to list products`);
+    throw new Error(`Error to list categories`);
   }
 
   async updateById(
     id: Schema.Types.ObjectId,
     data: ProductUpdateDto,
   ): Promise<ProductCreatedDto> {
-    const updatedProduct = await Product.findByIdAndUpdate(id, data);
+    const updatedProduct: ProductCreatedDto = await Product.findByIdAndUpdate(
+      id,
+      { data },
+    );
 
     if (updatedProduct) return updatedProduct;
 
