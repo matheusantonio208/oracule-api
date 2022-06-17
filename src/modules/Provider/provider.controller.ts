@@ -1,8 +1,11 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
-
-import { ProviderCreateDto } from './dto/provider-create.dto';
-import { IProvider } from './provider.interface';
+import {
+  ProviderToCreateDto,
+  ProviderCreatingDto,
+  ProviderCreatedDto,
+  ProviderToUpdateDto,
+} from './dto/index.dto';
 import ProviderRepository from './provider.repository';
 
 class ProviderController {

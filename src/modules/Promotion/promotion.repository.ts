@@ -1,9 +1,11 @@
 import { Document } from 'mongoose';
-
+import {
+  PromotionToCreateDto,
+  PromotionCreatingDto,
+  PromotionCreatedDto,
+  PromotionToUpdateDto,
+} from './dto/index.dto';
 import Promotion from '../../schemas/Promotion';
-
-import { PromotionCreateDto } from './dto/promotion-create.dto';
-import { IPromotion } from './promotion.interface';
 
 class PromotionRepository {
   async create(promotion: PromotionCreateDto): Promise<Document<IPromotion>> {
@@ -16,7 +18,7 @@ class PromotionRepository {
     throw new Error(`Error to create promotion`);
   }
 
-  async getOneById(id: string): Promise<Document<IPromotion>> {
+  async getOneById(id: Schema.Types.ObjectId;): Promise<Document<IPromotion>> {
     const promotion: Document<IPromotion> = await Promotion.findById(id);
     if (promotion) return promotion;
 
@@ -36,7 +38,7 @@ class PromotionRepository {
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: string, data: any): Promise<Document<IPromotion>> {
+  async updateById(id: Schema.Types.ObjectId;, data: any): Promise<Document<IPromotion>> {
     const updatedPromotion: Document<IPromotion> =
       await Promotion.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
@@ -47,7 +49,7 @@ class PromotionRepository {
     throw new Error(`Error to update promotion`);
   }
 
-  async deleteById(id: string): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId;): Promise<Boolean> {
     if (await Promotion.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete promotion`);

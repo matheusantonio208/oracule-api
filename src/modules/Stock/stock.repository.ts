@@ -1,9 +1,12 @@
 import { Document } from 'mongoose';
 
 import Stock from '../../schemas/Stock';
-
-import { StockCreateDto } from './dto/stock-create.dto';
-import { IStock } from './stock.interface';
+import {
+  StockToCreateDto,
+  StockCreatingDto,
+  StockCreatedDto,
+  StockToUpdateDto,
+} from './dto/index.dto';
 
 class StockRepository {
   async create(stock: StockCreateDto): Promise<Document<IStock>> {
@@ -16,7 +19,7 @@ class StockRepository {
     throw new Error(`Error to create stock`);
   }
 
-  async getOneById(id: string): Promise<Document<IStock>> {
+  async getOneById(id: Schema.Types.ObjectId;): Promise<Document<IStock>> {
     const stock: Document<IStock> = await Stock.findById(id);
     if (stock) return stock;
 
@@ -36,7 +39,7 @@ class StockRepository {
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: string, data: any): Promise<Document<IStock>> {
+  async updateById(id: Schema.Types.ObjectId;, data: any): Promise<Document<IStock>> {
     const updatedStock: Document<IStock> = await Stock.findByIdAndUpdate(
       id,
       data,
@@ -50,7 +53,7 @@ class StockRepository {
     throw new Error(`Error to update stock`);
   }
 
-  async deleteById(id: string): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId;): Promise<Boolean> {
     if (await Stock.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete stock`);

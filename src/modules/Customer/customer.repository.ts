@@ -2,8 +2,12 @@ import { Document } from 'mongoose';
 
 import Customer from '../../schemas/Customer';
 
-import { CustomerCreateDto } from './dto/customer-create.dto';
-import { ICustomer } from './customer.interface';
+import {
+  CustomerToCreateDto,
+  CustomerCreatingDto,
+  CustomerCreatedDto,
+  CustomerToUpdateDto,
+} from './dto/index.dto';
 
 class CustomerRepository {
   async create(customer: CustomerCreateDto): Promise<Document<ICustomer>> {
@@ -16,7 +20,7 @@ class CustomerRepository {
     throw new Error(`Error to create customer`);
   }
 
-  async getOneById(id: string): Promise<Document<ICustomer>> {
+  async getOneById(id: Schema.Types.ObjectId;): Promise<Document<ICustomer>> {
     const customer: Document<ICustomer> = await Customer.findById(id);
     if (customer) return customer;
 
@@ -36,7 +40,7 @@ class CustomerRepository {
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: string, data: any): Promise<Document<ICustomer>> {
+  async updateById(id: Schema.Types.ObjectId;, data: any): Promise<Document<ICustomer>> {
     const updatedCustomer: Document<ICustomer> =
       await Customer.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
@@ -47,7 +51,7 @@ class CustomerRepository {
     throw new Error(`Error to update customer`);
   }
 
-  async deleteById(id: string): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId;): Promise<Boolean> {
     if (await Customer.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete customer`);

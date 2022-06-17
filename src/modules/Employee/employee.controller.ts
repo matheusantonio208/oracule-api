@@ -1,8 +1,12 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
-import { EmployeeCreateDto } from './dto/employee-create.dto';
-import { IEmployee } from './employee.interface';
+import {
+  EmployeeToCreateDto,
+  EmployeeCreatingDto,
+  EmployeeCreatedDto,
+  EmployeeToUpdateDto,
+} from './dto/index.dto';
 import EmployeeRepository from './employee.repository';
 
 class EmployeeController {

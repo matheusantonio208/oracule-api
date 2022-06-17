@@ -1,10 +1,12 @@
 import { Document, Model, Schema } from 'mongoose';
 
 import Category from '../../schemas/Category';
-
-import { CategoryCreateDto } from './dto/category.create.dto';
-import { ICategory } from './category.interface';
-
+import {
+  CategoryToCreateDto,
+  CategoryCreatingDto,
+  CategoryCreatedDto,
+  CategoryToUpdateDto,
+} from './dto/index.dto';
 class CategoryRepository {
   async create(category: CategoryCreateDto): Promise<Document<ICategory>> {
     const categoryCreate = new Category(category);

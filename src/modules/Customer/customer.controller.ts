@@ -1,8 +1,11 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
-
-import { CustomerCreateDto } from './dto/customer-create.dto';
-import { ICustomer } from './customer.interface';
+import {
+  CustomerToCreateDto,
+  CustomerCreatingDto,
+  CustomerCreatedDto,
+  CustomerToUpdateDto,
+} from './dto/index.dto';
 import CustomerRepository from './customer.repository';
 
 class CustomerController {

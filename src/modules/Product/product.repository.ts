@@ -3,9 +3,10 @@ import { Schema } from 'mongoose';
 import Product from '../../schemas/Product';
 
 import {
-  ProductCreatedDto,
   ProductToCreateDto,
-  ProductUpdateDto,
+  ProductCreatingDto,
+  ProductCreatedDto,
+  ProductToUpdateDto,
 } from './dto/index.dto';
 
 class ProductRepository {

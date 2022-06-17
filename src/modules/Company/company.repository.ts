@@ -2,6 +2,7 @@ import { Schema } from 'mongoose';
 import Company from '../../schemas/Company';
 
 import {
+  CompanyToCreateDto,
   CompanyCreatingDto,
   CompanyCreatedDto,
   CompanyToUpdateDto,

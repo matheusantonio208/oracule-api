@@ -1,5 +1,10 @@
 import { IRequest, IResponse, MulterRequest } from '../../@types';
-import { FileCreatedDto } from './dto/file-created.dto';
+import {
+  FileToCreateDto,
+  FileCreatingDto,
+  FileCreatedDto,
+  FileToUpdateDto,
+} from './dto/index.dto';
 
 import FileRepository from './file.repository';
 import FileService from './file.service';

@@ -1,8 +1,11 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
-
-import { PersonCreateDto } from './dto/person-create.dto';
-import { IPerson } from './person.interface';
+import {
+  PersonToCreateDto,
+  PersonCreatingDto,
+  PersonCreatedDto,
+  PersonToUpdateDto,
+} from './dto/index.dto';
 import PersonRepository from './person.repository';
 
 class PersonController {

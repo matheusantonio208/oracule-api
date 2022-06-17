@@ -1,7 +1,12 @@
 import { Schema } from 'mongoose';
 import Ad from '../../schemas/Ad';
 
-import { AdCreatedDto, AdCreatingDto } from './dto/index.dto';
+import {
+  AdToCreateDto,
+  AdCreatingDto,
+  AdCreatedDto,
+  AdToUpdateDto,
+} from './dto/index.dto';
 
 class AdRepository {
   async create(ad: AdCreatingDto): Promise<AdCreatedDto> {

@@ -1,7 +1,12 @@
 import { Schema } from 'mongoose';
 import File from '../../schemas/File';
 
-import { FileCreatedDto, FileToCreateDto } from './dto/index.dto';
+import {
+  FileToCreateDto,
+  FileCreatingDto,
+  FileCreatedDto,
+  FileToUpdateDto,
+} from './dto/index.dto';
 
 class FileRepository {
   async create(file: FileToCreateDto): Promise<FileToCreateDto> {

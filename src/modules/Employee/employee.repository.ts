@@ -1,9 +1,11 @@
 import { Document } from 'mongoose';
-
+import {
+  EmployeeToCreateDto,
+  EmployeeCreatingDto,
+  EmployeeCreatedDto,
+  EmployeeToUpdateDto,
+} from './dto/index.dto';
 import Employee from '../../schemas/Employee';
-
-import { EmployeeCreateDto } from './dto/employee-create.dto';
-import { IEmployee } from './employee.interface';
 
 class EmployeeRepository {
   async create(employee: EmployeeCreateDto): Promise<Document<IEmployee>> {
@@ -16,7 +18,7 @@ class EmployeeRepository {
     throw new Error(`Error to create employee`);
   }
 
-  async getOneById(id: string): Promise<Document<IEmployee>> {
+  async getOneById(id: Schema.Types.ObjectId;): Promise<Document<IEmployee>> {
     const employee: Document<IEmployee> = await Employee.findById(id);
     if (employee) return employee;
 
@@ -36,7 +38,7 @@ class EmployeeRepository {
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: string, data: any): Promise<Document<IEmployee>> {
+  async updateById(id: Schema.Types.ObjectId;, data: any): Promise<Document<IEmployee>> {
     const updatedEmployee: Document<IEmployee> =
       await Employee.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
@@ -47,7 +49,7 @@ class EmployeeRepository {
     throw new Error(`Error to update employee`);
   }
 
-  async deleteById(id: string): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId;): Promise<Boolean> {
     if (await Employee.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete employee`);

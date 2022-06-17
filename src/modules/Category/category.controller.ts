@@ -1,18 +1,22 @@
-import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
-import { CategoryCreateDto } from './dto/category.create.dto';
-import { ICategory } from './category.interface';
+import {
+  CategoryToCreateDto,
+  CategoryCreatingDto,
+  CategoryCreatedDto,
+  CategoryToUpdateDto,
+} from './dto/index.dto';
+
 import CategoryRepository from './category.repository';
 
 class CategoryController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const categoryCreateDto: CategoryCreateDto = new CategoryCreateDto(
+      const categoryCreateDto: CategoryToCreateDto = new CategoryCreateDto(
         req.body,
       );
 
-      const categoryCreated: Document<ICategory> =
+      const categoryCreated: CategoryCreatedDto =
         await CategoryRepository.create(categoryCreateDto);
 
       return res.status(201).json(categoryCreated);
@@ -25,7 +29,7 @@ class CategoryController {
     try {
       const { id } = req.params;
 
-      const category: Document<ICategory> = await CategoryRepository.getOneById(
+      const category: CategoryCreatedDto = await CategoryRepository.getOneById(
         id,
       );
       return res.status(201).json(category);

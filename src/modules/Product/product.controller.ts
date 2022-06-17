@@ -3,6 +3,7 @@ import {
   ProductToCreateDto,
   ProductCreatingDto,
   ProductCreatedDto,
+  ProductToUpdateDto,
 } from './dto/index.dto';
 import ProductRepository from './product.repository';
 import ProductService from './product.service';

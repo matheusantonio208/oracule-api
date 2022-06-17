@@ -1,7 +1,11 @@
 import { IRequest, IResponse } from '../../@types';
 
-import { shopCreatedDto } from './dto/index.dto';
-import { IShop } from './shop.interface';
+import {
+  ShopToCreateDto,
+  ShopCreatingDto,
+  ShopCreatedDto,
+  ShopToUpdateDto,
+} from './dto/index.dto';
 import ShopRepository from './shop.repository';
 
 class ShopController {

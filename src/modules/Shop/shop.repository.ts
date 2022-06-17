@@ -1,9 +1,11 @@
 import { Schema } from 'mongoose';
-
+import {
+  ShopToCreateDto,
+  ShopCreatingDto,
+  ShopCreatedDto,
+  ShopToUpdateDto,
+} from './dto/index.dto';
 import Shop from '../../schemas/Shop';
-
-import { ShopCreateDto } from './dto/shop-create.dto';
-import { IShop } from './shop.interface';
 
 class ShopRepository {
   async create(shop: ShopCreateDto): Promise<IShop> {

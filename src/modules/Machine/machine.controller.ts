@@ -1,8 +1,11 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
-
-import { MachineCreateDto } from './dto/machine-create.dto';
-import { IMachine } from './machine.interface';
+import {
+  MachineToCreateDto,
+  MachineCreatingDto,
+  MachineCreatedDto,
+  MachineToUpdateDto,
+} from './dto/index.dto';
 import MachineRepository from './machine.repository';
 
 class MachineController {

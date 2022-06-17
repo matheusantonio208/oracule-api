@@ -1,8 +1,11 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
-
-import { PromotionCreateDto } from './dto/promotion-create.dto';
-import { IPromotion } from './promotion.interface';
+import {
+  PromotionToCreateDto,
+  PromotionCreatingDto,
+  PromotionCreatedDto,
+  PromotionToUpdateDto,
+} from './dto/index.dto';
 import PromotionRepository from './promotion.repository';
 
 class PromotionController {

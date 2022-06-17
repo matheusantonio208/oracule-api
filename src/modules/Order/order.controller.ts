@@ -1,8 +1,11 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
-
-import { OrderCreateDto } from './dto/order-create.dto';
-import { IOrder } from './order.interface';
+import {
+  OrderToCreateDto,
+  OrderCreatingDto,
+  OrderCreatedDto,
+  OrderToUpdateDto,
+} from './dto/index.dto';
 import OrderRepository from './order.repository';
 
 class OrderController {

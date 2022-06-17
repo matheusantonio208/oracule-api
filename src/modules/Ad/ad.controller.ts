@@ -18,7 +18,12 @@
  */
 import { IRequest, IResponse } from '../../@types';
 
-import { AdToCreateDto, AdCreatingDto, AdCreatedDto } from './dto/index.dto';
+import {
+  AdToCreateDto
+  AdCreatingDto,
+  AdCreatedDto,
+  AdToUpdateDto,
+} from './dto/index.dto';
 import { ProductCreatedDto } from '../Product/dto/product-created.dto';
 import { ShopCreatedDto } from '../Shop/dto/index.dto';
 

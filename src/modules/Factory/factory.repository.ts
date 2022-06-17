@@ -2,8 +2,12 @@ import { Document } from 'mongoose';
 
 import Factory from '../../schemas/Factory';
 
-import { FactoryCreateDto } from './dto/factory-create.dto';
-import { IFactory } from './factory.interface';
+import {
+  FactoryToCreateDto,
+  FactoryCreatingDto,
+  FactoryCreatedDto,
+  FactoryToUpdateDto,
+} from './dto/index.dto';
 
 class FactoryRepository {
   async create(factory: FactoryCreateDto): Promise<Document<IFactory>> {

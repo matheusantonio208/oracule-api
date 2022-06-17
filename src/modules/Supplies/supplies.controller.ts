@@ -1,9 +1,13 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
-import { SuppliesCreateDto } from './dto/supplies-create.dto';
-import { ISupplies } from './supplies.interface';
 import SuppliesRepository from './supplies.repository';
+import {
+  SuppliesToCreateDto,
+  SuppliesCreatingDto,
+  SuppliesCreatedDto,
+  SuppliesToUpdateDto,
+} from './dto/index.dto';
 
 class SuppliesController {
   async store(req: IRequest, res: IResponse) {

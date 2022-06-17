@@ -1,17 +1,21 @@
-import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
-import { TransactionCreateDto } from './dto/transaction-create.dto';
-import { ITransaction } from './transaction.interface';
+import {
+  TransactionToCreateDto,
+  TransactionCreatingDto,
+  TransactionCreatedDto,
+  TransactionToUpdateDto,
+} from './dto/index.dto';
+
 import TransactionRepository from './transaction.repository';
 
 class TransactionController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const transactionCreateDto: TransactionCreateDto =
-        new TransactionCreateDto(req.body);
+      const transactionCreateDto: TransactionToCreateDto =
+        new TransactionToCreateDto(req.body);
 
-      const transactionCreated: Document<ITransaction> =
+      const transactionCreated: TransactionCreatedDto =
         await TransactionRepository.create(transactionCreateDto);
 
       return res.status(201).json(transactionCreated);
@@ -24,7 +28,7 @@ class TransactionController {
     try {
       const { id } = req.params;
 
-      const transaction: Document<ITransaction> =
+      const transaction: TransactionCreatedDto =
         await TransactionRepository.getOneById(id);
 
       return res.status(201).json(transaction);
@@ -35,7 +39,7 @@ class TransactionController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const transaction: Array<Document<ITransaction>> =
+      const transaction: Array<TransactionCreatedDto> =
         await TransactionRepository.listAll();
 
       return res.status(201).json(transaction);

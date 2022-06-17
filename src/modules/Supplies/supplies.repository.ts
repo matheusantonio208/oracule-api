@@ -1,9 +1,12 @@
 import { Document } from 'mongoose';
 
-import Supplies from '../../schemas/Supplies';
+import {
+  SuppliesCreatingDto,
+  SuppliesCreatedDto,
+  SuppliesToUpdateDto,
+} from './dto/index.dto';
 
-import { SuppliesCreateDto } from './dto/supplies-create.dto';
-import { ISupplies } from './supplies.interface';
+import Supplies from '../../schemas/Supplies';
 
 class SuppliesRepository {
   async create(supplies: SuppliesCreateDto): Promise<Document<ISupplies>> {
@@ -16,7 +19,7 @@ class SuppliesRepository {
     throw new Error(`Error to create supplies`);
   }
 
-  async getOneById(id: string): Promise<Document<ISupplies>> {
+  async getOneById(id: Schema.Types.ObjectId;): Promise<Document<ISupplies>> {
     const supplies: Document<ISupplies> = await Supplies.findById(id);
     if (supplies) return supplies;
 
@@ -36,7 +39,7 @@ class SuppliesRepository {
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: string, data: any): Promise<Document<ISupplies>> {
+  async updateById(id: Schema.Types.ObjectId;, data: any): Promise<Document<ISupplies>> {
     const updatedSupplies: Document<ISupplies> =
       await Supplies.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
@@ -47,7 +50,7 @@ class SuppliesRepository {
     throw new Error(`Error to update supplies`);
   }
 
-  async deleteById(id: string): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId;): Promise<Boolean> {
     if (await Supplies.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete supplies`);

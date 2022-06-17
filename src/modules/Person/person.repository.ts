@@ -1,9 +1,11 @@
 import { Document } from 'mongoose';
-
+import {
+  PersonToCreateDto,
+  PersonCreatingDto,
+  PersonCreatedDto,
+  PersonToUpdateDto,
+} from './dto/index.dto';
 import Person from '../../schemas/Person';
-
-import { PersonCreateDto } from './dto/person-create.dto';
-import { IPerson } from './person.interface';
 
 class PersonRepository {
   async create(person: PersonCreateDto): Promise<Document<IPerson>> {
@@ -16,7 +18,7 @@ class PersonRepository {
     throw new Error(`Error to create person`);
   }
 
-  async getOneById(id: string): Promise<Document<IPerson>> {
+  async getOneById(id: Schema.Types.ObjectId;): Promise<Document<IPerson>> {
     const person: Document<IPerson> = await Person.findById(id);
     if (person) return person;
 
@@ -36,7 +38,7 @@ class PersonRepository {
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: string, data: any): Promise<Document<IPerson>> {
+  async updateById(id: Schema.Types.ObjectId;, data: any): Promise<Document<IPerson>> {
     const updatedPerson: Document<IPerson> = await Person.findByIdAndUpdate(
       id,
       data,
@@ -50,7 +52,7 @@ class PersonRepository {
     throw new Error(`Error to update person`);
   }
 
-  async deleteById(id: string): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId;): Promise<Boolean> {
     if (await Person.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete person`);

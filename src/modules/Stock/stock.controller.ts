@@ -1,9 +1,14 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
-import { StockCreateDto } from './dto/stock-create.dto';
-import { IStock } from './stock.interface';
 import StockRepository from './stock.repository';
+
+import {
+  StockToCreateDto,
+  StockCreatingDto,
+  StockCreatedDto,
+  StockToUpdateDto,
+} from './dto/index.dto';
 
 class StockController {
   async store(req: IRequest, res: IResponse) {

@@ -1,9 +1,14 @@
 import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
-import { FeedstockCreateDto } from './dto/feedstock-create.dto';
-import { IFeedstock } from './feedstock.interface';
 import FeedstockRepository from './feedstock.repository';
+
+import {
+  FeedstockToCreateDto,
+  FeedstockCreatingDto,
+  FeedstockCreatedDto,
+  FeedstockToUpdateDto,
+} from './dto/index.dto';
 
 class FeedstockController {
   async store(req: IRequest, res: IResponse) {

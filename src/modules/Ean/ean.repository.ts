@@ -1,7 +1,12 @@
 import { Schema } from 'mongoose';
 import Ean from '../../schemas/Ean';
 
-import { EanCreatingDto, EanCreatedDto, EanToUpdateDto } from './dto/index.dto';
+import {
+  EanToCreateDto,
+  EanCreatingDto,
+  EanCreatedDto,
+  EanToUpdateDto,
+} from './dto/index.dto';
 
 class EanRepository {
   async create(ean: EanCreatingDto): Promise<EanCreatedDto> {

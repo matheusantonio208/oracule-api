@@ -1,9 +1,11 @@
 import { Document } from 'mongoose';
-
+import {
+  OrderToCreateDto,
+  OrderCreatingDto,
+  OrderCreatedDto,
+  OrderToUpdateDto,
+} from './dto/index.dto';
 import Order from '../../schemas/Order';
-
-import { OrderCreateDto } from './dto/order-create.dto';
-import { IOrder } from './order.interface';
 
 class OrderRepository {
   async create(order: OrderCreateDto): Promise<Document<IOrder>> {
@@ -16,7 +18,7 @@ class OrderRepository {
     throw new Error(`Error to create order`);
   }
 
-  async getOneById(id: string): Promise<Document<IOrder>> {
+  async getOneById(id: Schema.Types.ObjectId;): Promise<Document<IOrder>> {
     const order: Document<IOrder> = await Order.findById(id);
     if (order) return order;
 
@@ -36,7 +38,7 @@ class OrderRepository {
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: string, data: any): Promise<Document<IOrder>> {
+  async updateById(id: Schema.Types.ObjectId;, data: any): Promise<Document<IOrder>> {
     const updatedOrder: Document<IOrder> = await Order.findByIdAndUpdate(
       id,
       data,
@@ -50,7 +52,7 @@ class OrderRepository {
     throw new Error(`Error to update order`);
   }
 
-  async deleteById(id: string): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId;): Promise<Boolean> {
     if (await Order.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete order`);
