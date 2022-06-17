@@ -15,6 +15,8 @@ class FileController {
         fileList.push(files[key]);
       });
 
+      const destination = path.split('-');
+
       switch (typeFile) {
         case 'photo':
           let commercialFile = FileService.getBufferAndName(fileList, '.webp');
@@ -22,24 +24,24 @@ class FileController {
           await FileService.uploadCommercialImage(
             commercialFile,
             20,
-            path,
+            destination,
             typeFile,
           );
           break;
 
         case 'video':
           let videoFile = FileService.getBufferAndName(fileList, '.mp4');
-          await FileService.uploadFile(videoFile, path, typeFile);
+          await FileService.uploadFile(videoFile, destination, typeFile);
           break;
 
         case 'artwork':
-          let artworkFile = FileService.getBufferAndName(fileList, '.jpg');
-          await FileService.uploadFile(artworkFile, path, typeFile);
+          let artworkFile = FileService.getBufferAndName(fileList, '.png');
+          await FileService.uploadFile(artworkFile, destination, typeFile);
           break;
 
-        case 'edit_artwork':
+        case 'edit-artwork':
           let editArtworkFile = FileService.getBufferAndName(fileList, '.psd');
-          FileService.uploadFile(editArtworkFile, path, typeFile);
+          FileService.uploadFile(editArtworkFile, destination, typeFile);
           break;
 
         default:

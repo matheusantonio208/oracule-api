@@ -1,4 +1,4 @@
-import { Document, Model } from 'mongoose';
+import { Document, Model, Schema } from 'mongoose';
 
 import Category from '../../schemas/Category';
 
@@ -16,7 +16,7 @@ class CategoryRepository {
     throw new Error(`Error to create category`);
   }
 
-  async getOneById(id: string): Promise<Document<ICategory>> {
+  async getOneById(id: Schema.Types.ObjectId): Promise<Document<ICategory>> {
     const category: Document<ICategory> = await Category.findById(id);
     if (category) return category;
 
@@ -36,7 +36,10 @@ class CategoryRepository {
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: string, data: any): Promise<Document<ICategory>> {
+  async updateById(
+    id: Schema.Types.ObjectId,
+    data: any,
+  ): Promise<Document<ICategory>> {
     const updatedCategory: Document<ICategory> =
       await Category.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
@@ -47,7 +50,7 @@ class CategoryRepository {
     throw new Error(`Error to update category`);
   }
 
-  async deleteById(id: string): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId): Promise<Boolean> {
     if (await Category.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete category`);

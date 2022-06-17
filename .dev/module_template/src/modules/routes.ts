@@ -1,15 +1,7 @@
-import Xxxx from './Xxxx/xxxx.controller';
+import XxxxRoute from './Xxxx/xxxx.routes';
 
 class Routes {
   constructor() {
-    this.xxxx('/xxxx');
-  }
-
-  xxxx(baseRoute): void {
-    this.route.post(`${baseRoute}/store`, Xxxx.store);
-    this.route.get(`${baseRoute}/index/:id`, Xxxx.index);
-    this.route.get(`${baseRoute}/show`, Xxxx.show);
-    this.route.delete(`${baseRoute}/delete/:id`, Xxxx.delete);
-    this.route.put(`${baseRoute}/update/:id`, Xxxx.update);
+    XxxxRoute(this.route, '/xxxx');
   }
 }

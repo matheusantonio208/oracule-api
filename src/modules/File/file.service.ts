@@ -2,6 +2,7 @@ import sharp from 'sharp';
 import FileRepository from './file.repository';
 
 import fs from 'fs';
+import util from 'util';
 
 import { parse, resolve } from 'path';
 
@@ -22,21 +23,38 @@ class FileService {
     return files;
   }
 
-  async uploadCommercialImage(files, quality, path, typeFile) {
+  async verifyAndCreateDirectory(path) {
+    const access = util.promisify(fs.access);
+    const makeDir = util.promisify(fs.mkdir);
+
+    try {
+      await access(path);
+    } catch (err) {
+      await makeDir(path, { recursive: true });
+    }
+  }
+
+  async uploadCommercialImage(
+    files,
+    quality: number,
+    path: Array<string>,
+    typeFile: string,
+  ) {
+    const destination = resolve(process.env.UPLOAD_DIRECTORY, ...path);
+    await this.verifyAndCreateDirectory(destination);
+
     files.forEach(async (_, index) => {
       const link = `${files[index].name}`;
-      const destination = `${process.env.UPLOAD_DIRECTORY}${path}/${files[index].name}`;
-
-      fs.access(destination, (error) => {
-        if (error) {
-          fs.mkdirSync(destination);
-        }
-      });
+      const destinationWithFileName = resolve(
+        process.env.UPLOAD_DIRECTORY,
+        ...path,
+        files[index].name,
+      );
 
       await sharp(files[index].buffer)
         .webp({ quality })
         .resize(1500, 1500)
-        .toFile(destination);
+        .toFile(destinationWithFileName);
 
       await FileRepository.create({
         name: files[index].name,
@@ -46,29 +64,25 @@ class FileService {
     });
   }
 
-  verifyAndCreateDirectory(path) {
-    fs.access(path, (error) => {
-      if (error) {
-        fs.mkdir(path, { recursive: true }, (error) => {});
-      }
-    });
-  }
+  async uploadFile(files, path: Array<string>, typeFile: string) {
+    const destination = resolve(
+      process.env.UPLOAD_DIRECTORY,
+      ...path,
+      'production-files',
+    );
+    await this.verifyAndCreateDirectory(destination);
 
-  async uploadFile(files, path, typeFile) {
     files.forEach(async (_, index) => {
       const link = `${files[index].name}`;
-      const destination = resolve(process.env.UPLOAD_DIRECTORY, path);
 
-      this.verifyAndCreateDirectory(destination);
-
-      return;
-
-      await sharp(files[index].buffer).toFile(
-        process.env.UPLOAD_DIRECTORY +
-          path +
-          'productions-file/' +
-          files[index].name,
+      const destinationWithFileName = resolve(
+        process.env.UPLOAD_DIRECTORY,
+        ...path,
+        'production-files',
+        files[index].name,
       );
+
+      await sharp(files[index].buffer).toFile(destinationWithFileName);
 
       await FileRepository.create({
         name: files[index].name,
