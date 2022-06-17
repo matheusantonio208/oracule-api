@@ -1,22 +1,33 @@
-import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
+
 import {
   CustomerToCreateDto,
   CustomerCreatingDto,
   CustomerCreatedDto,
   CustomerToUpdateDto,
 } from './dto/index.dto';
-import CustomerRepository from './customer.repository';
+
+import customerRepository from './customer.repository';
+
+import customerService from './customer.service';
 
 class CustomerController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const customerCreateDto: CustomerCreateDto = new CustomerCreateDto(
-        req.body,
-      );
+      // === Get Vars === //
+      const customer: CustomerToCreateDto = new CustomerToCreateDto(req.body);
 
-      const customerCreated: Document<ICustomer> =
-        await CustomerRepository.create(customerCreateDto);
+      // === Generate Vars === //
+      const customerProperty: number = await customerService.serviceFunction();
+
+      // === Create Dto === //
+      const customerCreatingDto: CustomerCreatingDto = new CustomerCreatingDto({
+        ...customer,
+      });
+
+      // === Create Object === //
+      const customerCreated: CustomerCreatedDto =
+        await customerRepository.create(customerCreatingDto);
 
       return res.status(201).json(customerCreated);
     } catch (error) {
@@ -28,7 +39,7 @@ class CustomerController {
     try {
       const { id } = req.params;
 
-      const customer: Document<ICustomer> = await CustomerRepository.getOneById(
+      const customer: CustomerCreatedDto = await customerRepository.getOneById(
         id,
       );
 
@@ -40,8 +51,15 @@ class CustomerController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const customer: Array<Document<ICustomer>> =
-        await CustomerRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const customer: Array<CustomerCreatedDto> =
+        await customerRepository.listAll(
+          property,
+          sort,
+          itensPerPage,
+          pagination,
+        );
 
       return res.status(201).json(customer);
     } catch (error) {
@@ -53,7 +71,7 @@ class CustomerController {
     try {
       const { id } = req.params;
 
-      await CustomerRepository.deleteById(id);
+      await customerRepository.deleteById(id);
 
       return res
         .status(201)
@@ -66,9 +84,10 @@ class CustomerController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: CustomerToUpdateDto = new CustomerToUpdateDto(req.body);
 
-      const customerUpdated = await CustomerRepository.updateById(id, data);
+      const customerUpdated: CustomerCreatedDto =
+        await customerRepository.updateById(id, data);
 
       return res.status(201).json(customerUpdated);
     } catch (error) {

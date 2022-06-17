@@ -2,7 +2,6 @@ import { Schema } from 'mongoose';
 import Company from '../../schemas/Company';
 
 import {
-  CompanyToCreateDto,
   CompanyCreatingDto,
   CompanyCreatedDto,
   CompanyToUpdateDto,
@@ -26,13 +25,22 @@ class CompanyRepository {
     throw new Error(`Error to get company`);
   }
 
-  async listAll(): Promise<Array<CompanyCreatedDto>> {
+  async listAll(
+    property: string,
+    sort: string,
+    itensPerPage: number,
+    pagination: number,
+  ): Promise<Array<CompanyCreatedDto>> {
     const companys: Array<CompanyCreatedDto> = await Company.find(
       {},
       (err, docs) => {
         if (!err) return docs;
       },
-    );
+    )
+      .sort([[property, sort]])
+      .skip(pagination)
+      .limit(itensPerPage)
+      .exec();
 
     if (companys) return companys;
 

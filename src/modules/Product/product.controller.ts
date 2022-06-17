@@ -5,8 +5,8 @@ import {
   ProductCreatedDto,
   ProductToUpdateDto,
 } from './dto/index.dto';
-import ProductRepository from './product.repository';
-import ProductService from './product.service';
+import productRepository from './product.repository';
+import productService from './product.service';
 
 class ProductController {
   async store(req: IRequest, res: IResponse) {
@@ -15,12 +15,12 @@ class ProductController {
 
       const product: ProductToCreateDto = new ProductToCreateDto(req.body);
 
-      const productCode: string = await ProductService.generateProductCode();
-      const productSku: string = await ProductService.generateSku(
+      const productCode: string = await productService.generateProductCode();
+      const productSku: string = await productService.generateSku(
         product,
         productCode,
       );
-      const productCost: number = await ProductService.generateProductionCost(
+      const productCost: number = await productService.generateProductionCost(
         product,
         other_transactions,
       );
@@ -35,7 +35,7 @@ class ProductController {
         production_cost: productCost,
       });
 
-      const productCreated: ProductCreatedDto = await ProductRepository.create(
+      const productCreated: ProductCreatedDto = await productRepository.create(
         productCreating,
       );
 
@@ -52,7 +52,7 @@ class ProductController {
     try {
       const { id } = req.params;
 
-      const product: ProductCreatedDto = await ProductRepository.getOneById(id);
+      const product: ProductCreatedDto = await productRepository.getOneById(id);
 
       return res.status(201).json(product);
     } catch (error) {
@@ -62,9 +62,10 @@ class ProductController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const { key, sort, itensPerPage, pagination } = req.params;
-      const product: Array<ProductCreatedDto> = await ProductRepository.listAll(
-        key,
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const product: Array<ProductCreatedDto> = await productRepository.listAll(
+        property,
         sort,
         itensPerPage,
         pagination,
@@ -80,7 +81,7 @@ class ProductController {
     try {
       const { id } = req.params;
 
-      await ProductRepository.deleteById(id);
+      await productRepository.deleteById(id);
 
       return res
         .status(201)
@@ -93,9 +94,10 @@ class ProductController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: ProductToUpdateDto = new ProductToUpdateDto(req.body);
 
-      const productUpdated = await ProductRepository.updateById(id, data);
+      const productUpdated: ProductCreatedDto =
+        await productRepository.updateById(id, data);
 
       return res.status(201).json(productUpdated);
     } catch (error) {

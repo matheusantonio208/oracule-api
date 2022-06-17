@@ -1,20 +1,34 @@
-import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
+
 import {
   MachineToCreateDto,
   MachineCreatingDto,
   MachineCreatedDto,
   MachineToUpdateDto,
 } from './dto/index.dto';
-import MachineRepository from './machine.repository';
+
+import machineRepository from './machine.repository';
+
+import machineService from './machine.service';
 
 class MachineController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const machineCreateDto: MachineCreateDto = new MachineCreateDto(req.body);
+      // === Get Vars === //
+      const machine: MachineToCreateDto = new MachineToCreateDto(req.body);
 
-      const machineCreated: Document<IMachine> = await MachineRepository.create(
-        machineCreateDto,
+      // === Generate Vars === //
+      const machineProperty: number = await machineService.serviceFunction();
+
+      // === Create Dto === //
+      const machineCreatingDto: MachineCreatingDto = new MachineCreatingDto({
+        ...machine,
+        //code: machineCode
+      });
+
+      // === Create Object === //
+      const machineCreated: MachineCreatedDto = await machineRepository.create(
+        machineCreatingDto,
       );
 
       return res.status(201).json(machineCreated);
@@ -27,9 +41,7 @@ class MachineController {
     try {
       const { id } = req.params;
 
-      const machine: Document<IMachine> = await MachineRepository.getOneById(
-        id,
-      );
+      const machine: MachineCreatedDto = await machineRepository.getOneById(id);
 
       return res.status(201).json(machine);
     } catch (error) {
@@ -39,8 +51,14 @@ class MachineController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const machine: Array<Document<IMachine>> =
-        await MachineRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const machine: Array<MachineCreatedDto> = await machineRepository.listAll(
+        property,
+        sort,
+        itensPerPage,
+        pagination,
+      );
 
       return res.status(201).json(machine);
     } catch (error) {
@@ -52,7 +70,7 @@ class MachineController {
     try {
       const { id } = req.params;
 
-      await MachineRepository.deleteById(id);
+      await machineRepository.deleteById(id);
 
       return res
         .status(201)
@@ -65,9 +83,10 @@ class MachineController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: MachineToUpdateDto = new MachineToUpdateDto(req.body);
 
-      const machineUpdated = await MachineRepository.updateById(id, data);
+      const machineUpdated: MachineCreatedDto =
+        await machineRepository.updateById(id, data);
 
       return res.status(201).json(machineUpdated);
     } catch (error) {

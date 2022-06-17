@@ -7,17 +7,28 @@ import {
   CategoryToUpdateDto,
 } from './dto/index.dto';
 
-import CategoryRepository from './category.repository';
+import categoryRepository from './ category.repository';
+
+import categoryService from './ category.service';
 
 class CategoryController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const categoryCreateDto: CategoryToCreateDto = new CategoryCreateDto(
-        req.body,
-      );
+      // === Get Vars === //
+      const category: CategoryToCreateDto = new CategoryToCreateDto(req.body);
 
+      // === Generate Vars === //
+      const categoryProperty: number = await categoryService.serviceFunction();
+
+      // === Create Dto === //
+      const categoryCreatingDto: CategoryCreatingDto = new CategoryCreatingDto({
+        ...category,
+        //code:  categoryCode
+      });
+
+      // === Create Object === //
       const categoryCreated: CategoryCreatedDto =
-        await CategoryRepository.create(categoryCreateDto);
+        await categoryRepository.create(categoryCreatingDto);
 
       return res.status(201).json(categoryCreated);
     } catch (error) {
@@ -29,38 +40,56 @@ class CategoryController {
     try {
       const { id } = req.params;
 
-      const category: CategoryCreatedDto = await CategoryRepository.getOneById(
+      const category: CategoryCreatedDto = await categoryRepository.getOneById(
         id,
       );
+
       return res.status(201).json(category);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
+
   async show(req: IRequest, res: IResponse) {
     try {
-      const categories = await CategoryRepository.listAll();
-      return res.status(201).json(categories);
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const category: Array<CategoryCreatedDto> =
+        await categoryRepository.listAll(
+          property,
+          sort,
+          itensPerPage,
+          pagination,
+        );
+
+      return res.status(201).json(category);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
+
   async delete(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      await CategoryRepository.deleteById(id);
+
+      await categoryRepository.deleteById(id);
+
       return res
         .status(201)
-        .json({ success_msg: `Success! Your category was deleted` });
+        .json({ success_msg: `Success! Your  category was deleted` });
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
   }
+
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
-      const categoryUpdated = await CategoryRepository.updateById(id, data);
+      const data: CategoryToUpdateDto = new CategoryToUpdateDto(req.body);
+
+      const categoryUpdated: CategoryCreatedDto =
+        await categoryRepository.updateById(id, data);
+
       return res.status(201).json(categoryUpdated);
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });

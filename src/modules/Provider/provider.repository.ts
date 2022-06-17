@@ -1,14 +1,14 @@
-import { Document } from 'mongoose';
+import { Schema } from 'mongoose';
+import Provider from '../../schemas/Provider';
+
 import {
-  ProviderToCreateDto,
   ProviderCreatingDto,
   ProviderCreatedDto,
   ProviderToUpdateDto,
 } from './dto/index.dto';
-import Provider from '../../schemas/Provider';
 
 class ProviderRepository {
-  async create(provider: ProviderCreateDto): Promise<Document<IProvider>> {
+  async create(provider: ProviderCreatingDto): Promise<ProviderCreatedDto> {
     const providerCreate = new Provider(provider);
 
     if (await providerCreate.save()) {
@@ -18,28 +18,40 @@ class ProviderRepository {
     throw new Error(`Error to create provider`);
   }
 
-  async getOneById(id: Schema.Types.ObjectId;): Promise<Document<IProvider>> {
-    const provider: Document<IProvider> = await Provider.findById(id);
+  async getOneById(id: Schema.Types.ObjectId): Promise<ProviderCreatedDto> {
+    const provider: ProviderCreatedDto = await Provider.findById(id);
     if (provider) return provider;
 
     throw new Error(`Error to get provider`);
   }
 
-  async listAll(): Promise<Array<Document<IProvider>>> {
-    const providers: Array<Document<IProvider>> = await Provider.find(
+  async listAll(
+    property: string,
+    sort: string,
+    itensPerPage: number,
+    pagination: number,
+  ): Promise<Array<ProviderCreatedDto>> {
+    const providers: Array<ProviderCreatedDto> = await Provider.find(
       {},
       (err, docs) => {
         if (!err) return docs;
       },
-    );
+    )
+      .sort([[property, sort]])
+      .skip(pagination)
+      .limit(itensPerPage)
+      .exec();
 
     if (providers) return providers;
 
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: Schema.Types.ObjectId;, data: any): Promise<Document<IProvider>> {
-    const updatedProvider: Document<IProvider> =
+  async updateById(
+    id: Schema.Types.ObjectId,
+    data: ProviderToUpdateDto,
+  ): Promise<ProviderCreatedDto> {
+    const updatedProvider: ProviderCreatedDto =
       await Provider.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
       });
@@ -49,7 +61,7 @@ class ProviderRepository {
     throw new Error(`Error to update provider`);
   }
 
-  async deleteById(id: Schema.Types.ObjectId;): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId): Promise<Boolean> {
     if (await Provider.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete provider`);

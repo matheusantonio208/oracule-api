@@ -1,4 +1,5 @@
 import { IRequest, IResponse } from '../../@types';
+
 import {
   CompanyToCreateDto,
   CompanyCreatingDto,
@@ -6,9 +7,9 @@ import {
   CompanyToUpdateDto,
 } from './dto/index.dto';
 
-import CompanyRepository from './company.repository';
+import companyRepository from './company.repository';
 
-import CompanyService from './company.service';
+import companyService from './company.service';
 
 class CompanyController {
   async store(req: IRequest, res: IResponse) {
@@ -17,16 +18,15 @@ class CompanyController {
       const company: CompanyToCreateDto = new CompanyToCreateDto(req.body);
 
       // === Generate Vars === //
-      const companyProperty: number = await CompanyService.serviceFunction();
+      const companyProperty: number = await companyService.serviceFunction();
 
       // === Create Dto === //
       const companyCreatingDto: CompanyCreatingDto = new CompanyCreatingDto({
         ...company,
-        //code: companyCode
       });
 
       // === Create Object === //
-      const companyCreated: CompanyCreatedDto = await CompanyRepository.create(
+      const companyCreated: CompanyCreatedDto = await companyRepository.create(
         companyCreatingDto,
       );
 
@@ -40,7 +40,7 @@ class CompanyController {
     try {
       const { id } = req.params;
 
-      const company: CompanyCreatedDto = await CompanyRepository.getOneById(id);
+      const company: CompanyCreatedDto = await companyRepository.getOneById(id);
 
       return res.status(201).json(company);
     } catch (error) {
@@ -50,8 +50,14 @@ class CompanyController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const company: Array<CompanyCreatedDto> =
-        await CompanyRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const company: Array<CompanyCreatedDto> = await companyRepository.listAll(
+        property,
+        sort,
+        itensPerPage,
+        pagination,
+      );
 
       return res.status(201).json(company);
     } catch (error) {
@@ -63,7 +69,7 @@ class CompanyController {
     try {
       const { id } = req.params;
 
-      await CompanyRepository.deleteById(id);
+      await companyRepository.deleteById(id);
 
       return res
         .status(201)
@@ -79,7 +85,7 @@ class CompanyController {
       const data: CompanyToUpdateDto = new CompanyToUpdateDto(req.body);
 
       const companyUpdated: CompanyCreatedDto =
-        await CompanyRepository.updateById(id, data);
+        await companyRepository.updateById(id, data);
 
       return res.status(201).json(companyUpdated);
     } catch (error) {

@@ -1,22 +1,38 @@
-import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
+
 import {
   PromotionToCreateDto,
   PromotionCreatingDto,
   PromotionCreatedDto,
   PromotionToUpdateDto,
 } from './dto/index.dto';
-import PromotionRepository from './promotion.repository';
+
+import promotionRepository from './promotion.repository';
+
+import promotionService from './promotion.service';
 
 class PromotionController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const promotionCreateDto: PromotionCreateDto = new PromotionCreateDto(
+      // === Get Vars === //
+      const promotion: PromotionToCreateDto = new PromotionToCreateDto(
         req.body,
       );
 
-      const promotionCreated: Document<IPromotion> =
-        await PromotionRepository.create(promotionCreateDto);
+      // === Generate Vars === //
+      const promotionProperty: number =
+        await promotionService.serviceFunction();
+
+      // === Create Dto === //
+      const promotionCreatingDto: PromotionCreatingDto =
+        new PromotionCreatingDto({
+          ...promotion,
+          //code: promotionCode
+        });
+
+      // === Create Object === //
+      const promotionCreated: PromotionCreatedDto =
+        await promotionRepository.create(promotionCreatingDto);
 
       return res.status(201).json(promotionCreated);
     } catch (error) {
@@ -28,8 +44,8 @@ class PromotionController {
     try {
       const { id } = req.params;
 
-      const promotion: Document<IPromotion> =
-        await PromotionRepository.getOneById(id);
+      const promotion: PromotionCreatedDto =
+        await promotionRepository.getOneById(id);
 
       return res.status(201).json(promotion);
     } catch (error) {
@@ -39,8 +55,15 @@ class PromotionController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const promotion: Array<Document<IPromotion>> =
-        await PromotionRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const promotion: Array<PromotionCreatedDto> =
+        await promotionRepository.listAll(
+          property,
+          sort,
+          itensPerPage,
+          pagination,
+        );
 
       return res.status(201).json(promotion);
     } catch (error) {
@@ -52,7 +75,7 @@ class PromotionController {
     try {
       const { id } = req.params;
 
-      await PromotionRepository.deleteById(id);
+      await promotionRepository.deleteById(id);
 
       return res
         .status(201)
@@ -65,9 +88,10 @@ class PromotionController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: PromotionToUpdateDto = new PromotionToUpdateDto(req.body);
 
-      const promotionUpdated = await PromotionRepository.updateById(id, data);
+      const promotionUpdated: PromotionCreatedDto =
+        await promotionRepository.updateById(id, data);
 
       return res.status(201).json(promotionUpdated);
     } catch (error) {

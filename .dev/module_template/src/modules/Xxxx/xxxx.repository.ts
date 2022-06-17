@@ -26,7 +26,7 @@ class XxxxRepository {
   }
 
   async listAll(
-    key: string,
+    property: string,
     sort: string,
     itensPerPage: number,
     pagination: number,
@@ -34,7 +34,7 @@ class XxxxRepository {
     const xxxxs: Array<XxxxCreatedDto> = await Xxxx.find({}, (err, docs) => {
       if (!err) return docs;
     })
-      .sort([[key, sort]])
+      .sort([[property, sort]])
       .skip(pagination)
       .limit(itensPerPage)
       .exec();

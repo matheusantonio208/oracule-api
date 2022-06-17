@@ -1,20 +1,34 @@
-import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
+
 import {
   PersonToCreateDto,
   PersonCreatingDto,
   PersonCreatedDto,
   PersonToUpdateDto,
 } from './dto/index.dto';
-import PersonRepository from './person.repository';
+
+import personRepository from './person.repository';
+
+import personService from './person.service';
 
 class PersonController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const personCreateDto: PersonCreateDto = new PersonCreateDto(req.body);
+      // === Get Vars === //
+      const person: PersonToCreateDto = new PersonToCreateDto(req.body);
 
-      const personCreated: Document<IPerson> = await PersonRepository.create(
-        personCreateDto,
+      // === Generate Vars === //
+      const personProperty: number = await personService.serviceFunction();
+
+      // === Create Dto === //
+      const personCreatingDto: PersonCreatingDto = new PersonCreatingDto({
+        ...person,
+        //code: personCode
+      });
+
+      // === Create Object === //
+      const personCreated: PersonCreatedDto = await personRepository.create(
+        personCreatingDto,
       );
 
       return res.status(201).json(personCreated);
@@ -27,7 +41,7 @@ class PersonController {
     try {
       const { id } = req.params;
 
-      const person: Document<IPerson> = await PersonRepository.getOneById(id);
+      const person: PersonCreatedDto = await personRepository.getOneById(id);
 
       return res.status(201).json(person);
     } catch (error) {
@@ -37,7 +51,14 @@ class PersonController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const person: Array<Document<IPerson>> = await PersonRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const person: Array<PersonCreatedDto> = await personRepository.listAll(
+        property,
+        sort,
+        itensPerPage,
+        pagination,
+      );
 
       return res.status(201).json(person);
     } catch (error) {
@@ -49,7 +70,7 @@ class PersonController {
     try {
       const { id } = req.params;
 
-      await PersonRepository.deleteById(id);
+      await personRepository.deleteById(id);
 
       return res
         .status(201)
@@ -62,9 +83,12 @@ class PersonController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: PersonToUpdateDto = new PersonToUpdateDto(req.body);
 
-      const personUpdated = await PersonRepository.updateById(id, data);
+      const personUpdated: PersonCreatedDto = await personRepository.updateById(
+        id,
+        data,
+      );
 
       return res.status(201).json(personUpdated);
     } catch (error) {

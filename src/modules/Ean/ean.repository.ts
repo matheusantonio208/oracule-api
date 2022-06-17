@@ -1,12 +1,7 @@
 import { Schema } from 'mongoose';
 import Ean from '../../schemas/Ean';
 
-import {
-  EanToCreateDto,
-  EanCreatingDto,
-  EanCreatedDto,
-  EanToUpdateDto,
-} from './dto/index.dto';
+import { EanCreatingDto, EanCreatedDto, EanToUpdateDto } from './dto/index.dto';
 
 class EanRepository {
   async create(ean: EanCreatingDto): Promise<EanCreatedDto> {
@@ -26,18 +21,19 @@ class EanRepository {
     throw new Error(`Error to get ean`);
   }
 
-  async getOneByEan(eanFind: string): Promise<string> {
-    const { ean } = await Ean.findOne({ ean: eanFind });
-
-    if (ean) return ean;
-
-    throw new Error(`Error to get ean`);
-  }
-
-  async listAll(): Promise<Array<EanCreatedDto>> {
+  async listAll(
+    property: string,
+    sort: string,
+    itensPerPage: number,
+    pagination: number,
+  ): Promise<Array<EanCreatedDto>> {
     const eans: Array<EanCreatedDto> = await Ean.find({}, (err, docs) => {
       if (!err) return docs;
-    });
+    })
+      .sort([[property, sort]])
+      .skip(pagination)
+      .limit(itensPerPage)
+      .exec();
 
     if (eans) return eans;
 

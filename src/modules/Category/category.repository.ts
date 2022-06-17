@@ -1,14 +1,14 @@
-import { Document, Model, Schema } from 'mongoose';
-
+import { Schema } from 'mongoose';
 import Category from '../../schemas/Category';
+
 import {
-  CategoryToCreateDto,
   CategoryCreatingDto,
   CategoryCreatedDto,
   CategoryToUpdateDto,
 } from './dto/index.dto';
+
 class CategoryRepository {
-  async create(category: CategoryCreateDto): Promise<Document<ICategory>> {
+  async create(category: CategoryCreatingDto): Promise<CategoryCreatedDto> {
     const categoryCreate = new Category(category);
 
     if (await categoryCreate.save()) {
@@ -18,31 +18,40 @@ class CategoryRepository {
     throw new Error(`Error to create category`);
   }
 
-  async getOneById(id: Schema.Types.ObjectId): Promise<Document<ICategory>> {
-    const category: Document<ICategory> = await Category.findById(id);
+  async getOneById(id: Schema.Types.ObjectId): Promise<CategoryCreatedDto> {
+    const category: CategoryCreatedDto = await Category.findById(id);
     if (category) return category;
 
     throw new Error(`Error to get category`);
   }
 
-  async listAll(): Promise<Array<Document<ICategory>>> {
-    const categories: Array<Document<ICategory>> = await Category.find(
+  async listAll(
+    property: string,
+    sort: string,
+    itensPerPage: number,
+    pagination: number,
+  ): Promise<Array<CategoryCreatedDto>> {
+    const categorys: Array<CategoryCreatedDto> = await Category.find(
       {},
       (err, docs) => {
         if (!err) return docs;
       },
-    );
+    )
+      .sort([[property, sort]])
+      .skip(pagination)
+      .limit(itensPerPage)
+      .exec();
 
-    if (categories) return categories;
+    if (categorys) return categorys;
 
     throw new Error(`Error to list categories`);
   }
 
   async updateById(
     id: Schema.Types.ObjectId,
-    data: any,
-  ): Promise<Document<ICategory>> {
-    const updatedCategory: Document<ICategory> =
+    data: CategoryToUpdateDto,
+  ): Promise<CategoryCreatedDto> {
+    const updatedCategory: CategoryCreatedDto =
       await Category.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
       });

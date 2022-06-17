@@ -24,7 +24,7 @@ class ProductService {
 
   async generateSku(product, productCode): Promise<any> {
     const feedStock = await FeedstockRepository.getOneById(
-      String(product.production_procedure[0].feedstock_id),
+      product.production_procedure[0].feedstock_id,
     );
 
     const feedStockSku = feedStock.sku;

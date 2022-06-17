@@ -1,7 +1,4 @@
-import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
-
-import FeedstockRepository from './feedstock.repository';
 
 import {
   FeedstockToCreateDto,
@@ -10,15 +7,32 @@ import {
   FeedstockToUpdateDto,
 } from './dto/index.dto';
 
+import feedstockRepository from './feedstock.repository';
+
+import feedstockService from './feedstock.service';
+
 class FeedstockController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const feedstockCreateDto: FeedstockCreateDto = new FeedstockCreateDto(
+      // === Get Vars === //
+      const feedstock: FeedstockToCreateDto = new FeedstockToCreateDto(
         req.body,
       );
 
-      const feedstockCreated: Document<IFeedstock> =
-        await FeedstockRepository.create(feedstockCreateDto);
+      // === Generate Vars === //
+      const feedstockProperty: number =
+        await feedstockService.serviceFunction();
+
+      // === Create Dto === //
+      const feedstockCreatingDto: FeedstockCreatingDto =
+        new FeedstockCreatingDto({
+          ...feedstock,
+          //code: feedstockCode
+        });
+
+      // === Create Object === //
+      const feedstockCreated: FeedstockCreatedDto =
+        await feedstockRepository.create(feedstockCreatingDto);
 
       return res.status(201).json(feedstockCreated);
     } catch (error) {
@@ -30,7 +44,8 @@ class FeedstockController {
     try {
       const { id } = req.params;
 
-      const feedstock: IFeedstock = await FeedstockRepository.getOneById(id);
+      const feedstock: FeedstockCreatedDto =
+        await feedstockRepository.getOneById(id);
 
       return res.status(201).json(feedstock);
     } catch (error) {
@@ -40,8 +55,15 @@ class FeedstockController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const feedstock: Array<Document<IFeedstock>> =
-        await FeedstockRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const feedstock: Array<FeedstockCreatedDto> =
+        await feedstockRepository.listAll(
+          property,
+          sort,
+          itensPerPage,
+          pagination,
+        );
 
       return res.status(201).json(feedstock);
     } catch (error) {
@@ -53,7 +75,7 @@ class FeedstockController {
     try {
       const { id } = req.params;
 
-      await FeedstockRepository.deleteById(id);
+      await feedstockRepository.deleteById(id);
 
       return res
         .status(201)
@@ -66,9 +88,10 @@ class FeedstockController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: FeedstockToUpdateDto = new FeedstockToUpdateDto(req.body);
 
-      const feedstockUpdated = await FeedstockRepository.updateById(id, data);
+      const feedstockUpdated: FeedstockCreatedDto =
+        await feedstockRepository.updateById(id, data);
 
       return res.status(201).json(feedstockUpdated);
     } catch (error) {

@@ -1,14 +1,14 @@
 import { Schema } from 'mongoose';
+import Shop from '../../schemas/Shop';
+
 import {
-  ShopToCreateDto,
   ShopCreatingDto,
   ShopCreatedDto,
   ShopToUpdateDto,
 } from './dto/index.dto';
-import Shop from '../../schemas/Shop';
 
 class ShopRepository {
-  async create(shop: ShopCreateDto): Promise<IShop> {
+  async create(shop: ShopCreatingDto): Promise<ShopCreatedDto> {
     const shopCreate = new Shop(shop);
 
     if (await shopCreate.save()) {
@@ -18,25 +18,37 @@ class ShopRepository {
     throw new Error(`Error to create shop`);
   }
 
-  async getOneById(id: Schema.Types.ObjectId): Promise<IShop> {
-    const shop: IShop = await Shop.findById(id);
+  async getOneById(id: Schema.Types.ObjectId): Promise<ShopCreatedDto> {
+    const shop: ShopCreatedDto = await Shop.findById(id);
     if (shop) return shop;
 
     throw new Error(`Error to get shop`);
   }
 
-  async listAll(): Promise<Array<IShop>> {
-    const shops: Array<IShop> = await Shop.find({}, (err, docs) => {
+  async listAll(
+    property: string,
+    sort: string,
+    itensPerPage: number,
+    pagination: number,
+  ): Promise<Array<ShopCreatedDto>> {
+    const shops: Array<ShopCreatedDto> = await Shop.find({}, (err, docs) => {
       if (!err) return docs;
-    });
+    })
+      .sort([[property, sort]])
+      .skip(pagination)
+      .limit(itensPerPage)
+      .exec();
 
     if (shops) return shops;
 
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: Schema.Types.ObjectId, data: any): Promise<IShop> {
-    const updatedShop: IShop = await Shop.findByIdAndUpdate(
+  async updateById(
+    id: Schema.Types.ObjectId,
+    data: ShopToUpdateDto,
+  ): Promise<ShopCreatedDto> {
+    const updatedShop: ShopCreatedDto = await Shop.findByIdAndUpdate(
       id,
       data,
       (error, document) => {

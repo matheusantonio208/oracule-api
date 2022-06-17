@@ -1,15 +1,14 @@
-import { Document } from 'mongoose';
-
+import { Schema } from 'mongoose';
 import Stock from '../../schemas/Stock';
+
 import {
-  StockToCreateDto,
   StockCreatingDto,
   StockCreatedDto,
   StockToUpdateDto,
 } from './dto/index.dto';
 
 class StockRepository {
-  async create(stock: StockCreateDto): Promise<Document<IStock>> {
+  async create(stock: StockCreatingDto): Promise<StockCreatedDto> {
     const stockCreate = new Stock(stock);
 
     if (await stockCreate.save()) {
@@ -19,28 +18,37 @@ class StockRepository {
     throw new Error(`Error to create stock`);
   }
 
-  async getOneById(id: Schema.Types.ObjectId;): Promise<Document<IStock>> {
-    const stock: Document<IStock> = await Stock.findById(id);
+  async getOneById(id: Schema.Types.ObjectId): Promise<StockCreatedDto> {
+    const stock: StockCreatedDto = await Stock.findById(id);
     if (stock) return stock;
 
     throw new Error(`Error to get stock`);
   }
 
-  async listAll(): Promise<Array<Document<IStock>>> {
-    const stocks: Array<Document<IStock>> = await Stock.find(
-      {},
-      (err, docs) => {
-        if (!err) return docs;
-      },
-    );
+  async listAll(
+    property: string,
+    sort: string,
+    itensPerPage: number,
+    pagination: number,
+  ): Promise<Array<StockCreatedDto>> {
+    const stocks: Array<StockCreatedDto> = await Stock.find({}, (err, docs) => {
+      if (!err) return docs;
+    })
+      .sort([[property, sort]])
+      .skip(pagination)
+      .limit(itensPerPage)
+      .exec();
 
     if (stocks) return stocks;
 
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: Schema.Types.ObjectId;, data: any): Promise<Document<IStock>> {
-    const updatedStock: Document<IStock> = await Stock.findByIdAndUpdate(
+  async updateById(
+    id: Schema.Types.ObjectId,
+    data: StockToUpdateDto,
+  ): Promise<StockCreatedDto> {
+    const updatedStock: StockCreatedDto = await Stock.findByIdAndUpdate(
       id,
       data,
       (error, document) => {
@@ -53,7 +61,7 @@ class StockRepository {
     throw new Error(`Error to update stock`);
   }
 
-  async deleteById(id: Schema.Types.ObjectId;): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId): Promise<Boolean> {
     if (await Stock.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete stock`);

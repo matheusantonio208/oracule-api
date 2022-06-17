@@ -1,22 +1,34 @@
-import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
+
 import {
   ProviderToCreateDto,
   ProviderCreatingDto,
   ProviderCreatedDto,
   ProviderToUpdateDto,
 } from './dto/index.dto';
-import ProviderRepository from './provider.repository';
+
+import providerRepository from './provider.repository';
+
+import providerService from './provider.service';
 
 class ProviderController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const providerCreateDto: ProviderCreateDto = new ProviderCreateDto(
-        req.body,
-      );
+      // === Get Vars === //
+      const provider: ProviderToCreateDto = new ProviderToCreateDto(req.body);
 
-      const providerCreated: Document<IProvider> =
-        await ProviderRepository.create(providerCreateDto);
+      // === Generate Vars === //
+      const providerProperty: number = await providerService.serviceFunction();
+
+      // === Create Dto === //
+      const providerCreatingDto: ProviderCreatingDto = new ProviderCreatingDto({
+        ...provider,
+        //code: providerCode
+      });
+
+      // === Create Object === //
+      const providerCreated: ProviderCreatedDto =
+        await providerRepository.create(providerCreatingDto);
 
       return res.status(201).json(providerCreated);
     } catch (error) {
@@ -28,7 +40,7 @@ class ProviderController {
     try {
       const { id } = req.params;
 
-      const provider: Document<IProvider> = await ProviderRepository.getOneById(
+      const provider: ProviderCreatedDto = await providerRepository.getOneById(
         id,
       );
 
@@ -40,8 +52,15 @@ class ProviderController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const provider: Array<Document<IProvider>> =
-        await ProviderRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const provider: Array<ProviderCreatedDto> =
+        await providerRepository.listAll(
+          property,
+          sort,
+          itensPerPage,
+          pagination,
+        );
 
       return res.status(201).json(provider);
     } catch (error) {
@@ -53,7 +72,7 @@ class ProviderController {
     try {
       const { id } = req.params;
 
-      await ProviderRepository.deleteById(id);
+      await providerRepository.deleteById(id);
 
       return res
         .status(201)
@@ -66,9 +85,10 @@ class ProviderController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: ProviderToUpdateDto = new ProviderToUpdateDto(req.body);
 
-      const providerUpdated = await ProviderRepository.updateById(id, data);
+      const providerUpdated: ProviderCreatedDto =
+        await providerRepository.updateById(id, data);
 
       return res.status(201).json(providerUpdated);
     } catch (error) {

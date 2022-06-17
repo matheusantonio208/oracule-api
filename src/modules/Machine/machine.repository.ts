@@ -1,16 +1,14 @@
-import { Document } from 'mongoose';
-
+import { Schema } from 'mongoose';
 import Machine from '../../schemas/Machine';
 
 import {
-  MachineToCreateDto,
   MachineCreatingDto,
   MachineCreatedDto,
   MachineToUpdateDto,
 } from './dto/index.dto';
 
 class MachineRepository {
-  async create(machine: MachineCreateDto): Promise<Document<IMachine>> {
+  async create(machine: MachineCreatingDto): Promise<MachineCreatedDto> {
     const machineCreate = new Machine(machine);
 
     if (await machineCreate.save()) {
@@ -20,28 +18,40 @@ class MachineRepository {
     throw new Error(`Error to create machine`);
   }
 
-  async getOneById(id: Schema.Types.ObjectId;): Promise<Document<IMachine>> {
-    const machine: Document<IMachine> = await Machine.findById(id);
+  async getOneById(id: Schema.Types.ObjectId): Promise<MachineCreatedDto> {
+    const machine: MachineCreatedDto = await Machine.findById(id);
     if (machine) return machine;
 
     throw new Error(`Error to get machine`);
   }
 
-  async listAll(): Promise<Array<Document<IMachine>>> {
-    const machines: Array<Document<IMachine>> = await Machine.find(
+  async listAll(
+    property: string,
+    sort: string,
+    itensPerPage: number,
+    pagination: number,
+  ): Promise<Array<MachineCreatedDto>> {
+    const machines: Array<MachineCreatedDto> = await Machine.find(
       {},
       (err, docs) => {
         if (!err) return docs;
       },
-    );
+    )
+      .sort([[property, sort]])
+      .skip(pagination)
+      .limit(itensPerPage)
+      .exec();
 
     if (machines) return machines;
 
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: Schema.Types.ObjectId;, data: any): Promise<Document<IMachine>> {
-    const updatedMachine: Document<IMachine> = await Machine.findByIdAndUpdate(
+  async updateById(
+    id: Schema.Types.ObjectId,
+    data: MachineToUpdateDto,
+  ): Promise<MachineCreatedDto> {
+    const updatedMachine: MachineCreatedDto = await Machine.findByIdAndUpdate(
       id,
       data,
       (error, document) => {
@@ -54,7 +64,7 @@ class MachineRepository {
     throw new Error(`Error to update machine`);
   }
 
-  async deleteById(id: Schema.Types.ObjectId;): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId): Promise<Boolean> {
     if (await Machine.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete machine`);

@@ -19,7 +19,7 @@
 import { IRequest, IResponse } from '../../@types';
 
 import {
-  AdToCreateDto
+  AdToCreateDto,
   AdCreatingDto,
   AdCreatedDto,
   AdToUpdateDto,
@@ -86,9 +86,10 @@ class AdController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const { key, sort, pagination, itensPerPage } = req.query;
+      const { property, sort, itensPerPage, pagination } = req.query;
+
       const ad: Array<AdCreatedDto> = await adRepository.listAll(
-        key,
+        property,
         sort,
         itensPerPage,
         pagination,
@@ -108,7 +109,7 @@ class AdController {
 
       return res
         .status(201)
-        .json({ success_msg: `Success! Your ad was deleted` });
+        .json({ success_msg: `Success! Your  ad was deleted` });
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }
@@ -117,9 +118,9 @@ class AdController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: AdToUpdateDto = new AdToUpdateDto(req.body);
 
-      const adUpdated = await adRepository.updateById(id, data);
+      const adUpdated: AdCreatedDto = await adRepository.updateById(id, data);
 
       return res.status(201).json(adUpdated);
     } catch (error) {

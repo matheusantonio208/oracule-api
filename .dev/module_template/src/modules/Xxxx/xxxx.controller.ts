@@ -7,9 +7,9 @@ import {
   XxxxToUpdateDto,
 } from './dto/index.dto';
 
-import XxxxRepository from './xxxx.repository';
+import xxxxRepository from './xxxx.repository';
 
-import XxxxService from './xxxx.service';
+import xxxxService from './xxxx.service';
 
 class XxxxController {
   async store(req: IRequest, res: IResponse) {
@@ -18,16 +18,16 @@ class XxxxController {
       const xxxx: XxxxToCreateDto = new XxxxToCreateDto(req.body);
 
       // === Generate Vars === //
-      const xxxxProperty: number = await XxxxService.serviceFunction();
+      const xxxxProperty: number = await xxxxService.serviceFunction();
 
       // === Create Dto === //
       const xxxxCreatingDto: XxxxCreatingDto = new XxxxCreatingDto({
         ...xxxx,
-        //code: xxxxCode
+        xxxx_property: xxxxProperty,
       });
 
       // === Create Object === //
-      const xxxxCreated: XxxxCreatedDto = await XxxxRepository.create(
+      const xxxxCreated: XxxxCreatedDto = await xxxxRepository.create(
         xxxxCreatingDto,
       );
 
@@ -41,7 +41,7 @@ class XxxxController {
     try {
       const { id } = req.params;
 
-      const xxxx: XxxxCreatedDto = await XxxxRepository.getOneById(id);
+      const xxxx: XxxxCreatedDto = await xxxxRepository.getOneById(id);
 
       return res.status(201).json(xxxx);
     } catch (error) {
@@ -51,7 +51,14 @@ class XxxxController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const xxxx: Array<XxxxCreatedDto> = await XxxxRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const xxxx: Array<XxxxCreatedDto> = await xxxxRepository.listAll(
+        property,
+        sort,
+        itensPerPage,
+        pagination,
+      );
 
       return res.status(201).json(xxxx);
     } catch (error) {
@@ -63,7 +70,7 @@ class XxxxController {
     try {
       const { id } = req.params;
 
-      await XxxxRepository.deleteById(id);
+      await xxxxRepository.deleteById(id);
 
       return res
         .status(201)
@@ -78,7 +85,7 @@ class XxxxController {
       const { id } = req.params;
       const data: XxxxToUpdateDto = new XxxxToUpdateDto(req.body);
 
-      const xxxxUpdated: XxxxCreatedDto = await XxxxRepository.updateById(
+      const xxxxUpdated: XxxxCreatedDto = await xxxxRepository.updateById(
         id,
         data,
       );

@@ -7,9 +7,9 @@ import {
   EanToUpdateDto,
 } from './dto/index.dto';
 
-import EanRepository from './ean.repository';
+import eanRepository from './ean.repository';
 
-import EanService from './ean.service';
+import eanService from './ean.service';
 
 class EanController {
   async store(req: IRequest, res: IResponse) {
@@ -18,7 +18,7 @@ class EanController {
       const ean: EanToCreateDto = new EanToCreateDto(req.body);
 
       // === Generate Vars === //
-      const eanProperty: number = await EanService.serviceFunction();
+      const eanProperty: number = await eanService.serviceFunction();
 
       // === Create Dto === //
       const eanCreatingDto: EanCreatingDto = new EanCreatingDto({
@@ -27,7 +27,7 @@ class EanController {
       });
 
       // === Create Object === //
-      const eanCreated: EanCreatedDto = await EanRepository.create(
+      const eanCreated: EanCreatedDto = await eanRepository.create(
         eanCreatingDto,
       );
 
@@ -41,7 +41,7 @@ class EanController {
     try {
       const { id } = req.params;
 
-      const ean: EanCreatedDto = await EanRepository.getOneById(id);
+      const ean: EanCreatedDto = await eanRepository.getOneById(id);
 
       return res.status(201).json(ean);
     } catch (error) {
@@ -51,7 +51,14 @@ class EanController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const ean: Array<EanCreatedDto> = await EanRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const ean: Array<EanCreatedDto> = await eanRepository.listAll(
+        property,
+        sort,
+        itensPerPage,
+        pagination,
+      );
 
       return res.status(201).json(ean);
     } catch (error) {
@@ -63,7 +70,7 @@ class EanController {
     try {
       const { id } = req.params;
 
-      await EanRepository.deleteById(id);
+      await eanRepository.deleteById(id);
 
       return res
         .status(201)
@@ -78,7 +85,7 @@ class EanController {
       const { id } = req.params;
       const data: EanToUpdateDto = new EanToUpdateDto(req.body);
 
-      const eanUpdated: EanCreatedDto = await EanRepository.updateById(
+      const eanUpdated: EanCreatedDto = await eanRepository.updateById(
         id,
         data,
       );

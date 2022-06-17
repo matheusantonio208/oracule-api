@@ -1,14 +1,14 @@
-import { Document } from 'mongoose';
+import { Schema } from 'mongoose';
+import Promotion from '../../schemas/Promotion';
+
 import {
-  PromotionToCreateDto,
   PromotionCreatingDto,
   PromotionCreatedDto,
   PromotionToUpdateDto,
 } from './dto/index.dto';
-import Promotion from '../../schemas/Promotion';
 
 class PromotionRepository {
-  async create(promotion: PromotionCreateDto): Promise<Document<IPromotion>> {
+  async create(promotion: PromotionCreatingDto): Promise<PromotionCreatedDto> {
     const promotionCreate = new Promotion(promotion);
 
     if (await promotionCreate.save()) {
@@ -18,28 +18,40 @@ class PromotionRepository {
     throw new Error(`Error to create promotion`);
   }
 
-  async getOneById(id: Schema.Types.ObjectId;): Promise<Document<IPromotion>> {
-    const promotion: Document<IPromotion> = await Promotion.findById(id);
+  async getOneById(id: Schema.Types.ObjectId): Promise<PromotionCreatedDto> {
+    const promotion: PromotionCreatedDto = await Promotion.findById(id);
     if (promotion) return promotion;
 
     throw new Error(`Error to get promotion`);
   }
 
-  async listAll(): Promise<Array<Document<IPromotion>>> {
-    const promotions: Array<Document<IPromotion>> = await Promotion.find(
+  async listAll(
+    property: string,
+    sort: string,
+    itensPerPage: number,
+    pagination: number,
+  ): Promise<Array<PromotionCreatedDto>> {
+    const promotions: Array<PromotionCreatedDto> = await Promotion.find(
       {},
       (err, docs) => {
         if (!err) return docs;
       },
-    );
+    )
+      .sort([[property, sort]])
+      .skip(pagination)
+      .limit(itensPerPage)
+      .exec();
 
     if (promotions) return promotions;
 
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: Schema.Types.ObjectId;, data: any): Promise<Document<IPromotion>> {
-    const updatedPromotion: Document<IPromotion> =
+  async updateById(
+    id: Schema.Types.ObjectId,
+    data: PromotionToUpdateDto,
+  ): Promise<PromotionCreatedDto> {
+    const updatedPromotion: PromotionCreatedDto =
       await Promotion.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
       });
@@ -49,7 +61,7 @@ class PromotionRepository {
     throw new Error(`Error to update promotion`);
   }
 
-  async deleteById(id: Schema.Types.ObjectId;): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId): Promise<Boolean> {
     if (await Promotion.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete promotion`);

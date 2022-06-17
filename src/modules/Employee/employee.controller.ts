@@ -1,4 +1,3 @@
-import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
 import {
@@ -7,17 +6,29 @@ import {
   EmployeeCreatedDto,
   EmployeeToUpdateDto,
 } from './dto/index.dto';
-import EmployeeRepository from './employee.repository';
+
+import employeeRepository from './employee.repository';
+
+import employeeService from './employee.service';
 
 class EmployeeController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const employeeCreateDto: EmployeeCreateDto = new EmployeeCreateDto(
-        req.body,
-      );
+      // === Get Vars === //
+      const employee: EmployeeToCreateDto = new EmployeeToCreateDto(req.body);
 
-      const employeeCreated: Document<IEmployee> =
-        await EmployeeRepository.create(employeeCreateDto);
+      // === Generate Vars === //
+      const employeeProperty: number = await employeeService.serviceFunction();
+
+      // === Create Dto === //
+      const employeeCreatingDto: EmployeeCreatingDto = new EmployeeCreatingDto({
+        ...employee,
+        //code: employeeCode
+      });
+
+      // === Create Object === //
+      const employeeCreated: EmployeeCreatedDto =
+        await employeeRepository.create(employeeCreatingDto);
 
       return res.status(201).json(employeeCreated);
     } catch (error) {
@@ -29,7 +40,7 @@ class EmployeeController {
     try {
       const { id } = req.params;
 
-      const employee: Document<IEmployee> = await EmployeeRepository.getOneById(
+      const employee: EmployeeCreatedDto = await employeeRepository.getOneById(
         id,
       );
 
@@ -41,8 +52,15 @@ class EmployeeController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const employee: Array<Document<IEmployee>> =
-        await EmployeeRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const employee: Array<EmployeeCreatedDto> =
+        await employeeRepository.listAll(
+          property,
+          sort,
+          itensPerPage,
+          pagination,
+        );
 
       return res.status(201).json(employee);
     } catch (error) {
@@ -54,7 +72,7 @@ class EmployeeController {
     try {
       const { id } = req.params;
 
-      await EmployeeRepository.deleteById(id);
+      await employeeRepository.deleteById(id);
 
       return res
         .status(201)
@@ -67,9 +85,10 @@ class EmployeeController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: EmployeeToUpdateDto = new EmployeeToUpdateDto(req.body);
 
-      const employeeUpdated = await EmployeeRepository.updateById(id, data);
+      const employeeUpdated: EmployeeCreatedDto =
+        await employeeRepository.updateById(id, data);
 
       return res.status(201).json(employeeUpdated);
     } catch (error) {

@@ -1,20 +1,34 @@
-import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
+
 import {
   OrderToCreateDto,
   OrderCreatingDto,
   OrderCreatedDto,
   OrderToUpdateDto,
 } from './dto/index.dto';
-import OrderRepository from './order.repository';
+
+import orderRepository from './order.repository';
+
+import orderService from './order.service';
 
 class OrderController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const orderCreateDto: OrderCreateDto = new OrderCreateDto(req.body);
+      // === Get Vars === //
+      const order: OrderToCreateDto = new OrderToCreateDto(req.body);
 
-      const orderCreated: Document<IOrder> = await OrderRepository.create(
-        orderCreateDto,
+      // === Generate Vars === //
+      const orderProperty: number = await orderService.serviceFunction();
+
+      // === Create Dto === //
+      const orderCreatingDto: OrderCreatingDto = new OrderCreatingDto({
+        ...order,
+        //code: orderCode
+      });
+
+      // === Create Object === //
+      const orderCreated: OrderCreatedDto = await orderRepository.create(
+        orderCreatingDto,
       );
 
       return res.status(201).json(orderCreated);
@@ -27,7 +41,7 @@ class OrderController {
     try {
       const { id } = req.params;
 
-      const order: Document<IOrder> = await OrderRepository.getOneById(id);
+      const order: OrderCreatedDto = await orderRepository.getOneById(id);
 
       return res.status(201).json(order);
     } catch (error) {
@@ -37,7 +51,14 @@ class OrderController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const order: Array<Document<IOrder>> = await OrderRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const order: Array<OrderCreatedDto> = await orderRepository.listAll(
+        property,
+        sort,
+        itensPerPage,
+        pagination,
+      );
 
       return res.status(201).json(order);
     } catch (error) {
@@ -49,7 +70,7 @@ class OrderController {
     try {
       const { id } = req.params;
 
-      await OrderRepository.deleteById(id);
+      await orderRepository.deleteById(id);
 
       return res
         .status(201)
@@ -62,9 +83,12 @@ class OrderController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: OrderToUpdateDto = new OrderToUpdateDto(req.body);
 
-      const orderUpdated = await OrderRepository.updateById(id, data);
+      const orderUpdated: OrderCreatedDto = await orderRepository.updateById(
+        id,
+        data,
+      );
 
       return res.status(201).json(orderUpdated);
     } catch (error) {

@@ -1,7 +1,5 @@
-import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
 
-import SuppliesRepository from './supplies.repository';
 import {
   SuppliesToCreateDto,
   SuppliesCreatingDto,
@@ -9,15 +7,28 @@ import {
   SuppliesToUpdateDto,
 } from './dto/index.dto';
 
+import suppliesRepository from './supplies.repository';
+
+import suppliesService from './supplies.service';
+
 class SuppliesController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const suppliesCreateDto: SuppliesCreateDto = new SuppliesCreateDto(
-        req.body,
-      );
+      // === Get Vars === //
+      const supplies: SuppliesToCreateDto = new SuppliesToCreateDto(req.body);
 
-      const suppliesCreated: Document<ISupplies> =
-        await SuppliesRepository.create(suppliesCreateDto);
+      // === Generate Vars === //
+      const suppliesProperty: number = await suppliesService.serviceFunction();
+
+      // === Create Dto === //
+      const suppliesCreatingDto: SuppliesCreatingDto = new SuppliesCreatingDto({
+        ...supplies,
+        //code: suppliesCode
+      });
+
+      // === Create Object === //
+      const suppliesCreated: SuppliesCreatedDto =
+        await suppliesRepository.create(suppliesCreatingDto);
 
       return res.status(201).json(suppliesCreated);
     } catch (error) {
@@ -29,7 +40,7 @@ class SuppliesController {
     try {
       const { id } = req.params;
 
-      const supplies: Document<ISupplies> = await SuppliesRepository.getOneById(
+      const supplies: SuppliesCreatedDto = await suppliesRepository.getOneById(
         id,
       );
 
@@ -41,8 +52,15 @@ class SuppliesController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const supplies: Array<Document<ISupplies>> =
-        await SuppliesRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const supplies: Array<SuppliesCreatedDto> =
+        await suppliesRepository.listAll(
+          property,
+          sort,
+          itensPerPage,
+          pagination,
+        );
 
       return res.status(201).json(supplies);
     } catch (error) {
@@ -54,7 +72,7 @@ class SuppliesController {
     try {
       const { id } = req.params;
 
-      await SuppliesRepository.deleteById(id);
+      await suppliesRepository.deleteById(id);
 
       return res
         .status(201)
@@ -67,9 +85,10 @@ class SuppliesController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: SuppliesToUpdateDto = new SuppliesToUpdateDto(req.body);
 
-      const suppliesUpdated = await SuppliesRepository.updateById(id, data);
+      const suppliesUpdated: SuppliesCreatedDto =
+        await suppliesRepository.updateById(id, data);
 
       return res.status(201).json(suppliesUpdated);
     } catch (error) {

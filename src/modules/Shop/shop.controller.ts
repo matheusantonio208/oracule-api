@@ -6,14 +6,30 @@ import {
   ShopCreatedDto,
   ShopToUpdateDto,
 } from './dto/index.dto';
-import ShopRepository from './shop.repository';
+
+import shopRepository from './shop.repository';
+
+import shopService from './shop.service';
 
 class ShopController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const shopCreateDto: shopCreatedDto = new shopCreatedDto(req.body);
+      // === Get Vars === //
+      const shop: ShopToCreateDto = new ShopToCreateDto(req.body);
 
-      const shopCreated: IShop = await ShopRepository.create(shopCreateDto);
+      // === Generate Vars === //
+      const shopProperty: number = await shopService.serviceFunction();
+
+      // === Create Dto === //
+      const shopCreatingDto: ShopCreatingDto = new ShopCreatingDto({
+        ...shop,
+        //code: shopCode
+      });
+
+      // === Create Object === //
+      const shopCreated: ShopCreatedDto = await shopRepository.create(
+        shopCreatingDto,
+      );
 
       return res.status(201).json(shopCreated);
     } catch (error) {
@@ -25,7 +41,7 @@ class ShopController {
     try {
       const { id } = req.params;
 
-      const shop: IShop = await ShopRepository.getOneById(id);
+      const shop: ShopCreatedDto = await shopRepository.getOneById(id);
 
       return res.status(201).json(shop);
     } catch (error) {
@@ -35,7 +51,14 @@ class ShopController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const shop: Array<IShop> = await ShopRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const shop: Array<ShopCreatedDto> = await shopRepository.listAll(
+        property,
+        sort,
+        itensPerPage,
+        pagination,
+      );
 
       return res.status(201).json(shop);
     } catch (error) {
@@ -47,7 +70,7 @@ class ShopController {
     try {
       const { id } = req.params;
 
-      await ShopRepository.deleteById(id);
+      await shopRepository.deleteById(id);
 
       return res
         .status(201)
@@ -60,9 +83,12 @@ class ShopController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: ShopToUpdateDto = new ShopToUpdateDto(req.body);
 
-      const shopUpdated = await ShopRepository.updateById(id, data);
+      const shopUpdated: ShopCreatedDto = await shopRepository.updateById(
+        id,
+        data,
+      );
 
       return res.status(201).json(shopUpdated);
     } catch (error) {

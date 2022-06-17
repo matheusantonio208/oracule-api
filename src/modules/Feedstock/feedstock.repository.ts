@@ -1,16 +1,14 @@
-import { Document } from 'mongoose';
-
+import { Schema } from 'mongoose';
 import Feedstock from '../../schemas/Feedstock';
 
 import {
-  FeedstockToCreateDto,
   FeedstockCreatingDto,
   FeedstockCreatedDto,
   FeedstockToUpdateDto,
 } from './dto/index.dto';
 
 class FeedstockRepository {
-  async create(feedstock: FeedstockCreateDto): Promise<Document<IFeedstock>> {
+  async create(feedstock: FeedstockCreatingDto): Promise<FeedstockCreatedDto> {
     const feedstockCreate = new Feedstock(feedstock);
 
     if (await feedstockCreate.save()) {
@@ -20,28 +18,40 @@ class FeedstockRepository {
     throw new Error(`Error to create feedstock`);
   }
 
-  async getOneById(id: Schema.Types.ObjectId;): Promise<IFeedstock> {
-    const feedstock = await Feedstock.findById(id);
-    if (feedstock) return feedstock as IFeedstock;
+  async getOneById(id: Schema.Types.ObjectId): Promise<FeedstockCreatedDto> {
+    const feedstock: FeedstockCreatedDto = await Feedstock.findById(id);
+    if (feedstock) return feedstock;
 
     throw new Error(`Error to get feedstock`);
   }
 
-  async listAll(): Promise<Array<Document<IFeedstock>>> {
-    const feedstocks: Array<Document<IFeedstock>> = await Feedstock.find(
+  async listAll(
+    property: string,
+    sort: string,
+    itensPerPage: number,
+    pagination: number,
+  ): Promise<Array<FeedstockCreatedDto>> {
+    const feedstocks: Array<FeedstockCreatedDto> = await Feedstock.find(
       {},
       (err, docs) => {
         if (!err) return docs;
       },
-    );
+    )
+      .sort([[property, sort]])
+      .skip(pagination)
+      .limit(itensPerPage)
+      .exec();
 
     if (feedstocks) return feedstocks;
 
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: Schema.Types.ObjectId;, data: any): Promise<Document<IFeedstock>> {
-    const updatedFeedstock: Document<IFeedstock> =
+  async updateById(
+    id: Schema.Types.ObjectId,
+    data: FeedstockToUpdateDto,
+  ): Promise<FeedstockCreatedDto> {
+    const updatedFeedstock: FeedstockCreatedDto =
       await Feedstock.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
       });
@@ -51,7 +61,7 @@ class FeedstockRepository {
     throw new Error(`Error to update feedstock`);
   }
 
-  async deleteById(id: Schema.Types.ObjectId;): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId): Promise<Boolean> {
     if (await Feedstock.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete feedstock`);

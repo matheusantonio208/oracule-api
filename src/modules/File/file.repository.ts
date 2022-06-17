@@ -2,14 +2,13 @@ import { Schema } from 'mongoose';
 import File from '../../schemas/File';
 
 import {
-  FileToCreateDto,
   FileCreatingDto,
   FileCreatedDto,
   FileToUpdateDto,
 } from './dto/index.dto';
 
 class FileRepository {
-  async create(file: FileToCreateDto): Promise<FileToCreateDto> {
+  async create(file: FileCreatingDto): Promise<FileCreatedDto> {
     const fileCreate = new File(file);
 
     if (await fileCreate.save()) {
@@ -19,18 +18,26 @@ class FileRepository {
     throw new Error(`Error to create file`);
   }
 
-  async getOneByName(name: string): Promise<any> {
-    const file: any = await File.find({ name });
-
+  async getOneById(id: Schema.Types.ObjectId): Promise<FileCreatedDto> {
+    const file: FileCreatedDto = await File.findById(id);
     if (file) return file;
 
     throw new Error(`Error to get file`);
   }
 
-  async listAll(): Promise<Array<FileCreatedDto>> {
+  async listAll(
+    property: string,
+    sort: string,
+    itensPerPage: number,
+    pagination: number,
+  ): Promise<Array<FileCreatedDto>> {
     const files: Array<FileCreatedDto> = await File.find({}, (err, docs) => {
       if (!err) return docs;
-    });
+    })
+      .sort([[property, sort]])
+      .skip(pagination)
+      .limit(itensPerPage)
+      .exec();
 
     if (files) return files;
 
@@ -39,7 +46,7 @@ class FileRepository {
 
   async updateById(
     id: Schema.Types.ObjectId,
-    data: any,
+    data: FileToUpdateDto,
   ): Promise<FileCreatedDto> {
     const updatedFile: FileCreatedDto = await File.findByIdAndUpdate(
       id,

@@ -6,8 +6,8 @@ import {
   FileToUpdateDto,
 } from './dto/index.dto';
 
-import FileRepository from './file.repository';
-import FileService from './file.service';
+import fileRepository from './file.repository';
+import fileService from './file.service';
 
 class FileController {
   async store(req: MulterRequest, res: IResponse) {
@@ -24,9 +24,9 @@ class FileController {
 
       switch (typeFile) {
         case 'photo':
-          let commercialFile = FileService.getBufferAndName(fileList, '.webp');
+          let commercialFile = fileService.getBufferAndName(fileList, '.webp');
 
-          await FileService.uploadCommercialImage(
+          await fileService.uploadCommercialImage(
             commercialFile,
             20,
             destination,
@@ -35,18 +35,18 @@ class FileController {
           break;
 
         case 'video':
-          let videoFile = FileService.getBufferAndName(fileList, '.mp4');
-          await FileService.uploadFile(videoFile, destination, typeFile);
+          let videoFile = fileService.getBufferAndName(fileList, '.mp4');
+          await fileService.uploadFile(videoFile, destination, typeFile);
           break;
 
         case 'artwork':
-          let artworkFile = FileService.getBufferAndName(fileList, '.png');
-          await FileService.uploadFile(artworkFile, destination, typeFile);
+          let artworkFile = fileService.getBufferAndName(fileList, '.png');
+          await fileService.uploadFile(artworkFile, destination, typeFile);
           break;
 
         case 'edit-artwork':
-          let editArtworkFile = FileService.getBufferAndName(fileList, '.psd');
-          FileService.uploadFile(editArtworkFile, destination, typeFile);
+          let editArtworkFile = fileService.getBufferAndName(fileList, '.psd');
+          fileService.uploadFile(editArtworkFile, destination, typeFile);
           break;
 
         default:
@@ -64,9 +64,9 @@ class FileController {
 
   async index(req: IRequest, res: IResponse) {
     try {
-      const { name } = req.params;
+      const { id } = req.params;
 
-      const file = await FileRepository.getOneByName(name);
+      const file: FileCreatedDto = await fileRepository.getOneById(id);
 
       return res.status(201).json(file);
     } catch (error) {
@@ -76,7 +76,14 @@ class FileController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const file: Array<FileCreatedDto> = await FileRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const file: Array<FileCreatedDto> = await fileRepository.listAll(
+        property,
+        sort,
+        itensPerPage,
+        pagination,
+      );
 
       return res.status(201).json(file);
     } catch (error) {
@@ -88,7 +95,7 @@ class FileController {
     try {
       const { id } = req.params;
 
-      await FileRepository.deleteById(id);
+      await fileRepository.deleteById(id);
 
       return res
         .status(201)
@@ -101,9 +108,12 @@ class FileController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: FileToUpdateDto = new FileToUpdateDto(req.body);
 
-      const fileUpdated = await FileRepository.updateById(id, data);
+      const fileUpdated: FileCreatedDto = await fileRepository.updateById(
+        id,
+        data,
+      );
 
       return res.status(201).json(fileUpdated);
     } catch (error) {

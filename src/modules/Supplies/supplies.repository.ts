@@ -1,4 +1,5 @@
-import { Document } from 'mongoose';
+import { Schema } from 'mongoose';
+import Supplies from '../../schemas/Supplies';
 
 import {
   SuppliesCreatingDto,
@@ -6,10 +7,8 @@ import {
   SuppliesToUpdateDto,
 } from './dto/index.dto';
 
-import Supplies from '../../schemas/Supplies';
-
 class SuppliesRepository {
-  async create(supplies: SuppliesCreateDto): Promise<Document<ISupplies>> {
+  async create(supplies: SuppliesCreatingDto): Promise<SuppliesCreatedDto> {
     const suppliesCreate = new Supplies(supplies);
 
     if (await suppliesCreate.save()) {
@@ -19,28 +18,40 @@ class SuppliesRepository {
     throw new Error(`Error to create supplies`);
   }
 
-  async getOneById(id: Schema.Types.ObjectId;): Promise<Document<ISupplies>> {
-    const supplies: Document<ISupplies> = await Supplies.findById(id);
+  async getOneById(id: Schema.Types.ObjectId): Promise<SuppliesCreatedDto> {
+    const supplies: SuppliesCreatedDto = await Supplies.findById(id);
     if (supplies) return supplies;
 
     throw new Error(`Error to get supplies`);
   }
 
-  async listAll(): Promise<Array<Document<ISupplies>>> {
-    const supplies: Array<Document<ISupplies>> = await Supplies.find(
+  async listAll(
+    property: string,
+    sort: string,
+    itensPerPage: number,
+    pagination: number,
+  ): Promise<Array<SuppliesCreatedDto>> {
+    const suppliess: Array<SuppliesCreatedDto> = await Supplies.find(
       {},
       (err, docs) => {
         if (!err) return docs;
       },
-    );
+    )
+      .sort([[property, sort]])
+      .skip(pagination)
+      .limit(itensPerPage)
+      .exec();
 
-    if (supplies) return supplies;
+    if (suppliess) return suppliess;
 
     throw new Error(`Error to list categories`);
   }
 
-  async updateById(id: Schema.Types.ObjectId;, data: any): Promise<Document<ISupplies>> {
-    const updatedSupplies: Document<ISupplies> =
+  async updateById(
+    id: Schema.Types.ObjectId,
+    data: SuppliesToUpdateDto,
+  ): Promise<SuppliesCreatedDto> {
+    const updatedSupplies: SuppliesCreatedDto =
       await Supplies.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
       });
@@ -50,7 +61,7 @@ class SuppliesRepository {
     throw new Error(`Error to update supplies`);
   }
 
-  async deleteById(id: Schema.Types.ObjectId;): Promise<Boolean> {
+  async deleteById(id: Schema.Types.ObjectId): Promise<Boolean> {
     if (await Supplies.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete supplies`);

@@ -1,33 +1,32 @@
 import { Schema } from 'mongoose';
-
 import Product from '../../schemas/Product';
 
 import {
-  ProductToCreateDto,
   ProductCreatingDto,
   ProductCreatedDto,
   ProductToUpdateDto,
 } from './dto/index.dto';
 
 class ProductRepository {
-  async create(product: ProductToCreateDto): Promise<ProductCreatedDto> {
+  async create(product: ProductCreatingDto): Promise<ProductCreatedDto> {
     const productCreate = new Product(product);
 
-    if (await productCreate.save()) return productCreate;
+    if (await productCreate.save()) {
+      return productCreate;
+    }
 
     throw new Error(`Error to create product`);
   }
 
   async getOneById(id: Schema.Types.ObjectId): Promise<ProductCreatedDto> {
-    const product = await Product.findById(id);
-
+    const product: ProductCreatedDto = await Product.findById(id);
     if (product) return product;
 
     throw new Error(`Error to get product`);
   }
 
   async listAll(
-    key: string,
+    property: string,
     sort: string,
     itensPerPage: number,
     pagination: number,
@@ -38,7 +37,7 @@ class ProductRepository {
         if (!err) return docs;
       },
     )
-      .sort([[key, sort]])
+      .sort([[property, sort]])
       .skip(pagination)
       .limit(itensPerPage)
       .exec();
@@ -50,11 +49,14 @@ class ProductRepository {
 
   async updateById(
     id: Schema.Types.ObjectId,
-    data: ProductUpdateDto,
+    data: ProductToUpdateDto,
   ): Promise<ProductCreatedDto> {
     const updatedProduct: ProductCreatedDto = await Product.findByIdAndUpdate(
       id,
-      { data },
+      data,
+      (error, document) => {
+        if (!error) return document;
+      },
     );
 
     if (updatedProduct) return updatedProduct;

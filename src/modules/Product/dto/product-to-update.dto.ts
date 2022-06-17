@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-export class ProductUpdateDto {
+export class ProductToUpdateDto {
   name: string;
   theme: string;
   categories_id: Array<Schema.Types.ObjectId>;
@@ -53,7 +53,7 @@ export class ProductUpdateDto {
     value_cofins: number;
   };
 
-  constructor(body: ProductUpdateDto) {
+  constructor(body: ProductToUpdateDto) {
     this.name = body?.name;
     this.theme = body?.theme;
     this.categories_id = body?.categories_id;

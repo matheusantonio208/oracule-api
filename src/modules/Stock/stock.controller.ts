@@ -1,7 +1,4 @@
-import { Document } from 'mongoose';
 import { IRequest, IResponse } from '../../@types';
-
-import StockRepository from './stock.repository';
 
 import {
   StockToCreateDto,
@@ -10,13 +7,28 @@ import {
   StockToUpdateDto,
 } from './dto/index.dto';
 
+import stockRepository from './stock.repository';
+
+import stockService from './stock.service';
+
 class StockController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const stockCreateDto: StockCreateDto = new StockCreateDto(req.body);
+      // === Get Vars === //
+      const stock: StockToCreateDto = new StockToCreateDto(req.body);
 
-      const stockCreated: Document<IStock> = await StockRepository.create(
-        stockCreateDto,
+      // === Generate Vars === //
+      const stockProperty: number = await stockService.serviceFunction();
+
+      // === Create Dto === //
+      const stockCreatingDto: StockCreatingDto = new StockCreatingDto({
+        ...stock,
+        //code: stockCode
+      });
+
+      // === Create Object === //
+      const stockCreated: StockCreatedDto = await stockRepository.create(
+        stockCreatingDto,
       );
 
       return res.status(201).json(stockCreated);
@@ -29,7 +41,7 @@ class StockController {
     try {
       const { id } = req.params;
 
-      const stock: Document<IStock> = await StockRepository.getOneById(id);
+      const stock: StockCreatedDto = await stockRepository.getOneById(id);
 
       return res.status(201).json(stock);
     } catch (error) {
@@ -39,7 +51,14 @@ class StockController {
 
   async show(req: IRequest, res: IResponse) {
     try {
-      const stock: Array<Document<IStock>> = await StockRepository.listAll();
+      const { property, sort, itensPerPage, pagination } = req.query;
+
+      const stock: Array<StockCreatedDto> = await stockRepository.listAll(
+        property,
+        sort,
+        itensPerPage,
+        pagination,
+      );
 
       return res.status(201).json(stock);
     } catch (error) {
@@ -51,7 +70,7 @@ class StockController {
     try {
       const { id } = req.params;
 
-      await StockRepository.deleteById(id);
+      await stockRepository.deleteById(id);
 
       return res
         .status(201)
@@ -64,9 +83,12 @@ class StockController {
   async update(req: IRequest, res: IResponse) {
     try {
       const { id } = req.params;
-      const data = req.body;
+      const data: StockToUpdateDto = new StockToUpdateDto(req.body);
 
-      const stockUpdated = await StockRepository.updateById(id, data);
+      const stockUpdated: StockCreatedDto = await stockRepository.updateById(
+        id,
+        data,
+      );
 
       return res.status(201).json(stockUpdated);
     } catch (error) {
