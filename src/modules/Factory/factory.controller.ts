@@ -1,14 +1,11 @@
 import { IRequest, IResponse } from '../../@types';
-
 import {
   FactoryToCreateDto,
   FactoryCreatingDto,
   FactoryCreatedDto,
   FactoryToUpdateDto,
 } from './dto/index.dto';
-
 import factoryRepository from './factory.repository';
-
 import factoryService from './factory.service';
 
 class FactoryController {
@@ -23,7 +20,7 @@ class FactoryController {
       // === Create Dto === //
       const factoryCreatingDto: FactoryCreatingDto = new FactoryCreatingDto({
         ...factory,
-        //code: factoryCode
+        // code: factoryCode
       });
 
       // === Create Object === //

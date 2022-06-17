@@ -7,6 +7,8 @@ class ShopService {
     switch (shopName) {
       case 'mercado_livre':
         return this.calculateCommissionMercadoLivre(price, typeAd);
+      default:
+        break;
     }
   }
 

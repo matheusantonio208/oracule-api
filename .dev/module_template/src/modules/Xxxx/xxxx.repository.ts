@@ -31,8 +31,9 @@ class XxxxRepository {
     itensPerPage: number,
     pagination: number,
   ): Promise<Array<XxxxCreatedDto>> {
-    const xxxxs: Array<XxxxCreatedDto> = await Xxxx.find({}, (err, docs) => {
-      if (!err) return docs;
+    const xxxxs: Array<XxxxCreatedDto> = await Xxxx.find({}, (error, docs) => {
+      if (!error) return docs;
+      throw error;
     })
       .sort([[property, sort]])
       .skip(pagination)
@@ -53,6 +54,7 @@ class XxxxRepository {
       data,
       (error, document) => {
         if (!error) return document;
+        throw error;
       },
     );
 

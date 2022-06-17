@@ -1,12 +1,10 @@
 import { IRequest, IResponse } from '../../@types';
-
 import {
   PromotionToCreateDto,
   PromotionCreatingDto,
   PromotionCreatedDto,
   PromotionToUpdateDto,
 } from './dto/index.dto';
-
 import promotionRepository from './promotion.repository';
 
 // import promotionService from './promotion.service';
@@ -27,7 +25,7 @@ class PromotionController {
       const promotionCreatingDto: PromotionCreatingDto =
         new PromotionCreatingDto({
           ...promotion,
-          //code: promotionCode
+          // code: promotionCode
         });
 
       // === Create Object === //

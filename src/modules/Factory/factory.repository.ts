@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Factory from '../../schemas/Factory';
 
+import Factory from '../../schemas/Factory';
 import {
   FactoryCreatingDto,
   FactoryCreatedDto,
@@ -33,8 +33,8 @@ class FactoryRepository {
   ): Promise<Array<FactoryCreatedDto>> {
     const factorys: Array<FactoryCreatedDto> = await Factory.find(
       {},
-      (err, docs) => {
-        if (!err) return docs;
+      (error, docs) => {
+        if (!error) return docs;
       },
     )
       .sort([[property, sort]])

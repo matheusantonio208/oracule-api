@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Promotion from '../../schemas/Promotion';
 
+import Promotion from '../../schemas/Promotion';
 import {
   PromotionCreatingDto,
   PromotionCreatedDto,
@@ -33,8 +33,9 @@ class PromotionRepository {
   ): Promise<Array<PromotionCreatedDto>> {
     const promotions: Array<PromotionCreatedDto> = await Promotion.find(
       {},
-      (err, docs) => {
-        if (!err) return docs;
+      (error, docs) => {
+        if (!error) return docs;
+        throw error;
       },
     )
       .sort([[property, sort]])
@@ -54,6 +55,7 @@ class PromotionRepository {
     const updatedPromotion: PromotionCreatedDto =
       await Promotion.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
+        throw error;
       });
 
     if (updatedPromotion) return updatedPromotion;

@@ -2,17 +2,29 @@ import { Schema } from 'mongoose';
 
 export class AdToCreateDto {
   title: string;
+
   description: string;
+
   additional_img_link: Array<string>;
+
   additional_vid_link: Array<string>;
+
   status: string;
+
   category_id: Schema.Types.ObjectId;
+
   promotions_id?: Array<Schema.Types.ObjectId>;
+
   product_id: Schema.Types.ObjectId;
+
   shop_id: Schema.Types.ObjectId;
+
   typeAd?: string;
+
   profit: number;
+
   country_ean_code: string;
+
   company_id: Schema.Types.ObjectId;
 
   constructor(body: AdToCreateDto) {

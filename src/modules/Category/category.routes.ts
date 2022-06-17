@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import Category from './category.controller';
 
 export default function routes(

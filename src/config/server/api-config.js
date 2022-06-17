@@ -1,11 +1,10 @@
 import '../env-loader.js';
-import express from 'express';
 import cors from 'cors';
-import YouchLogs from '../debug/youch-config.js';
-
-import MongoDB from '../db-mongo/mongo-connect';
+import express from 'express';
 
 import routes from '../../modules/routes';
+import MongoDB from '../db-mongo/mongo-connect';
+import YouchLogs from '../debug/youch-config.js';
 
 class ApiConfig {
   constructor() {
@@ -22,7 +21,6 @@ class ApiConfig {
     this.server.use(YouchLogs);
     this.server.use(express.json());
     this.server.use(express.static('public'));
-    //http://localhost:3550/caneca-branco-meio.webp
   }
 
   routes() {

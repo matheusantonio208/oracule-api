@@ -1,5 +1,5 @@
-import ProductRepository from './product.repository';
 import FeedstockRepository from '../Feedstock/feedstock.repository';
+import ProductRepository from './product.repository';
 
 class ProductService {
   async generateProductCode() {

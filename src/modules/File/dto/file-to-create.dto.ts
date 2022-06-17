@@ -1,6 +1,8 @@
 export class FileToCreateDto {
   name: string;
+
   link: string;
+
   type_file: string;
 
   constructor(body: FileToCreateDto) {

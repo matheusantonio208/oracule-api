@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import Factory from './factory.controller';
 
 export default function routes(

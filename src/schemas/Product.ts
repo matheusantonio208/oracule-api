@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose';
+
 import { ProductCreatedDto } from '../modules/Product/dto/index.dto';
 
 const productSchema = new Schema<ProductCreatedDto>(

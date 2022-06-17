@@ -1,12 +1,10 @@
 import { IRequest, IResponse } from '../../@types';
-
 import {
   ProviderToCreateDto,
   ProviderCreatingDto,
   ProviderCreatedDto,
   ProviderToUpdateDto,
 } from './dto/index.dto';
-
 import providerRepository from './provider.repository';
 
 // import providerService from './provider.service';
@@ -23,7 +21,7 @@ class ProviderController {
       // === Create Dto === //
       const providerCreatingDto: ProviderCreatingDto = new ProviderCreatingDto({
         ...provider,
-        //code: providerCode
+        // code: providerCode
       });
 
       // === Create Object === //

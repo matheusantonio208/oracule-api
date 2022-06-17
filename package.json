@@ -8,6 +8,7 @@
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "start": "node dist/config/server/server-connect.js",
     "test": "jest --detectOpenHandles",
+    "lint": "eslint . --ext .ts,.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/config/server/server-connect.js",
     "dev:debug": "ts-node-dev --inspect -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/config/server/server-connect.js"
   },
@@ -33,7 +34,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-babel-plugin-root-import": "^1.1.1",
     "eslint-import-resolver-typescript": "^2.7.1",
-    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-import-helpers": "^1.2.1",
     "eslint-plugin-jest": "^24.1.0",
     "eslint-plugin-prettier": "^4.0.0",

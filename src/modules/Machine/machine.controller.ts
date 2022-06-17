@@ -1,14 +1,11 @@
 import { IRequest, IResponse } from '../../@types';
-
 import {
   MachineToCreateDto,
   MachineCreatingDto,
   MachineCreatedDto,
   MachineToUpdateDto,
 } from './dto/index.dto';
-
 import machineRepository from './machine.repository';
-
 import machineService from './machine.service';
 
 class MachineController {
@@ -23,7 +20,7 @@ class MachineController {
       // === Create Dto === //
       const machineCreatingDto: MachineCreatingDto = new MachineCreatingDto({
         ...machine,
-        //code: machineCode
+        // code: machineCode
       });
 
       // === Create Object === //

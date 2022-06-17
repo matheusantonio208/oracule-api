@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import Product from './product.controller';
 
 export default function routes(

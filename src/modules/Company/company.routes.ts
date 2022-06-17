@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import Company from './company.controller';
 
 export default function routes(

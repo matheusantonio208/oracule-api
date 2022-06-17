@@ -13,7 +13,7 @@ export interface IRequest extends Request {
   };
 }
 
-export interface MulterRequest extends Request {
+export interface IMulterRequest extends Request {
   buffer: Buffer;
   originalname: string;
   encoding: string;

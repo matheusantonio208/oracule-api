@@ -1,15 +1,12 @@
 import { IRequest, IResponse } from '../../@types';
-
 import {
   ShopToCreateDto,
   ShopCreatingDto,
   ShopCreatedDto,
   ShopToUpdateDto,
 } from './dto/index.dto';
-
 import shopRepository from './shop.repository';
-
-import shopService from './shop.service';
+// import shopService from './shop.service';
 
 class ShopController {
   async store(req: IRequest, res: IResponse) {
@@ -18,12 +15,12 @@ class ShopController {
       const shop: ShopToCreateDto = new ShopToCreateDto(req.body);
 
       // === Generate Vars === //
-      const shopProperty: number = await shopService.serviceFunction();
+      // const shopProperty: number = await shopService.serviceFunction();
 
       // === Create Dto === //
       const shopCreatingDto: ShopCreatingDto = new ShopCreatingDto({
         ...shop,
-        //code: shopCode
+        // code: shopCode
       });
 
       // === Create Object === //

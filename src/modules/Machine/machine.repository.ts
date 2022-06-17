@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Machine from '../../schemas/Machine';
 
+import Machine from '../../schemas/Machine';
 import {
   MachineCreatingDto,
   MachineCreatedDto,
@@ -33,8 +33,9 @@ class MachineRepository {
   ): Promise<Array<MachineCreatedDto>> {
     const machines: Array<MachineCreatedDto> = await Machine.find(
       {},
-      (err, docs) => {
-        if (!err) return docs;
+      (error, docs) => {
+        if (!error) return docs;
+        throw error;
       },
     )
       .sort([[property, sort]])
@@ -56,6 +57,7 @@ class MachineRepository {
       data,
       (error, document) => {
         if (!error) return document;
+        throw error;
       },
     );
 

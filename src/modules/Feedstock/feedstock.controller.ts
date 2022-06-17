@@ -1,12 +1,10 @@
 import { IRequest, IResponse } from '../../@types';
-
 import {
   FeedstockToCreateDto,
   FeedstockCreatingDto,
   FeedstockCreatedDto,
   FeedstockToUpdateDto,
 } from './dto/index.dto';
-
 import feedstockRepository from './feedstock.repository';
 
 // import feedstockService from './feedstock.service';
@@ -27,7 +25,7 @@ class FeedstockController {
       const feedstockCreatingDto: FeedstockCreatingDto =
         new FeedstockCreatingDto({
           ...feedstock,
-          //code: feedstockCode
+          // code: feedstockCode
         });
 
       // === Create Object === //

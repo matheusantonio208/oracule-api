@@ -22,6 +22,7 @@ import TransactionRoute from './Transaction/transaction.routes';
 
 class Routes {
   route: Router;
+
   uploadMiddleware: any;
 
   constructor() {

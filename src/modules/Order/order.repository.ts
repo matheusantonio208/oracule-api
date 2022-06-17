@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Order from '../../schemas/Order';
 
+import Order from '../../schemas/Order';
 import {
   OrderCreatingDto,
   OrderCreatedDto,
@@ -31,9 +31,13 @@ class OrderRepository {
     itensPerPage: number,
     pagination: number,
   ): Promise<Array<OrderCreatedDto>> {
-    const orders: Array<OrderCreatedDto> = await Order.find({}, (err, docs) => {
-      if (!err) return docs;
-    })
+    const orders: Array<OrderCreatedDto> = await Order.find(
+      {},
+      (error, docs) => {
+        if (!error) return docs;
+        throw error;
+      },
+    )
       .sort([[property, sort]])
       .skip(pagination)
       .limit(itensPerPage)
@@ -53,6 +57,7 @@ class OrderRepository {
       data,
       (error, document) => {
         if (!error) return document;
+        throw error;
       },
     );
 

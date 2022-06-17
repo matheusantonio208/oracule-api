@@ -1,5 +1,6 @@
 export class ShopToCreateDto {
   name: string;
+
   sku_suffix: string;
 
   constructor(body: ShopToCreateDto) {

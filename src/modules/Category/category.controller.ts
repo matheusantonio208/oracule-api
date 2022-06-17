@@ -1,13 +1,11 @@
-import { IRequest, IResponse } from '../../@types';
-
+import { IRequest, IResponse } from '@types';
+import categoryRepository from './category.repository';
 import {
   CategoryToCreateDto,
   CategoryCreatingDto,
   CategoryCreatedDto,
   CategoryToUpdateDto,
 } from './dto/index.dto';
-
-import categoryRepository from './category.repository';
 
 // import categoryService from './category.service';
 

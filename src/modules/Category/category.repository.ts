@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Category from '../../schemas/Category';
 
+import Category from '../../schemas/Category';
 import {
   CategoryCreatingDto,
   CategoryCreatedDto,
@@ -33,8 +33,8 @@ class CategoryRepository {
   ): Promise<Array<CategoryCreatedDto>> {
     const categorys: Array<CategoryCreatedDto> = await Category.find(
       {},
-      (err, docs) => {
-        if (!err) return docs;
+      (error, docs) => {
+        if (!error) return docs;
       },
     )
       .sort([[property, sort]])

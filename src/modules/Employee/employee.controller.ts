@@ -1,12 +1,10 @@
 import { IRequest, IResponse } from '../../@types';
-
 import {
   EmployeeToCreateDto,
   EmployeeCreatingDto,
   EmployeeCreatedDto,
   EmployeeToUpdateDto,
 } from './dto/index.dto';
-
 import employeeRepository from './employee.repository';
 
 // import employeeService from './employee.service';
@@ -23,7 +21,7 @@ class EmployeeController {
       // === Create Dto === //
       const employeeCreatingDto: EmployeeCreatingDto = new EmployeeCreatingDto({
         ...employee,
-        //code: employeeCode
+        // code: employeeCode
       });
 
       // === Create Object === //

@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Shop from '../../schemas/Shop';
 
+import Shop from '../../schemas/Shop';
 import {
   ShopCreatingDto,
   ShopCreatedDto,
@@ -31,8 +31,9 @@ class ShopRepository {
     itensPerPage: number,
     pagination: number,
   ): Promise<Array<ShopCreatedDto>> {
-    const shops: Array<ShopCreatedDto> = await Shop.find({}, (err, docs) => {
-      if (!err) return docs;
+    const shops: Array<ShopCreatedDto> = await Shop.find({}, (error, docs) => {
+      if (!error) return docs;
+      throw error;
     })
       .sort([[property, sort]])
       .skip(pagination)
@@ -53,6 +54,7 @@ class ShopRepository {
       data,
       (error, document) => {
         if (!error) return document;
+        throw error;
       },
     );
 

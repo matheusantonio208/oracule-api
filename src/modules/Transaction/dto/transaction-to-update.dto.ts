@@ -2,9 +2,13 @@ import { Schema } from 'mongoose';
 
 export class TransactionToUpdateDto {
   seller: Schema.Types.ObjectId;
+
   description: string;
+
   item_id: Schema.Types.ObjectId;
+
   date: Date;
+
   value: number;
 
   constructor(body: TransactionToUpdateDto) {

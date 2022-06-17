@@ -2,14 +2,23 @@ import { Schema } from 'mongoose';
 
 export class ProductCreatingDto {
   name: string;
+
   product_code: string;
+
   sku: string;
+
   theme: string;
+
   categories_id: Array<Schema.Types.ObjectId>;
+
   tags: Array<string>;
+
   production_type: Array<string>;
+
   provider_id?: Schema.Types.ObjectId;
+
   production_cost: number;
+
   production_procedure: [
     {
       order: number;
@@ -29,6 +38,7 @@ export class ProductCreatingDto {
       files_production: Array<Schema.Types.ObjectId>;
     },
   ];
+
   datasheet: {
     weight_in_grams: number;
     width_in_cm: number;
@@ -37,8 +47,11 @@ export class ProductCreatingDto {
     material: string;
     expiration_time_in_days?: Number;
   };
+
   videos_id?: Array<Schema.Types.ObjectId>;
+
   images_id: Array<Schema.Types.ObjectId>;
+
   tax_information: {
     origin: number;
     ncm: number;
@@ -56,6 +69,7 @@ export class ProductCreatingDto {
   };
 
   purchase_history: Array<Schema.Types.ObjectId>;
+
   feedbacks_history: {
     customer_id: Schema.Types.ObjectId;
     feedback: string;

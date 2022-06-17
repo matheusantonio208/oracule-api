@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import File from '../../schemas/File';
 
+import File from '../../schemas/File';
 import {
   FileCreatingDto,
   FileCreatedDto,
@@ -31,8 +31,9 @@ class FileRepository {
     itensPerPage: number,
     pagination: number,
   ): Promise<Array<FileCreatedDto>> {
-    const files: Array<FileCreatedDto> = await File.find({}, (err, docs) => {
-      if (!err) return docs;
+    const files: Array<FileCreatedDto> = await File.find({}, (error, docs) => {
+      if (!error) return docs;
+      throw error;
     })
       .sort([[property, sort]])
       .skip(pagination)
@@ -53,6 +54,7 @@ class FileRepository {
       data,
       (error, document) => {
         if (!error) return document;
+        throw error;
       },
     );
 

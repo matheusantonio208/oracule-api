@@ -1,12 +1,10 @@
 import { IRequest, IResponse } from '../../@types';
-
 import {
   TransactionToCreateDto,
   TransactionCreatingDto,
   TransactionCreatedDto,
   TransactionToUpdateDto,
 } from './dto/index.dto';
-
 import transactionRepository from './transaction.repository';
 
 // import transactionService from './transaction.service';
@@ -27,7 +25,7 @@ class TransactionController {
       const transactionCreatingDto: TransactionCreatingDto =
         new TransactionCreatingDto({
           ...transaction,
-          //code: transactionCode
+          // code: transactionCode
         });
 
       // === Create Object === //

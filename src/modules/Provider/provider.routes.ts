@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import Provider from './provider.controller';
 
 export default function routes(

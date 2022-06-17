@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Supplies from '../../schemas/Supplies';
 
+import Supplies from '../../schemas/Supplies';
 import {
   SuppliesCreatingDto,
   SuppliesCreatedDto,
@@ -33,8 +33,9 @@ class SuppliesRepository {
   ): Promise<Array<SuppliesCreatedDto>> {
     const suppliess: Array<SuppliesCreatedDto> = await Supplies.find(
       {},
-      (err, docs) => {
-        if (!err) return docs;
+      (error, docs) => {
+        if (!error) return docs;
+        throw error;
       },
     )
       .sort([[property, sort]])
@@ -54,6 +55,7 @@ class SuppliesRepository {
     const updatedSupplies: SuppliesCreatedDto =
       await Supplies.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
+        throw error;
       });
 
     if (updatedSupplies) return updatedSupplies;

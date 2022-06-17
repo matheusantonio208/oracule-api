@@ -1,12 +1,10 @@
 import { IRequest, IResponse } from '../../@types';
-
 import {
   StockToCreateDto,
   StockCreatingDto,
   StockCreatedDto,
   StockToUpdateDto,
 } from './dto/index.dto';
-
 import stockRepository from './stock.repository';
 
 // import stockService from './stock.service';
@@ -23,7 +21,7 @@ class StockController {
       // === Create Dto === //
       const stockCreatingDto: StockCreatingDto = new StockCreatingDto({
         ...stock,
-        //code: stockCode
+        // code: stockCode
       });
 
       // === Create Object === //

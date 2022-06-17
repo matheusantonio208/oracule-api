@@ -14,7 +14,7 @@ class MongoConnect {
         useCreateIndex: true,
         useUnifiedTopology: true,
       })
-      .then((result) => console.log(`Connect with Mongo in ${connectionUri}`))
+      .then(() => console.log(`Connect with Mongo in ${connectionUri}`))
       .catch((error) => console.log(error));
   }
 

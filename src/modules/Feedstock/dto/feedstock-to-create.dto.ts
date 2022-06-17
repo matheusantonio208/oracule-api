@@ -1,12 +1,20 @@
 import { Schema } from 'mongoose';
+
 export class FeedstockToCreateDto {
   name: string;
+
   variation: string;
+
   sku: string;
+
   material: string;
+
   material_synonyms: string;
+
   ncm: string;
+
   weight_in_grams: number;
+
   stock_movement_id: Schema.Types.ObjectId;
 
   constructor(body: FeedstockToCreateDto) {

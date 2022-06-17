@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import Ean from './ean.controller';
 
 export default function routes(

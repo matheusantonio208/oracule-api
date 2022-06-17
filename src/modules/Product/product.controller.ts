@@ -25,8 +25,8 @@ class ProductController {
         other_transactions,
       );
 
-      //=== Upload Images Minify ===
-      //=== Upload Files ===
+      //= == Upload Images Minify ===
+      //= == Upload Files ===
 
       const productCreating: ProductCreatingDto = new ProductCreatingDto({
         ...product,

@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Product from '../../schemas/Product';
 
+import Product from '../../schemas/Product';
 import {
   ProductCreatingDto,
   ProductCreatedDto,
@@ -33,8 +33,8 @@ class ProductRepository {
   ): Promise<Array<ProductCreatedDto>> {
     const products: Array<ProductCreatedDto> = await Product.find(
       {},
-      (err, docs) => {
-        if (!err) return docs;
+      (error, docs) => {
+        if (!error) return docs;
       },
     )
       .sort([[property, sort]])

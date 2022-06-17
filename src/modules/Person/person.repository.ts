@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Person from '../../schemas/Person';
 
+import Person from '../../schemas/Person';
 import {
   PersonCreatingDto,
   PersonCreatedDto,
@@ -33,8 +33,9 @@ class PersonRepository {
   ): Promise<Array<PersonCreatedDto>> {
     const persons: Array<PersonCreatedDto> = await Person.find(
       {},
-      (err, docs) => {
-        if (!err) return docs;
+      (error, docs) => {
+        if (!error) return docs;
+        throw error;
       },
     )
       .sort([[property, sort]])
@@ -56,6 +57,7 @@ class PersonRepository {
       data,
       (error, document) => {
         if (!error) return document;
+        throw error;
       },
     );
 

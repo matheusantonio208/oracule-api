@@ -1,14 +1,11 @@
 import { IRequest, IResponse } from '../../@types';
-
 import {
   EanToCreateDto,
   EanCreatingDto,
   EanCreatedDto,
   EanToUpdateDto,
 } from './dto/index.dto';
-
 import eanRepository from './ean.repository';
-
 import eanService from './ean.service';
 
 class EanController {
@@ -23,7 +20,7 @@ class EanController {
       // === Create Dto === //
       const eanCreatingDto: EanCreatingDto = new EanCreatingDto({
         ...ean,
-        //code: eanCode
+        // code: eanCode
       });
 
       // === Create Object === //

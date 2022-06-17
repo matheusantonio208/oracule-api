@@ -1,12 +1,10 @@
 import { IRequest, IResponse } from '../../@types';
-
 import {
   OrderToCreateDto,
   OrderCreatingDto,
   OrderCreatedDto,
   OrderToUpdateDto,
 } from './dto/index.dto';
-
 import orderRepository from './order.repository';
 
 // import orderService from './order.service';
@@ -23,7 +21,7 @@ class OrderController {
       // === Create Dto === //
       const orderCreatingDto: OrderCreatingDto = new OrderCreatingDto({
         ...order,
-        //code: orderCode
+        // code: orderCode
       });
 
       // === Create Object === //

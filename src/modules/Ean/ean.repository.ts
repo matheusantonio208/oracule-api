@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Ean from '../../schemas/Ean';
 
+import Ean from '../../schemas/Ean';
 import { EanCreatingDto, EanCreatedDto, EanToUpdateDto } from './dto/index.dto';
 
 class EanRepository {
@@ -27,8 +27,9 @@ class EanRepository {
     itensPerPage: number,
     pagination: number,
   ): Promise<Array<EanCreatedDto>> {
-    const eans: Array<EanCreatedDto> = await Ean.find({}, (err, docs) => {
-      if (!err) return docs;
+    const eans: Array<EanCreatedDto> = await Ean.find({}, (error, docs) => {
+      if (!error) return docs;
+      throw error;
     })
       .sort([[property, sort]])
       .skip(pagination)
@@ -49,6 +50,7 @@ class EanRepository {
       data,
       (error, document) => {
         if (!error) return document;
+        throw error;
       },
     );
 

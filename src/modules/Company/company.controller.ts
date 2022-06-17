@@ -1,15 +1,12 @@
 import { IRequest, IResponse } from '../../@types';
-
+import companyRepository from './company.repository';
+import companyService from './company.service';
 import {
   CompanyToCreateDto,
   CompanyCreatingDto,
   CompanyCreatedDto,
   CompanyToUpdateDto,
 } from './dto/index.dto';
-
-import companyRepository from './company.repository';
-
-import companyService from './company.service';
 
 class CompanyController {
   async store(req: IRequest, res: IResponse) {

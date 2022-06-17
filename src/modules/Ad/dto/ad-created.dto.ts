@@ -2,19 +2,33 @@ import { Schema } from 'mongoose';
 
 export class AdCreatedDto {
   title: string;
+
   description: string;
+
   additional_img_id: Array<Schema.Types.ObjectId>;
+
   additional_vid_id: Array<Schema.Types.ObjectId>;
+
   status: string;
+
   ean_code: string;
+
   sku: string;
+
   category_id: Schema.Types.ObjectId;
+
   promotions_id?: Array<Schema.Types.ObjectId>;
+
   products_id: Array<Schema.Types.ObjectId>;
+
   shop_id: Schema.Types.ObjectId;
+
   typeAd?: string;
+
   profit: number;
+
   price: number;
+
   price_history: [
     {
       date: Date;

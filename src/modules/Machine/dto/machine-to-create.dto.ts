@@ -1,9 +1,14 @@
 import { Schema } from 'mongoose';
+
 export class MachineToCreateDto {
   name: string;
+
   description: string;
+
   category: string;
+
   transaction_id: Schema.Types.ObjectId;
+
   life_expectancy_in_months: number;
 
   constructor(body: MachineToCreateDto) {

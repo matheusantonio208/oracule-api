@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import Ad from './ad.controller';
 
 export default function routes(

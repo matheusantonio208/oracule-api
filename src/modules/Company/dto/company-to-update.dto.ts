@@ -1,13 +1,22 @@
 import { Schema } from 'mongoose';
+
 export class CompanyToUpdateDto {
   corporate_name?: string;
+
   fantasy_name?: string;
+
   cnpj?: string;
+
   ie?: string;
+
   im?: string;
+
   bio?: string;
+
   tax_regime_code?: string;
+
   company_size?: string;
+
   contact?: {
     phone?: {
       name?: string;
@@ -16,6 +25,7 @@ export class CompanyToUpdateDto {
     email?: string;
     site?: string;
   };
+
   address?: {
     two?: string;
     number?: string;
@@ -25,6 +35,7 @@ export class CompanyToUpdateDto {
     state?: string;
     zip_code?: string;
   };
+
   logo_id?: Schema.Types.ObjectId;
 
   constructor(body?: CompanyToUpdateDto) {

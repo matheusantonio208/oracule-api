@@ -1,13 +1,11 @@
 import { IRequest, IResponse } from '../../@types';
-
+import customerRepository from './customer.repository';
 import {
   CustomerToCreateDto,
   CustomerCreatingDto,
   CustomerCreatedDto,
   CustomerToUpdateDto,
 } from './dto/index.dto';
-
-import customerRepository from './customer.repository';
 
 // import customerService from './customer.service';
 

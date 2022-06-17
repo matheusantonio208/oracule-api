@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import Person from './person.controller';
 
 export default function routes(

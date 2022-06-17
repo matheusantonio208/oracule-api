@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Stock from '../../schemas/Stock';
 
+import Stock from '../../schemas/Stock';
 import {
   StockCreatingDto,
   StockCreatedDto,
@@ -31,9 +31,13 @@ class StockRepository {
     itensPerPage: number,
     pagination: number,
   ): Promise<Array<StockCreatedDto>> {
-    const stocks: Array<StockCreatedDto> = await Stock.find({}, (err, docs) => {
-      if (!err) return docs;
-    })
+    const stocks: Array<StockCreatedDto> = await Stock.find(
+      {},
+      (error, docs) => {
+        if (!error) return docs;
+        throw error;
+      },
+    )
       .sort([[property, sort]])
       .skip(pagination)
       .limit(itensPerPage)
@@ -53,6 +57,7 @@ class StockRepository {
       data,
       (error, document) => {
         if (!error) return document;
+        throw error;
       },
     );
 

@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose';
+
 import { ProviderCreatedDto } from '../modules/Provider/dto/index.dto';
 
 const providerSchema = new Schema<ProviderCreatedDto>(

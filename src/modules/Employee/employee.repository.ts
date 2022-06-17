@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Employee from '../../schemas/Employee';
 
+import Employee from '../../schemas/Employee';
 import {
   EmployeeCreatingDto,
   EmployeeCreatedDto,
@@ -33,8 +33,8 @@ class EmployeeRepository {
   ): Promise<Array<EmployeeCreatedDto>> {
     const employees: Array<EmployeeCreatedDto> = await Employee.find(
       {},
-      (err, docs) => {
-        if (!err) return docs;
+      (error, docs) => {
+        if (!error) return docs;
       },
     )
       .sort([[property, sort]])

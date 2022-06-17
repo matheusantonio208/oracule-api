@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import Machine from './machine.controller';
 
 export default function routes(

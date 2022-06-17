@@ -17,21 +17,18 @@
  * Taxa do Cartão
  */
 import { IRequest, IResponse } from '../../@types';
-
+import { ProductCreatedDto } from '../Product/dto/product-created.dto';
+import productRepository from '../Product/product.repository';
+import { ShopCreatedDto } from '../Shop/dto/index.dto';
+import shopRepository from '../Shop/shop.repository';
+import adRepository from './ad.repository';
+import adService from './ad.service';
 import {
   AdToCreateDto,
   AdCreatingDto,
   AdCreatedDto,
   AdToUpdateDto,
 } from './dto/index.dto';
-import { ProductCreatedDto } from '../Product/dto/product-created.dto';
-import { ShopCreatedDto } from '../Shop/dto/index.dto';
-
-import adRepository from './ad.repository';
-import productRepository from '../Product/product.repository';
-import shopRepository from '../Shop/shop.repository';
-
-import adService from './ad.service';
 
 class AdController {
   async store(req: IRequest, res: IResponse) {

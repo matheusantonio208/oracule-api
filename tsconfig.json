@@ -14,7 +14,15 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@types/": ["@types/*"],
+      "@modules/": ["modules/*"],
+      "@config/": ["config/*"],
+      "@utils/": ["utils/*"],
+      "@schemas/": ["schemas/*"]
+    }
   },
   "include": ["./**/*"],
   "exclude": [".dev", "node_modules", "src/**/*.spec.ts"]

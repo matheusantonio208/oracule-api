@@ -2,6 +2,7 @@ import { Schema } from 'mongoose';
 
 export class CategoryCreatedDto {
   name: string;
+
   parent_category: Schema.Types.ObjectId;
 
   constructor(body: CategoryCreatedDto) {

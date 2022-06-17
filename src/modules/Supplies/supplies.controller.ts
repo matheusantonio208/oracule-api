@@ -1,12 +1,10 @@
 import { IRequest, IResponse } from '../../@types';
-
 import {
   SuppliesToCreateDto,
   SuppliesCreatingDto,
   SuppliesCreatedDto,
   SuppliesToUpdateDto,
 } from './dto/index.dto';
-
 import suppliesRepository from './supplies.repository';
 
 // import suppliesService from './supplies.service';
@@ -23,7 +21,7 @@ class SuppliesController {
       // === Create Dto === //
       const suppliesCreatingDto: SuppliesCreatingDto = new SuppliesCreatingDto({
         ...supplies,
-        //code: suppliesCode
+        // code: suppliesCode
       });
 
       // === Create Object === //

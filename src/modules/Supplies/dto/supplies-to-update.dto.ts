@@ -2,10 +2,15 @@ import { Schema } from 'mongoose';
 
 export class SuppliesToUpdateDto {
   images_id: Schema.Types.ObjectId;
+
   name: string;
+
   description: string;
+
   categories: string;
+
   providers_id: Array<Schema.Types.ObjectId>;
+
   stock_movement_id: Schema.Types.ObjectId;
 
   constructor(body: SuppliesToUpdateDto) {

@@ -1,14 +1,12 @@
-import { Schema } from 'mongoose';
 import { ean13 } from 'ean-check';
-
-import { CompanyCreatedDto } from '../Company/dto/company-created.dto';
-import { EanCreatingDto, EanCreatedDto } from '../Ean/dto/index.dto';
+import { Schema } from 'mongoose';
 
 import companyRepository from '../Company/company.repository';
+import { CompanyCreatedDto } from '../Company/dto/company-created.dto';
+import { EanCreatingDto, EanCreatedDto } from '../Ean/dto/index.dto';
 import eanRepository from '../Ean/ean.repository';
-
-import countryCodeEan from './utils/country-code-ean-13.json';
 import shopService from '../Shop/shop.service';
+import countryCodeEan from './utils/country-code-ean-13.json';
 
 class AdService {
   keywordList = [];
@@ -75,7 +73,7 @@ class AdService {
   ) {
     this.generateKeywords(keywords);
 
-    let titles = [];
+    const titles = [];
 
     models.map((model) => {
       materials.map((material) => {
@@ -117,15 +115,15 @@ class AdService {
     if (keywords.length === 1) {
       return keywords[0];
     }
-    for (var i = 0; i < keywords.length; i++) {
+    for (let i = 0; i < keywords.length; i++) {
       keywords.splice(i, 1);
       this.generateKeywords(keywords);
     }
   }
 
   shuffle(array) {
-    let currentIndex = array.length,
-      randomIndex;
+    let currentIndex = array.length;
+    let randomIndex;
 
     while (currentIndex != 0) {
       randomIndex = Math.floor(Math.random() * currentIndex);

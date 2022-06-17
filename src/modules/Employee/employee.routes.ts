@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import Employee from './employee.controller';
 
 export default function routes(

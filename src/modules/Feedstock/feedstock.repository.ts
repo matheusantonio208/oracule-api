@@ -1,6 +1,6 @@
-import { Schema } from 'mongoose';
-import Feedstock from '../../schemas/Feedstock';
+import { Document, Schema } from 'mongoose';
 
+import Feedstock from '../../schemas/Feedstock';
 import {
   FeedstockCreatingDto,
   FeedstockCreatedDto,
@@ -22,7 +22,7 @@ class FeedstockRepository {
     const feedstock: FeedstockCreatedDto = await Feedstock.findById(id);
     if (feedstock) return feedstock;
 
-    throw new Error(`Error to get feedstock`);
+    throw new Error(`Error to get ad`);
   }
 
   async listAll(
@@ -33,8 +33,8 @@ class FeedstockRepository {
   ): Promise<Array<FeedstockCreatedDto>> {
     const feedstocks: Array<FeedstockCreatedDto> = await Feedstock.find(
       {},
-      (err, docs) => {
-        if (!err) return docs;
+      (error, docs) => {
+        if (!error) return docs;
       },
     )
       .sort([[property, sort]])

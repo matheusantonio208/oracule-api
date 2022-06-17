@@ -1,16 +1,10 @@
-import { IRequest, IResponse, MulterRequest } from '../../@types';
-import {
-  FileToCreateDto,
-  FileCreatingDto,
-  FileCreatedDto,
-  FileToUpdateDto,
-} from './dto/index.dto';
-
+import { IRequest, IResponse, IMulterRequest } from '../../@types';
+import { FileCreatedDto, FileToUpdateDto } from './dto/index.dto';
 import fileRepository from './file.repository';
 import fileService from './file.service';
 
 class FileController {
-  async store(req: MulterRequest, res: IResponse) {
+  async store(req: IMulterRequest, res: IResponse) {
     try {
       const { typeFile } = req.params;
       const { path } = req.query;
@@ -25,7 +19,10 @@ class FileController {
 
       switch (typeFile) {
         case 'photo':
-          let commercialFile = fileService.getBufferAndName(fileList, '.webp');
+          const commercialFile = fileService.getBufferAndName(
+            fileList,
+            '.webp',
+          );
 
           await fileService.uploadCommercialImage(
             commercialFile,
@@ -36,17 +33,20 @@ class FileController {
           break;
 
         case 'video':
-          let videoFile = fileService.getBufferAndName(fileList, '.mp4');
+          const videoFile = fileService.getBufferAndName(fileList, '.mp4');
           await fileService.uploadFile(videoFile, destination, typeFile);
           break;
 
         case 'artwork':
-          let artworkFile = fileService.getBufferAndName(fileList, '.png');
+          const artworkFile = fileService.getBufferAndName(fileList, '.png');
           await fileService.uploadFile(artworkFile, destination, typeFile);
           break;
 
         case 'edit-artwork':
-          let editArtworkFile = fileService.getBufferAndName(fileList, '.psd');
+          const editArtworkFile = fileService.getBufferAndName(
+            fileList,
+            '.psd',
+          );
           fileService.uploadFile(editArtworkFile, destination, typeFile);
           break;
 

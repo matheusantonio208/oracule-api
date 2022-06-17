@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Ad from '../../schemas/Ad';
 
+import Ad from '../../schemas/Ad';
 import { AdCreatingDto, AdCreatedDto, AdToUpdateDto } from './dto/index.dto';
 
 class AdRepository {
@@ -27,8 +27,9 @@ class AdRepository {
     itensPerPage: number,
     pagination: number,
   ): Promise<Array<AdCreatedDto>> {
-    const ads: Array<AdCreatedDto> = await Ad.find({}, (err, docs) => {
-      if (!err) return docs;
+    const ads: Array<AdCreatedDto> = await Ad.find({}, (error, docs) => {
+      if (!error) return docs;
+      throw error;
     })
       .sort([[property, sort]])
       .skip(pagination)

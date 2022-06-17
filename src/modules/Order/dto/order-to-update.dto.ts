@@ -2,10 +2,15 @@ import { Schema } from 'mongoose';
 
 export class OrderToUpdateDto {
   order_number: number;
+
   track_code: string;
+
   status: string;
+
   customer_id: Schema.Types.ObjectId;
+
   ad_id: Schema.Types.ObjectId;
+
   products_id: Array<Schema.Types.ObjectId>;
 
   constructor(body: OrderToUpdateDto) {

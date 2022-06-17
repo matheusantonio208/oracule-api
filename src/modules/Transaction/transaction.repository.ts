@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import Transaction from '../../schemas/Transaction';
 
+import Transaction from '../../schemas/Transaction';
 import {
   TransactionCreatingDto,
   TransactionCreatedDto,
@@ -35,8 +35,9 @@ class TransactionRepository {
   ): Promise<Array<TransactionCreatedDto>> {
     const transactions: Array<TransactionCreatedDto> = await Transaction.find(
       {},
-      (err, docs) => {
-        if (!err) return docs;
+      (error, docs) => {
+        if (!error) return docs;
+        throw error;
       },
     )
       .sort([[property, sort]])
@@ -56,6 +57,7 @@ class TransactionRepository {
     const updatedTransaction: TransactionCreatedDto =
       await Transaction.findByIdAndUpdate(id, data, (error, document) => {
         if (!error) return document;
+        throw error;
       });
 
     if (updatedTransaction) return updatedTransaction;

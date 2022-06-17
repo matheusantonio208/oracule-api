@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import Promotion from './promotion.controller';
 
 export default function routes(

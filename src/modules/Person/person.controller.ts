@@ -1,12 +1,10 @@
 import { IRequest, IResponse } from '../../@types';
-
 import {
   PersonToCreateDto,
   PersonCreatingDto,
   PersonCreatedDto,
   PersonToUpdateDto,
 } from './dto/index.dto';
-
 import personRepository from './person.repository';
 
 // import personService from './person.service';
@@ -23,7 +21,7 @@ class PersonController {
       // === Create Dto === //
       const personCreatingDto: PersonCreatingDto = new PersonCreatingDto({
         ...person,
-        //code: personCode
+        // code: personCode
       });
 
       // === Create Object === //

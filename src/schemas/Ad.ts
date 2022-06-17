@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose';
+
 import { AdCreatedDto } from '../modules/Ad/dto/index.dto';
 
 const adSchema = new Schema<AdCreatedDto>(
