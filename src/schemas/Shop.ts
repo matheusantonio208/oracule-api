@@ -1,12 +1,13 @@
 import { model, Schema } from 'mongoose';
 
-import { IShop } from '../modules/Shop/shop.interface';
+import { ShopCreatedDto } from '../modules/Shop/dto/index.dto';
 
-const shopSchema = new Schema<IShop>(
+const shopSchema = new Schema<ShopCreatedDto>(
   {
     name: String,
+    sku_suffix: String,
   },
   { timestamps: true },
 );
 
-export default model<IShop>('shops', shopSchema);
+export default model<ShopCreatedDto>('shops', shopSchema);

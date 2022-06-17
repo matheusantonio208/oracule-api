@@ -5,8 +5,6 @@ export class ProductCreatedDto {
   product_code: string;
   sku: string;
   theme: string;
-  additional_img_id: Array<Schema.Types.ObjectId>;
-  additional_vid_id: Array<Schema.Types.ObjectId>;
   categories_id: Array<Schema.Types.ObjectId>;
   tags: Array<string>;
   production_type: Array<string>;
@@ -39,8 +37,8 @@ export class ProductCreatedDto {
     material: string;
     expiration_time_in_days?: Number;
   };
-  video_id?: Schema.Types.ObjectId;
-  image_id: Schema.Types.ObjectId;
+  videos_id?: Array<Schema.Types.ObjectId>;
+  images_id: Array<Schema.Types.ObjectId>;
   tax_information: {
     origin: number;
     ncm: number;
@@ -57,6 +55,13 @@ export class ProductCreatedDto {
     value_cofins: number;
   };
 
+  purchase_history: Array<Schema.Types.ObjectId>;
+  feedbacks_history: {
+    customer_id: Schema.Types.ObjectId;
+    feedback: string;
+    rating: number;
+  };
+
   constructor(body: ProductCreatedDto) {
     this.name = body?.name;
     this.product_code = body?.product_code;
@@ -69,32 +74,13 @@ export class ProductCreatedDto {
     this.production_cost = body?.production_cost;
     this.production_procedure = body?.production_procedure;
     this.datasheet = body?.datasheet;
-    this.video_id = body?.video_id;
-    this.image_id = body?.image_id;
+    this.videos_id = body?.videos_id;
+    this.images_id = body?.images_id;
     this.tax_information = body?.tax_information;
+    this.purchase_history = body?.purchase_history;
+    this.feedbacks_history = body?.feedbacks_history;
   }
 }
-
-// brand_id: {
-//   type: Schema.Types.ObjectId;
-//   ref: 'brands';
-// };
-// purchase_history: [
-//   {
-//     type: Schema.Types.ObjectId;
-//     ref: 'purchases';
-//   },
-// ];
-// feedbacks_history: [
-//   {
-//     customer_id: {
-//       type: Schema.Types.ObjectId;
-//       ref: 'customers';
-//     };
-//     feedback: string;
-//     assessment: number;
-//   },
-// ];
 
 /* === Req Body Example ===
 {

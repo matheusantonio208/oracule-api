@@ -1,16 +1,12 @@
 import { model, Schema } from 'mongoose';
 
-import { IProvider } from '../controllers/Provider/provider.interface';
+import { ProviderCreatedDto } from '../modules/Provider/dto/index.dto';
 
-const providerSchema = new Schema<IProvider>(
+const providerSchema = new Schema<ProviderCreatedDto>(
   {
     person_id: {
       type: Schema.Types.ObjectId,
       ref: 'persons',
-    },
-    name: {
-      type: String,
-      required: true,
     },
     itens_id: [
       {
@@ -22,4 +18,4 @@ const providerSchema = new Schema<IProvider>(
   { timestamps: true },
 );
 
-export default model<IProvider>('providers', providerSchema);
+export default model<ProviderCreatedDto>('providers', providerSchema);

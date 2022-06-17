@@ -1,7 +1,16 @@
+import { Schema } from 'mongoose';
+
 export class StockCreatedDto {
-  property: string;
+  input_amount: number;
+  exists: [
+    {
+      exit_date: Date;
+      exit_amount: number;
+    },
+  ];
+  transaction_id: Schema.Types.ObjectId;
 
   constructor(body: StockCreatedDto) {
-    this.property = body?.property;
+    this.input_amount = body?.input_amount;
   }
 }

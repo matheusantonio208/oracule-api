@@ -1,8 +1,8 @@
 import { model, Schema } from 'mongoose';
 
-import { IOrder } from '../modules/Order/order.interface';
+import { OrderCreatedDto } from '../modules/Order/dto/index.dto';
 
-const orderSchema = new Schema<IOrder>(
+const orderSchema = new Schema<OrderCreatedDto>(
   {
     order_number: Number,
     track_code: String,
@@ -26,4 +26,4 @@ const orderSchema = new Schema<IOrder>(
   { timestamps: true },
 );
 
-export default model<IOrder>('orders', orderSchema);
+export default model<OrderCreatedDto>('orders', orderSchema);

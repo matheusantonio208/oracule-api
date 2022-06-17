@@ -76,10 +76,12 @@ const productSchema = new Schema<ProductCreatedDto>(
       material: String,
       expiration_time_in_days: Number,
     },
-    video_id: {
-      type: Schema.Types.ObjectId,
-      ref: 'files',
-    },
+    videos_id: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'files',
+      },
+    ],
     images_id: [
       {
         type: Schema.Types.ObjectId,
@@ -102,26 +104,22 @@ const productSchema = new Schema<ProductCreatedDto>(
       value_pis: Number,
       value_cofins: Number,
     },
-    // brand_id: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'brands',
-    // },
-    // purchase_history: [
-    //   {
-    //     type: Schema.Types.ObjectId;
-    //     ref: 'purchases';
-    //   },
-    // ];
-    // feedbacks_history: [
-    //   {
-    //     customer_id: {
-    //       type: Schema.Types.ObjectId;
-    //       ref: 'customers';
-    //     };
-    //     feedback: string;
-    //     assessment: number;
-    //   },
-    // ];
+    purchase_history: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'purchases',
+      },
+    ],
+    feedbacks_history: [
+      {
+        customer_id: {
+          type: Schema.Types.ObjectId,
+          ref: 'customers',
+        },
+        feedback: String,
+        rating: Number,
+      },
+    ],
   },
   { timestamps: true },
 );

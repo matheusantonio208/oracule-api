@@ -1,10 +1,10 @@
 import { model, Schema } from 'mongoose';
 
-import { ISupplies } from '../controllers/Supplies/supplies.interface';
+import { SuppliesCreatedDto } from '../modules/Supplies/dto/index.dto';
 
-const suppliesSchema = new Schema<ISupplies>(
+const suppliesSchema = new Schema<SuppliesCreatedDto>(
   {
-    image_id: [
+    images_id: [
       {
         type: Schema.Types.ObjectId,
         ref: 'images',
@@ -13,7 +13,7 @@ const suppliesSchema = new Schema<ISupplies>(
     name: String,
     description: String,
     categories: String,
-    provider_id: [
+    providers_id: [
       {
         type: Schema.Types.ObjectId,
         ref: 'providers',
@@ -27,4 +27,4 @@ const suppliesSchema = new Schema<ISupplies>(
   { timestamps: true },
 );
 
-export default model<ISupplies>('supplies', suppliesSchema);
+export default model<SuppliesCreatedDto>('supplies', suppliesSchema);

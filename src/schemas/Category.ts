@@ -1,8 +1,8 @@
 import { model, Schema } from 'mongoose';
 
-import { ICategory } from '../controllers/Category/category.interface';
+import { CategoryCreatedDto } from '../modules/Category/dto/category-created.dto';
 
-const categorySchema = new Schema<ICategory>(
+const categorySchema = new Schema<CategoryCreatedDto>(
   {
     name: {
       type: String,
@@ -16,4 +16,4 @@ const categorySchema = new Schema<ICategory>(
   { timestamps: true },
 );
 
-export default model<ICategory>('categories', categorySchema);
+export default model<CategoryCreatedDto>('categories', categorySchema);

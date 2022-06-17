@@ -1,8 +1,8 @@
 import { model, Schema } from 'mongoose';
 
-import { IMachine } from '../controllers/Machine/machine.interface';
+import { MachineCreatedDto } from '../modules/Machine/dto/index.dto';
 
-const machineSchema = new Schema<IMachine>(
+const machineSchema = new Schema<MachineCreatedDto>(
   {
     name: {
       type: String,
@@ -29,4 +29,4 @@ const machineSchema = new Schema<IMachine>(
   { timestamps: true },
 );
 
-export default model<IMachine>('machines', machineSchema);
+export default model<MachineCreatedDto>('machines', machineSchema);

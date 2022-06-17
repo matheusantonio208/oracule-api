@@ -1,21 +1,13 @@
 import { model, Schema } from 'mongoose';
-import { IFeedstock } from '../controllers/Feedstock/feedstock.interface';
+import { ProviderCreatedDto } from '../modules/Provider/dto/index.dto';
 
-const providerSchema = new Schema<IFeedstock>(
+const providerSchema = new Schema<ProviderCreatedDto>(
   {
     name: {
       type: String,
       required: true,
       unique: true,
     },
-
-    synonyms: [
-      {
-        type: String,
-        required: true,
-        unique: true,
-      },
-    ],
 
     variation: {
       type: String,
@@ -34,6 +26,14 @@ const providerSchema = new Schema<IFeedstock>(
       required: true,
     },
 
+    material_synonyms: [
+      {
+        type: String,
+        required: true,
+        unique: true,
+      },
+    ],
+
     ncm: {
       type: String,
       required: true,
@@ -47,4 +47,4 @@ const providerSchema = new Schema<IFeedstock>(
   { timestamps: true },
 );
 
-export default model<IFeedstock>('feedstock', providerSchema);
+export default model<ProviderCreatedDto>('feedstock', providerSchema);

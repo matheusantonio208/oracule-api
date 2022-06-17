@@ -1,8 +1,8 @@
 import { model, Schema } from 'mongoose';
 
-import { ITransaction } from '../controllers/Transaction/transaction.interface';
+import { TransactionCreatedDto } from '../modules/Transaction/dto/index.dto';
 
-const transactionSchema = new Schema<ITransaction>(
+const transactionSchema = new Schema<TransactionCreatedDto>(
   {
     seller: {
       type: Schema.Types.ObjectId,
@@ -21,4 +21,4 @@ const transactionSchema = new Schema<ITransaction>(
   { timestamps: true },
 );
 
-export default model<ITransaction>('transactions', transactionSchema);
+export default model<TransactionCreatedDto>('transactions', transactionSchema);

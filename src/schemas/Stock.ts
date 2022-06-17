@@ -1,8 +1,8 @@
 import { model, Schema } from 'mongoose';
 
-import { IStock } from '../controllers/Stock/stock.interface';
+import { StockCreatedDto } from '../modules/Stock/dto/index.dto';
 
-const stockSchema = new Schema<IStock>(
+const stockSchema = new Schema<StockCreatedDto>(
   {
     input_amount: Number,
     exits: [
@@ -19,4 +19,4 @@ const stockSchema = new Schema<IStock>(
   { timestamps: true },
 );
 
-export default model<IStock>('stocks', stockSchema);
+export default model<StockCreatedDto>('stocks', stockSchema);

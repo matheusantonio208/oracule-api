@@ -1,21 +1,15 @@
 import { model, Schema } from 'mongoose';
 
-import { IFactory } from '../controllers/Factory/factory.interface';
+import { FactoryCreatedDto } from '../modules/Factory/dto/index.dto';
 
-const factorySchema = new Schema<IFactory>(
+const factorySchema = new Schema<FactoryCreatedDto>(
   {
     name: {
       type: String,
       required: true,
     },
-    products_id: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'products',
-      },
-    ],
   },
   { timestamps: true },
 );
 
-export default model<IFactory>('factories', factorySchema);
+export default model<FactoryCreatedDto>('factories', factorySchema);

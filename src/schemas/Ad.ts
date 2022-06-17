@@ -33,10 +33,12 @@ const adSchema = new Schema<AdCreatedDto>(
         ref: 'promotions',
       },
     ],
-    product_id: {
-      type: Schema.Types.ObjectId,
-      ref: 'products',
-    },
+    products_id: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'products',
+      },
+    ],
     shop_id: {
       type: Schema.Types.ObjectId,
       ref: 'shops',
@@ -48,22 +50,6 @@ const adSchema = new Schema<AdCreatedDto>(
       {
         date: Date,
         price: Number,
-      },
-    ],
-    purchase_history: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'purchases',
-      },
-    ],
-    feedbacks_history: [
-      {
-        customer_id: {
-          type: Schema.Types.ObjectId,
-          ref: 'customers',
-        },
-        feedback: String,
-        assessment: Number,
       },
     ],
   },

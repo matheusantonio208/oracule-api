@@ -1,12 +1,12 @@
 import { model, Schema } from 'mongoose';
 
-import { ICustomer } from '../modules/Customer/customer.interface';
+import { CustomerCreatedDto } from '../modules/Customer/dto/index.dto';
 
-const customerSchema = new Schema<ICustomer>(
+const customerSchema = new Schema<CustomerCreatedDto>(
   {
     property: String,
   },
   { timestamps: true },
 );
 
-export default model<ICustomer>('customers', customerSchema);
+export default model<CustomerCreatedDto>('customers', customerSchema);

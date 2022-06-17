@@ -5,7 +5,7 @@ const fileSchema = new Schema<FileCreatedDto>(
   {
     name: String,
     link: String,
-    category: String,
+    type_file: String,
   },
   { timestamps: true },
 );

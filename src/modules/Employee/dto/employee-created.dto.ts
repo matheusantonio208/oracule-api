@@ -1,7 +1,7 @@
 export class EmployeeCreatedDto {
-  property: string;
+  name: string;
 
   constructor(body: EmployeeCreatedDto) {
-    this.property = body?.property;
+    this.name = body?.name;
   }
 }

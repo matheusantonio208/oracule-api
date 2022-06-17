@@ -1,15 +1,13 @@
 import { model, Schema } from 'mongoose';
 
-import { IPerson } from '../controllers/Person/person.interface';
+import { PersonCreatedDto } from '../modules/Person/dto/index.dto';
 
-const personSchema = new Schema<IPerson>(
+const personSchema = new Schema<PersonCreatedDto>(
   {
-    image_profile_id: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'products',
-      },
-    ],
+    image_profile_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'products',
+    },
     person_type: {
       type: String,
       enum: ['physical', 'legal'],
@@ -17,25 +15,21 @@ const personSchema = new Schema<IPerson>(
 
     company_name: String,
     fantasy_name: String,
-
     cnpj: String,
     state_registration: String,
-
     taxpayer: {
       type: String,
       enum: ['icms', 'withoutIcms', 'non-taxpayer'],
     },
 
-    site: String,
-
     name: String,
     nick_name: String,
-
     cpf: String,
     rg: String,
 
     email: String,
     email_invoice: String,
+    site: String,
 
     phone_numbers: [
       {
@@ -59,4 +53,4 @@ const personSchema = new Schema<IPerson>(
   { timestamps: true },
 );
 
-export default model<IPerson>('persons', personSchema);
+export default model<PersonCreatedDto>('persons', personSchema);

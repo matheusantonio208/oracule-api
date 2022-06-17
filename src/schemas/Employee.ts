@@ -1,12 +1,12 @@
 import { model, Schema } from 'mongoose';
 
-import { IEmployee } from '../modules/Employee/employee.interface';
+import { EmployeeCreatedDto } from '../modules/Employee/dto/index.dto';
 
-const employeeSchema = new Schema<IEmployee>(
+const employeeSchema = new Schema<EmployeeCreatedDto>(
   {
     name: String,
   },
   { timestamps: true },
 );
 
-export default model<IEmployee>('employees', employeeSchema);
+export default model<EmployeeCreatedDto>('employees', employeeSchema);
