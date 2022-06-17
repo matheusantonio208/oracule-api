@@ -25,6 +25,13 @@ class FileRepository {
     throw new Error(`Error to get file`);
   }
 
+  async getManyById(id: Schema.Types.ObjectId): Promise<Array<FileCreatedDto>> {
+    const files: Array<FileCreatedDto> = await File.find({ _id: id });
+    if (files) return files;
+
+    throw new Error(`Error to get file`);
+  }
+
   async listAll(
     property: string,
     sort: string,

@@ -26,7 +26,7 @@ export class ProductCreatingDto {
       description: string;
       time_in_minutes: number;
       feedstock_id: Array<Schema.Types.ObjectId>;
-      machine_id: Schema.Types.ObjectId;
+      machines_id: Array<Schema.Types.ObjectId>;
       tools_id: Array<Schema.Types.ObjectId>;
       employee_id: Array<Schema.Types.ObjectId>;
       supplies: [

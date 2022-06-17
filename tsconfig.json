@@ -18,10 +18,10 @@
     "baseUrl": "./src",
     "paths": {
       "@types/": ["@types/*"],
-      "@modules/": ["modules/*"],
-      "@config/": ["config/*"],
-      "@utils/": ["utils/*"],
-      "@schemas/": ["schemas/*"]
+      "@modules/": ["*/modules/**/*"],
+      "@config/": ["*/config/**/*"],
+      "@utils/": ["*/utils/**/*"],
+      "@schemas/": ["*/schemas/**/*"]
     }
   },
   "include": ["./**/*"],

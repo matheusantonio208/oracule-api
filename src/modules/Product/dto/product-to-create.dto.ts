@@ -32,7 +32,7 @@ export class ProductToCreateDto {
           amount: number;
         },
       ];
-      files_production: Array<Schema.Types.ObjectId>;
+      files_production: Array<IMulterRequest>;
     },
   ];
 

@@ -5,6 +5,8 @@ export class FileCreatingDto {
 
   type_file: string;
 
+  product_code?: string;
+
   constructor(body: FileCreatingDto) {
     this.name = body?.name;
     this.link = body?.link;
