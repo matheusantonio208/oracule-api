@@ -1,19 +1,16 @@
+import { IMulterRequest } from '@types';
 import { Schema } from 'mongoose';
 
 export class ProductToUpdateDto {
   name: string;
 
-  product_code: string;
-
-  sku: string;
-
   theme: string;
 
-  categories_id: Array<Schema.Types.ObjectId>;
+  category_id: Schema.Types.ObjectId;
 
   tags: Array<string>;
 
-  production_type: Array<string>;
+  production_type: string;
 
   provider_id?: Schema.Types.ObjectId;
 
@@ -26,7 +23,7 @@ export class ProductToUpdateDto {
       description: string;
       time_in_minutes: number;
       feedstock_id: Array<Schema.Types.ObjectId>;
-      machine_id: Schema.Types.ObjectId;
+      machines_id: Array<Schema.Types.ObjectId>;
       tools_id: Array<Schema.Types.ObjectId>;
       employee_id: Array<Schema.Types.ObjectId>;
       supplies: [
@@ -48,9 +45,9 @@ export class ProductToUpdateDto {
     expiration_time_in_days?: Number;
   };
 
-  videos_id?: Array<Schema.Types.ObjectId>;
+  videos_id?: Array<IMulterRequest>;
 
-  images_id: Array<Schema.Types.ObjectId>;
+  images_id: Array<IMulterRequest>;
 
   tax_information: {
     origin: number;
@@ -68,20 +65,9 @@ export class ProductToUpdateDto {
     value_cofins: number;
   };
 
-  purchase_history: Array<Schema.Types.ObjectId>;
-
-  feedbacks_history: {
-    customer_id: Schema.Types.ObjectId;
-    feedback: string;
-    rating: number;
-  };
-
   constructor(body: ProductToUpdateDto) {
     this.name = body?.name;
-    this.product_code = body?.product_code;
-    this.sku = body?.sku;
     this.theme = body?.theme;
-    this.categories_id = body?.categories_id;
     this.tags = body?.tags;
     this.production_type = body?.production_type;
     this.provider_id = body?.provider_id;
@@ -91,7 +77,5 @@ export class ProductToUpdateDto {
     this.videos_id = body?.videos_id;
     this.images_id = body?.images_id;
     this.tax_information = body?.tax_information;
-    this.purchase_history = body?.purchase_history;
-    this.feedbacks_history = body?.feedbacks_history;
   }
 }

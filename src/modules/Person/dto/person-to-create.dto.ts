@@ -1,7 +1,8 @@
+import { IMulterRequest } from '@types';
 import { Schema } from 'mongoose';
 
 export class PersonToCreateDto {
-  image_profile_id: Schema.Types.ObjectId;
+  image_profile_file: IMulterRequest;
 
   person_type: string;
 
@@ -49,7 +50,7 @@ export class PersonToCreateDto {
   ];
 
   constructor(body: PersonToCreateDto) {
-    this.image_profile_id = body?.image_profile_id;
+    this.image_profile_file = body?.image_profile_file;
     this.person_type = body?.person_type;
     this.company_name = body?.company_name;
     this.fantasy_name = body?.fantasy_name;

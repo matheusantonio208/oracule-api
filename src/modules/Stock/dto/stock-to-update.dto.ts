@@ -10,11 +10,8 @@ export class StockToUpdateDto {
     },
   ];
 
-  transaction_id: Schema.Types.ObjectId;
-
   constructor(body: StockToUpdateDto) {
     this.input_amount = body?.input_amount;
     this.exists = body?.exists;
-    this.transaction_id = body?.transaction_id;
   }
 }

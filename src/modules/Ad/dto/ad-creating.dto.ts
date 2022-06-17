@@ -19,7 +19,7 @@ export class AdCreatingDto {
 
   promotions_id?: Array<Schema.Types.ObjectId>;
 
-  product_id: Schema.Types.ObjectId;
+  products_id: Array<Schema.Types.ObjectId>;
 
   shop_id: Schema.Types.ObjectId;
 
@@ -45,7 +45,7 @@ export class AdCreatingDto {
     this.ean_code = body?.ean_code;
     this.category_id = body?.category_id;
     this.promotions_id = body?.promotions_id;
-    this.product_id = body?.product_id;
+    this.products_id = body?.products_id;
     this.shop_id = body?.shop_id;
     this.profit = body?.profit;
     this.price = body?.price;

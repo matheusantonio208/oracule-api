@@ -3,10 +3,10 @@ import { Schema } from 'mongoose';
 export class CategoryToCreateDto {
   name: string;
 
-  parent_category: Schema.Types.ObjectId;
+  parent_category_id?: Schema.Types.ObjectId;
 
   constructor(body: CategoryToCreateDto) {
     this.name = body?.name;
-    this.parent_category = body?.parent_category;
+    this.parent_category_id = body?.parent_category_id;
   }
 }

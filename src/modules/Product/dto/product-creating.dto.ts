@@ -9,11 +9,11 @@ export class ProductCreatingDto {
 
   theme: string;
 
-  categories_id: Array<Schema.Types.ObjectId>;
+  category_id: Schema.Types.ObjectId;
 
   tags: Array<string>;
 
-  production_type: Array<string>;
+  production_type: string;
 
   provider_id?: Schema.Types.ObjectId;
 
@@ -68,20 +68,12 @@ export class ProductCreatingDto {
     value_cofins: number;
   };
 
-  purchase_history: Array<Schema.Types.ObjectId>;
-
-  feedbacks_history: {
-    customer_id: Schema.Types.ObjectId;
-    feedback: string;
-    rating: number;
-  };
-
   constructor(body: ProductCreatingDto) {
     this.name = body?.name;
     this.product_code = body?.product_code;
     this.sku = body?.sku;
     this.theme = body?.theme;
-    this.categories_id = body?.categories_id;
+    this.category_id = body?.category_id;
     this.tags = body?.tags;
     this.production_type = body?.production_type;
     this.provider_id = body?.provider_id;
@@ -91,15 +83,8 @@ export class ProductCreatingDto {
     this.videos_id = body?.videos_id;
     this.images_id = body?.images_id;
     this.tax_information = body?.tax_information;
-    this.purchase_history = body?.purchase_history;
-    this.feedbacks_history = body?.feedbacks_history;
   }
 }
-
-// brand_id: {
-//   type: Schema.Types.ObjectId;
-//   ref: 'brands';
-// };
 
 /* === Req Body Example ===
 {

@@ -68,12 +68,12 @@ export class ProductCreatedDto {
     value_cofins: number;
   };
 
-  purchase_history: Array<Schema.Types.ObjectId>;
+  purchase_history?: Array<Schema.Types.ObjectId>;
 
-  feedbacks_history: {
-    customer_id: Schema.Types.ObjectId;
-    feedback: string;
-    rating: number;
+  feedbacks_history?: {
+    customer_id?: Schema.Types.ObjectId;
+    feedback?: string;
+    rating?: number;
   };
 
   constructor(body: ProductCreatedDto) {
