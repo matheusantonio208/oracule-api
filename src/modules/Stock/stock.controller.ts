@@ -9,7 +9,7 @@ import {
 
 import stockRepository from './stock.repository';
 
-import stockService from './stock.service';
+// import stockService from './stock.service';
 
 class StockController {
   async store(req: IRequest, res: IResponse) {
@@ -18,7 +18,7 @@ class StockController {
       const stock: StockToCreateDto = new StockToCreateDto(req.body);
 
       // === Generate Vars === //
-      const stockProperty: number = await stockService.serviceFunction();
+      // const stockProperty: number = await stockService.serviceFunction();
 
       // === Create Dto === //
       const stockCreatingDto: StockCreatingDto = new StockCreatingDto({

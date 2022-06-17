@@ -9,7 +9,7 @@ import {
 
 import feedstockRepository from './feedstock.repository';
 
-import feedstockService from './feedstock.service';
+// import feedstockService from './feedstock.service';
 
 class FeedstockController {
   async store(req: IRequest, res: IResponse) {
@@ -20,8 +20,8 @@ class FeedstockController {
       );
 
       // === Generate Vars === //
-      const feedstockProperty: number =
-        await feedstockService.serviceFunction();
+      // const feedstockProperty: number =
+      // await feedstockService.serviceFunction();
 
       // === Create Dto === //
       const feedstockCreatingDto: FeedstockCreatingDto =

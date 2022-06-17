@@ -9,7 +9,7 @@ import {
 
 import xxxxRepository from './xxxx.repository';
 
-import xxxxService from './xxxx.service';
+// import xxxxService from './xxxx.service';
 
 class XxxxController {
   async store(req: IRequest, res: IResponse) {
@@ -18,12 +18,12 @@ class XxxxController {
       const xxxx: XxxxToCreateDto = new XxxxToCreateDto(req.body);
 
       // === Generate Vars === //
-      const xxxxProperty: number = await xxxxService.serviceFunction();
+      // const xxxxProperty: number = await xxxxService.serviceFunction();
 
       // === Create Dto === //
       const xxxxCreatingDto: XxxxCreatingDto = new XxxxCreatingDto({
         ...xxxx,
-        xxxx_property: xxxxProperty,
+        // xxxx_property: xxxxProperty,
       });
 
       // === Create Object === //

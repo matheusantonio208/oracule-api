@@ -9,7 +9,7 @@ import {
 
 import employeeRepository from './employee.repository';
 
-import employeeService from './employee.service';
+// import employeeService from './employee.service';
 
 class EmployeeController {
   async store(req: IRequest, res: IResponse) {
@@ -18,7 +18,7 @@ class EmployeeController {
       const employee: EmployeeToCreateDto = new EmployeeToCreateDto(req.body);
 
       // === Generate Vars === //
-      const employeeProperty: number = await employeeService.serviceFunction();
+      // const employeeProperty: number = await employeeService.serviceFunction();
 
       // === Create Dto === //
       const employeeCreatingDto: EmployeeCreatingDto = new EmployeeCreatingDto({

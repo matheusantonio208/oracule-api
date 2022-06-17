@@ -9,7 +9,7 @@ import {
 
 import personRepository from './person.repository';
 
-import personService from './person.service';
+// import personService from './person.service';
 
 class PersonController {
   async store(req: IRequest, res: IResponse) {
@@ -18,7 +18,7 @@ class PersonController {
       const person: PersonToCreateDto = new PersonToCreateDto(req.body);
 
       // === Generate Vars === //
-      const personProperty: number = await personService.serviceFunction();
+      // const personProperty: number = await personService.serviceFunction();
 
       // === Create Dto === //
       const personCreatingDto: PersonCreatingDto = new PersonCreatingDto({

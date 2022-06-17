@@ -12,7 +12,8 @@ import fileService from './file.service';
 class FileController {
   async store(req: MulterRequest, res: IResponse) {
     try {
-      const { typeFile, path } = req.params;
+      const { typeFile } = req.params;
+      const { path } = req.query;
       const { files } = req;
       const fileList = [];
 

@@ -12,5 +12,7 @@ export class StockCreatedDto {
 
   constructor(body: StockCreatedDto) {
     this.input_amount = body?.input_amount;
+    this.exists = body?.exists;
+    this.transaction_id = body?.transaction_id;
   }
 }

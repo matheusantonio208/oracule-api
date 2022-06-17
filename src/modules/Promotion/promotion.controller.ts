@@ -9,7 +9,7 @@ import {
 
 import promotionRepository from './promotion.repository';
 
-import promotionService from './promotion.service';
+// import promotionService from './promotion.service';
 
 class PromotionController {
   async store(req: IRequest, res: IResponse) {
@@ -20,8 +20,8 @@ class PromotionController {
       );
 
       // === Generate Vars === //
-      const promotionProperty: number =
-        await promotionService.serviceFunction();
+      // const promotionProperty: number =
+      // await promotionService.serviceFunction();
 
       // === Create Dto === //
       const promotionCreatingDto: PromotionCreatingDto =

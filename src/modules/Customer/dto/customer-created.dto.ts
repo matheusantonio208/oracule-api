@@ -1,7 +1,7 @@
 export class CustomerCreatedDto {
-  property: string;
+  name: string;
 
   constructor(body: CustomerCreatedDto) {
-    this.property = body?.property;
+    this.name = body?.name;
   }
 }

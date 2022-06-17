@@ -1,3 +1,5 @@
+import { Schema } from 'mongoose';
+
 export class FeedstockCreatedDto {
   name: string;
   variation: string;
@@ -6,6 +8,7 @@ export class FeedstockCreatedDto {
   material_synonyms: string;
   ncm: string;
   weight_in_grams: number;
+  stock_movement_id: Schema.Types.ObjectId;
 
   constructor(body: FeedstockCreatedDto) {
     this.name = body?.name;
@@ -15,5 +18,6 @@ export class FeedstockCreatedDto {
     this.material_synonyms = body?.material_synonyms;
     this.ncm = body?.ncm;
     this.weight_in_grams = body?.weight_in_grams;
+    this.stock_movement_id = body?.stock_movement_id;
   }
 }

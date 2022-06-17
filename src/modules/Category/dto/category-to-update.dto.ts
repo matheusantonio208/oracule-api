@@ -1,7 +1,11 @@
+import { Schema } from 'mongoose';
+
 export class CategoryToUpdateDto {
-  property: string;
+  name: string;
+  parent_category: Schema.Types.ObjectId;
 
   constructor(body: CategoryToUpdateDto) {
-    this.property = body?.property;
+    this.name = body?.name;
+    this.parent_category = body?.parent_category;
   }
 }

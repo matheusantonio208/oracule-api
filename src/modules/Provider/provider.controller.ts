@@ -9,7 +9,7 @@ import {
 
 import providerRepository from './provider.repository';
 
-import providerService from './provider.service';
+// import providerService from './provider.service';
 
 class ProviderController {
   async store(req: IRequest, res: IResponse) {
@@ -18,7 +18,7 @@ class ProviderController {
       const provider: ProviderToCreateDto = new ProviderToCreateDto(req.body);
 
       // === Generate Vars === //
-      const providerProperty: number = await providerService.serviceFunction();
+      // const providerProperty: number = await providerService.serviceFunction();
 
       // === Create Dto === //
       const providerCreatingDto: ProviderCreatingDto = new ProviderCreatingDto({

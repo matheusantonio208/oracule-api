@@ -1,7 +1,7 @@
-export class PromotionToUpdateDto {
-  property: string;
+export class PromotionToCreateDto {
+  ticket: string;
 
-  constructor(body: PromotionToUpdateDto) {
-    this.property = body?.property;
+  constructor(body: PromotionToCreateDto) {
+    this.ticket = body?.ticket;
   }
 }

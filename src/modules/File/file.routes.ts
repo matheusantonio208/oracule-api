@@ -6,7 +6,7 @@ export default function routes(
   baseUrl: string,
   middleware?: any,
 ): void {
-  route.post(`${baseUrl}/store/:typeFile/:path`, middleware, File.store);
+  route.post(`${baseUrl}/store/:typeFile`, middleware, File.store);
   route.get(`${baseUrl}/index/:id`, File.index);
   route.get(`${baseUrl}/show`, File.show);
   route.delete(`${baseUrl}/delete/:id`, File.delete);

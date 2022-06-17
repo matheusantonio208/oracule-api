@@ -7,9 +7,9 @@ import {
   CategoryToUpdateDto,
 } from './dto/index.dto';
 
-import categoryRepository from './ category.repository';
+import categoryRepository from './category.repository';
 
-import categoryService from './ category.service';
+// import categoryService from './category.service';
 
 class CategoryController {
   async store(req: IRequest, res: IResponse) {
@@ -18,12 +18,12 @@ class CategoryController {
       const category: CategoryToCreateDto = new CategoryToCreateDto(req.body);
 
       // === Generate Vars === //
-      const categoryProperty: number = await categoryService.serviceFunction();
+      // const categoryProperty: number = await categoryService.serviceFunction();
 
       // === Create Dto === //
       const categoryCreatingDto: CategoryCreatingDto = new CategoryCreatingDto({
         ...category,
-        //code:  categoryCode
+        // category_property: categoryProperty,
       });
 
       // === Create Object === //
@@ -76,7 +76,7 @@ class CategoryController {
 
       return res
         .status(201)
-        .json({ success_msg: `Success! Your  category was deleted` });
+        .json({ success_msg: `Success! Your category was deleted` });
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }

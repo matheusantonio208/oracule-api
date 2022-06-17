@@ -9,7 +9,7 @@ import {
 
 import customerRepository from './customer.repository';
 
-import customerService from './customer.service';
+// import customerService from './customer.service';
 
 class CustomerController {
   async store(req: IRequest, res: IResponse) {
@@ -18,7 +18,7 @@ class CustomerController {
       const customer: CustomerToCreateDto = new CustomerToCreateDto(req.body);
 
       // === Generate Vars === //
-      const customerProperty: number = await customerService.serviceFunction();
+      // const customerProperty: number = await customerService.serviceFunction();
 
       // === Create Dto === //
       const customerCreatingDto: CustomerCreatingDto = new CustomerCreatingDto({

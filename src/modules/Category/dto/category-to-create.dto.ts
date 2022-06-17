@@ -1,10 +1,8 @@
 import { Schema } from 'mongoose';
+
 export class CategoryToCreateDto {
   name: string;
-  parent_category?: {
-    type: Schema.Types.ObjectId;
-    ref: 'categories';
-  };
+  parent_category: Schema.Types.ObjectId;
 
   constructor(body: CategoryToCreateDto) {
     this.name = body?.name;

@@ -1,7 +1,9 @@
 export class ShopCreatingDto {
-  property: string;
+  name: string;
+  sku_suffix: string;
 
   constructor(body: ShopCreatingDto) {
-    this.property = body?.property;
+    this.name = body?.name;
+    this.sku_suffix = body?.sku_suffix;
   }
 }

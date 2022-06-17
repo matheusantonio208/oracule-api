@@ -43,6 +43,10 @@ const providerSchema = new Schema<ProviderCreatedDto>(
       type: Number,
       required: true,
     },
+    stock_movement_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'stock',
+    },
   },
   { timestamps: true },
 );

@@ -9,7 +9,7 @@ import {
 
 import orderRepository from './order.repository';
 
-import orderService from './order.service';
+// import orderService from './order.service';
 
 class OrderController {
   async store(req: IRequest, res: IResponse) {
@@ -18,7 +18,7 @@ class OrderController {
       const order: OrderToCreateDto = new OrderToCreateDto(req.body);
 
       // === Generate Vars === //
-      const orderProperty: number = await orderService.serviceFunction();
+      // const orderProperty: number = await orderService.serviceFunction();
 
       // === Create Dto === //
       const orderCreatingDto: OrderCreatingDto = new OrderCreatingDto({

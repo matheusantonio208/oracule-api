@@ -9,7 +9,7 @@ import {
 
 import transactionRepository from './transaction.repository';
 
-import transactionService from './transaction.service';
+// import transactionService from './transaction.service';
 
 class TransactionController {
   async store(req: IRequest, res: IResponse) {
@@ -20,8 +20,8 @@ class TransactionController {
       );
 
       // === Generate Vars === //
-      const transactionProperty: number =
-        await transactionService.serviceFunction();
+      // const transactionProperty: number =
+      // await transactionService.serviceFunction();
 
       // === Create Dto === //
       const transactionCreatingDto: TransactionCreatingDto =

@@ -1,7 +1,11 @@
 export class FileCreatingDto {
-  property: string;
+  name: string;
+  link: string;
+  type_file: string;
 
   constructor(body: FileCreatingDto) {
-    this.property = body?.property;
+    this.name = body?.name;
+    this.link = body?.link;
+    this.type_file = body?.type_file;
   }
 }

@@ -1,7 +1,7 @@
 export class FactoryCreatingDto {
-  property: string;
+  name: string;
 
   constructor(body: FactoryCreatingDto) {
-    this.property = body?.property;
+    this.name = body?.name;
   }
 }

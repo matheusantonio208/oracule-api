@@ -1,7 +1,7 @@
 export class EmployeeToUpdateDto {
-  property: string;
+  name: string;
 
   constructor(body: EmployeeToUpdateDto) {
-    this.property = body?.property;
+    this.name = body?.name;
   }
 }

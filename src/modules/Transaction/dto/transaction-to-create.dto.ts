@@ -1,22 +1,15 @@
 import { Schema } from 'mongoose';
+
 export class TransactionToCreateDto {
-  seller: {
-    type: Schema.Types.ObjectId;
-    ref: ['providers'];
-  };
-  item_id: {
-    type: Schema.Types.ObjectId;
-    ref: ['products', 'machines', 'feedstocks', 'supplies'];
-  };
+  seller: Schema.Types.ObjectId;
   description: string;
-  date: {
-    type: Date;
-    require: true;
-  };
+  item_id: Schema.Types.ObjectId;
+  date: Date;
   value: number;
 
   constructor(body: TransactionToCreateDto) {
     this.seller = body?.seller;
+    this.description = body?.description;
     this.item_id = body?.item_id;
     this.date = body?.date;
     this.value = body?.value;

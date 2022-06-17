@@ -9,7 +9,7 @@ import {
 
 import suppliesRepository from './supplies.repository';
 
-import suppliesService from './supplies.service';
+// import suppliesService from './supplies.service';
 
 class SuppliesController {
   async store(req: IRequest, res: IResponse) {
@@ -18,7 +18,7 @@ class SuppliesController {
       const supplies: SuppliesToCreateDto = new SuppliesToCreateDto(req.body);
 
       // === Generate Vars === //
-      const suppliesProperty: number = await suppliesService.serviceFunction();
+      // const suppliesProperty: number = await suppliesService.serviceFunction();
 
       // === Create Dto === //
       const suppliesCreatingDto: SuppliesCreatingDto = new SuppliesCreatingDto({
