@@ -1,5 +1,3 @@
-import { FileCreatedDto } from 'modules/File/dto/file-created.dto';
-import fileRepository from 'modules/File/file.repository';
 import { IRequest, IResponse } from '../../@types';
 import {
   ProductToCreateDto,
