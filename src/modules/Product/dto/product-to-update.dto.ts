@@ -8,7 +8,7 @@ export class ProductToUpdateDto {
 
   category_id: Schema.Types.ObjectId;
 
-  tags: Array<string>;
+  tags: string[];
 
   production_type: string;
 
@@ -22,17 +22,17 @@ export class ProductToUpdateDto {
       name: string;
       description: string;
       time_in_minutes: number;
-      feedstock_id: Array<Schema.Types.ObjectId>;
-      machines_id: Array<Schema.Types.ObjectId>;
-      tools_id: Array<Schema.Types.ObjectId>;
-      employee_id: Array<Schema.Types.ObjectId>;
+      feedstock_id: Schema.Types.ObjectId[];
+      machines_id: Schema.Types.ObjectId[];
+      tools_id: Schema.Types.ObjectId[];
+      employee_id: Schema.Types.ObjectId[];
       supplies: [
         {
           supply_id: Schema.Types.ObjectId;
           amount: number;
         },
       ];
-      files_production: Array<Schema.Types.ObjectId>;
+      files_production: Schema.Types.ObjectId[];
     },
   ];
 
@@ -45,9 +45,9 @@ export class ProductToUpdateDto {
     expiration_time_in_days?: Number;
   };
 
-  videos_id?: Array<IMulterRequest>;
+  videos_id?: IMulterRequest[];
 
-  images_id: Array<IMulterRequest>;
+  images_id: IMulterRequest[];
 
   tax_information: {
     origin: number;
