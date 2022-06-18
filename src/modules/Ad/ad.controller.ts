@@ -16,6 +16,7 @@
  * Aluguel
  * Taxa do Cartão
  */
+import { getValues } from 'utils/json-to-csv';
 import { IRequest, IResponse } from '../../@types';
 import { ProductCreatedDto } from '../Product/dto/product-created.dto';
 import productRepository from '../Product/product.repository';
@@ -35,16 +36,23 @@ class AdController {
     try {
       const ad: AdToCreateDto = new AdToCreateDto(req.body);
       const product: ProductCreatedDto = await productRepository.getOneById(
-        ad.product_id,
+        ad.products_id[0],
       );
       const shop: ShopCreatedDto = await shopRepository.getOneById(ad.shop_id);
 
-      const skuAd: string = adService.generateSku(product.sku, shop.sku_suffix);
+      const adCode: string = await adService.generateAdCode();
+      const skuAd: string = adService.generateSku(
+        product.sku,
+        adCode,
+        shop.sku_suffix,
+      );
       const eanCodeAd = await adService.generateEan13(
         ad.company_id,
         ad.country_ean_code,
-        product.product_code,
+        adCode,
       );
+
+      //TODO: Generate Sum Cost Product of all products in ad
       const costs = [product.production_cost];
       const priceWithCommissionShop = await adService.createPrice(
         ad.profit,
@@ -55,6 +63,7 @@ class AdController {
 
       const adCreating: AdCreatingDto = new AdCreatingDto({
         ...ad,
+        ad_code: adCode,
         ean_code: eanCodeAd,
         sku: skuAd,
         price: priceWithCommissionShop,
@@ -120,6 +129,19 @@ class AdController {
       const adUpdated: AdCreatedDto = await adRepository.updateById(id, data);
 
       return res.status(201).json(adUpdated);
+    } catch (error) {
+      return res.status(401).json({ error_msg: `Error! ${error}` });
+    }
+  }
+
+  async download(req: IRequest, res: IResponse) {
+    try {
+      const values = getValues(req.body);
+      console.log(values);
+
+      adService.exportCSV(values);
+
+      return res.status(201).json('Exported!');
     } catch (error) {
       return res.status(401).json({ error_msg: `Error! ${error}` });
     }

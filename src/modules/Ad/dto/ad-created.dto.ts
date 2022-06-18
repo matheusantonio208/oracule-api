@@ -3,11 +3,13 @@ import { Schema } from 'mongoose';
 export class AdCreatedDto {
   title: string;
 
+  ad_code: string;
+
   description: string;
 
-  additional_img_id: Array<Schema.Types.ObjectId>;
+  additional_img_link: Array<string>;
 
-  additional_vid_id: Array<Schema.Types.ObjectId>;
+  additional_vid_link: Array<string>;
 
   status: string;
 
@@ -39,8 +41,8 @@ export class AdCreatedDto {
   constructor(body: AdCreatedDto) {
     this.title = body?.title;
     this.description = body?.description;
-    this.additional_img_id = body?.additional_img_id;
-    this.additional_vid_id = body?.additional_vid_id;
+    this.additional_img_link = body?.additional_img_link;
+    this.additional_vid_link = body?.additional_vid_link;
     this.status = body?.status;
     this.ean_code = body?.ean_code;
     this.category_id = body?.category_id;
@@ -49,6 +51,5 @@ export class AdCreatedDto {
     this.shop_id = body?.shop_id;
     this.profit = body?.profit;
     this.price = body?.price;
-    this.price_history = body?.price_history;
   }
 }

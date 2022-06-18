@@ -1,4 +1,3 @@
-import { IMulterRequest } from '@types/';
 import { Schema } from 'mongoose';
 
 export class AdToUpdateDto {
@@ -6,15 +5,15 @@ export class AdToUpdateDto {
 
   description: string;
 
-  additional_img_file: Array<IMulterRequest>;
+  additional_img_link: string[];
 
-  additional_vid_file: Array<IMulterRequest>;
+  additional_vid_link: string[];
 
   status: string;
 
   category_id: Schema.Types.ObjectId;
 
-  promotions_id?: Array<Schema.Types.ObjectId>;
+  promotions_id?: Schema.Types.ObjectId[];
 
   product_id: Schema.Types.ObjectId;
 
@@ -30,8 +29,8 @@ export class AdToUpdateDto {
 
   constructor(body: AdToUpdateDto) {
     this.description = body?.description;
-    this.additional_img_file = body?.additional_img_file;
-    this.additional_vid_file = body?.additional_vid_file;
+    this.additional_img_link = body?.additional_img_link;
+    this.additional_vid_link = body?.additional_vid_link;
     this.status = body?.status;
     this.category_id = body?.category_id;
     this.promotions_id = body?.promotions_id;

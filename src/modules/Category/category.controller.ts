@@ -1,4 +1,5 @@
 import { IRequest, IResponse } from '@types';
+import { exportToCsv } from 'utils/json-to-csv';
 import categoryRepository from './category.repository';
 import {
   CategoryToCreateDto,

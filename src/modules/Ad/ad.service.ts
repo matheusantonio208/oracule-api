@@ -1,24 +1,40 @@
 import { ean13 } from 'ean-check';
 import { Schema } from 'mongoose';
+import { exportToCsv } from 'utils/json-to-csv';
 
 import companyRepository from '../Company/company.repository';
 import { CompanyCreatedDto } from '../Company/dto/company-created.dto';
 import { EanCreatingDto, EanCreatedDto } from '../Ean/dto/index.dto';
 import eanRepository from '../Ean/ean.repository';
 import shopService from '../Shop/shop.service';
+import adRepository from './ad.repository';
+import { header } from './utils/bling-product-csv-file';
 import countryCodeEan from './utils/country-code-ean-13.json';
 
 class AdService {
   keywordList = [];
 
-  generateSku(sku_preffix: string, sku_suffix: string) {
-    return `${sku_preffix}${sku_suffix}`;
+  async generateAdCode() {
+    const ads = await adRepository.listAll('ad_code', 'asc', null, null);
+
+    if (ads.length > 0) {
+      const lastAdCode = Number(ads[Object.keys(ads).sort().pop()].ad_code);
+      const adCode = String(lastAdCode + 1).padStart(4, '0');
+
+      return adCode;
+    }
+
+    return '0000';
+  }
+
+  generateSku(sku_preffix: string, ad_code: string, sku_suffix: string) {
+    return `${sku_preffix}${ad_code}${sku_suffix}`;
   }
 
   async generateEan13(
     companyId: Schema.Types.ObjectId,
     countryEanCode: string,
-    productCode: string,
+    adCode: string,
   ): Promise<string> {
     let countryCode;
 
@@ -32,12 +48,15 @@ class AdService {
       countryCode = countryCodeEan[countryEanCode][i];
     }
     const ean13Code = await ean13.generate(
-      Number(`${countryCode}${cnpjDigits}${productCode}`),
+      Number(`${countryCode}${cnpjDigits}${adCode}`),
     );
     const isValidEan13 = this.verifyEan(ean13Code);
 
     if (isValidEan13) {
-      const eanCreating = new EanCreatingDto({ ean: ean13Code });
+      const eanCreating = new EanCreatingDto({
+        _id: ean13Code,
+        ean: ean13Code,
+      });
       const eanCreated: EanCreatedDto = await eanRepository.create(eanCreating);
       return eanCreated.ean;
     }
@@ -46,7 +65,7 @@ class AdService {
   }
 
   async verifyEan(ean: string): Promise<boolean> {
-    const isValid = !!(await eanRepository.getOneByEan(ean));
+    const isValid = !!(await eanRepository.getOneById(ean));
 
     return isValid;
   }
@@ -165,6 +184,11 @@ class AdService {
       );
 
     return priceWithCommissionShop;
+  }
+
+  exportCSV(data) {
+    if (exportToCsv(header, data, 'ads')) return true;
+    throw new Error('Error on export CSV');
   }
 }
 

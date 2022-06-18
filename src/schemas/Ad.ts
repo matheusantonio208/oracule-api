@@ -6,6 +6,7 @@ const adSchema = new Schema<AdCreatedDto>(
   {
     title: String,
     description: String,
+    ad_code: String,
     additional_img_id: [
       {
         type: Schema.Types.ObjectId,

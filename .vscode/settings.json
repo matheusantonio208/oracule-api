@@ -9,5 +9,6 @@
     "config": true,
     "dist": true,
     "node_modules": true
-  }
+  },
+  "cSpell.words": ["csvwriter"]
 }

@@ -3,6 +3,8 @@ import { Schema } from 'mongoose';
 export class AdCreatingDto {
   title: string;
 
+  ad_code: string;
+
   description: string;
 
   additional_img_link: Array<string>;

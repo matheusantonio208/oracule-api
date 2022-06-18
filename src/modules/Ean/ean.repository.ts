@@ -14,7 +14,7 @@ class EanRepository {
     throw new Error(`Error to create ean`);
   }
 
-  async getOneById(id: Schema.Types.ObjectId): Promise<EanCreatedDto> {
+  async getOneById(id: string): Promise<EanCreatedDto> {
     const ean: EanCreatedDto = await Ean.findById(id);
     if (ean) return ean;
 
@@ -59,7 +59,7 @@ class EanRepository {
     throw new Error(`Error to update ean`);
   }
 
-  async deleteById(id: Schema.Types.ObjectId): Promise<Boolean> {
+  async deleteById(id: string): Promise<Boolean> {
     if (await Ean.deleteOne({ _id: id })) return true;
 
     throw new Error(`Error to delete ean`);
