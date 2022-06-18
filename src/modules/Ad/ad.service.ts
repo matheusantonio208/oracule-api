@@ -186,7 +186,7 @@ class AdService {
     return priceWithCommissionShop;
   }
 
-  exportCSV(data) {
+  exportCSV(data: any[]) {
     if (exportToCsv(header, data, 'ads')) return true;
     throw new Error('Error on export CSV');
   }

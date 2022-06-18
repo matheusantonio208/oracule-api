@@ -16,7 +16,6 @@
  * Aluguel
  * Taxa do Cartão
  */
-import { getValues } from 'utils/json-to-csv';
 import { IRequest, IResponse } from '../../@types';
 import { ProductCreatedDto } from '../Product/dto/product-created.dto';
 import productRepository from '../Product/product.repository';
@@ -30,6 +29,7 @@ import {
   AdCreatedDto,
   AdToUpdateDto,
 } from './dto/index.dto';
+import { getValues } from './utils/bling-product-csv-file';
 
 class AdController {
   async store(req: IRequest, res: IResponse) {
@@ -137,8 +137,6 @@ class AdController {
   async download(req: IRequest, res: IResponse) {
     try {
       const values = getValues(req.body);
-      console.log(values);
-
       adService.exportCSV(values);
 
       return res.status(201).json('Exported!');
