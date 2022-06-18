@@ -1,4 +1,3 @@
-import { IMulterRequest } from '@types';
 import { Schema } from 'mongoose';
 
 export class ProductToCreateDto {
@@ -32,7 +31,7 @@ export class ProductToCreateDto {
           amount: number;
         },
       ];
-      files_production: Array<IMulterRequest>;
+      files_production: Array<Schema.Types.ObjectId>;
     },
   ];
 
@@ -45,9 +44,9 @@ export class ProductToCreateDto {
     expiration_time_in_days?: Number;
   };
 
-  videos_id?: Array<IMulterRequest>;
+  videos_id?: Array<Schema.Types.ObjectId>;
 
-  images_id: Array<IMulterRequest>;
+  images_id: Array<Schema.Types.ObjectId>;
 
   tax_information: {
     origin: number;

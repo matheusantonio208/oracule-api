@@ -13,7 +13,7 @@ import productService from './product.service';
 class ProductController {
   async store(req: IRequest, res: IResponse) {
     try {
-      const { other_transactions, product_code } = req.body;
+      const { other_transactions } = req.body;
 
       const product: ProductToCreateDto = new ProductToCreateDto(req.body);
 
@@ -27,17 +27,8 @@ class ProductController {
         other_transactions,
       );
 
-      //= == Upload Images Minify ===
-      const imagesMinifyUploaded: Array<FileCreatedDto> =
-        await fileRepository.getManyById(product_code);
-      const imagesMinifyIds: Array<string> = imagesMinifyUploaded.map(
-        (image) => image.link,
-      );
-      //= == Upload Files ===
-
       const productCreating: ProductCreatingDto = new ProductCreatingDto({
         ...product,
-        images_id: imagesMinifyIds,
         product_code: productCode,
         sku: productSku,
         production_cost: productCost,
