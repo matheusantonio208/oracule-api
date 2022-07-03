@@ -2,11 +2,7 @@ import { Router } from 'express';
 
 import Product from './product.controller';
 
-export default function routes(
-  route: Router,
-  baseUrl: string,
-  middleware?: any,
-): void {
+export default function routes(route: Router, baseUrl: string): void {
   route.post(`${baseUrl}/store`, Product.store);
   route.get(`${baseUrl}/index/:id`, Product.index);
   route.get(`${baseUrl}/show`, Product.show);

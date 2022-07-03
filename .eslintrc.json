@@ -22,6 +22,7 @@
     "eslint-plugin-import-helpers"
   ],
   "rules": {
+    "import/no-default-export": "error",
     "import/no-unresolved": [2, { "commonjs": true, "amd": true }],
     "import/named": 2,
     "import/namespace": 2,

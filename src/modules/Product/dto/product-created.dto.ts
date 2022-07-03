@@ -3,6 +3,8 @@ import { Schema } from 'mongoose';
 export class ProductCreatedDto {
   name: string;
 
+  model: Schema.Types.ObjectId;
+
   product_code: string;
 
   sku: string;
@@ -13,7 +15,7 @@ export class ProductCreatedDto {
 
   tags: string[];
 
-  production_type: string[];
+  production_type: string;
 
   provider_id?: Schema.Types.ObjectId;
 
@@ -48,9 +50,9 @@ export class ProductCreatedDto {
     expiration_time_in_days?: Number;
   };
 
-  videos_id?: Schema.Types.ObjectId[];
+  videos_link?: Schema.Types.ObjectId[];
 
-  images_id: Schema.Types.ObjectId[];
+  images_link: Schema.Types.ObjectId[];
 
   tax_information: {
     origin: number;
@@ -68,13 +70,20 @@ export class ProductCreatedDto {
     value_cofins: number;
   };
 
-  purchase_history?: Schema.Types.ObjectId[];
+  purchase_history?: [
+    {
+      order_id: Schema.Types.ObjectId;
+      order_date: Date;
+    },
+  ];
 
-  feedbacks_history?: {
-    customer_id?: Schema.Types.ObjectId;
-    feedback?: string;
-    rating?: number;
-  };
+  feedbacks_history?: [
+    {
+      customer_id?: Schema.Types.ObjectId;
+      feedback?: string;
+      rating?: number;
+    },
+  ];
 
   constructor(body: ProductCreatedDto) {
     this.name = body?.name;
@@ -88,48 +97,10 @@ export class ProductCreatedDto {
     this.production_cost = body?.production_cost;
     this.production_procedure = body?.production_procedure;
     this.datasheet = body?.datasheet;
-    this.videos_id = body?.videos_id;
-    this.images_id = body?.images_id;
+    this.videos_link = body?.videos_link;
+    this.images_link = body?.images_link;
     this.tax_information = body?.tax_information;
     this.purchase_history = body?.purchase_history;
     this.feedbacks_history = body?.feedbacks_history;
   }
 }
-
-/* === Req Body Example ===
-{
-	"images_id": "123",
-	"video_id": "123",
-	"name": "Caneca Velozes e Furiosos em Tóquio",
-	"product_code": "0001",
-	"brand_id": "123",
-	"categories_id": "1",
-	"tags": "Filmes, Carros, Tóquio",
-	"production_type": "own",
-	"production_procedure": [{
-		"order_step": 0,
-		"name_step": "Imprimir Arte da Caneca",
-		"description_step": "Imprimir a arte da caneca na impressora",
-		"time_in_minutes": 1,
-		"machine_id": "123",
-		"tools_id": ["123", "456"],
-		"employee_id": ["123"],
-		"feedstock_id": ["123"],
-		"supplies": [{
-			"supply": "123",
-			"amount": 1
-		}],
-		"files_production" : [{
-			"name": "arte",
-			"path": "src/assets/images/products/canecas/filmes/Velozes e furiosos/ Caneca Velozes e Furiosos em Tóquio"
-		}],
-		"datasheet": [{
-			"weight_in_grams": 420,
-			"width_in_cm": 10,
-			"height_in_cm": 13,
-			"depth_in_cm": 17,
-			"material": "Cerâmica"
-		}]
-}]
-}
-*/

@@ -56,12 +56,13 @@ class ProductRepository {
       data,
       (error, document) => {
         if (!error) return document;
+        throw error;
       },
     );
 
     if (updatedProduct) return updatedProduct;
 
-    throw new Error(`Error to update product`);
+    throw new Error(`Error to update ad`);
   }
 
   async deleteById(id: Schema.Types.ObjectId): Promise<Boolean> {

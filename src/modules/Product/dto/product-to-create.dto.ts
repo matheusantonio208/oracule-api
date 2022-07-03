@@ -3,6 +3,8 @@ import { Schema } from 'mongoose';
 export class ProductToCreateDto {
   name: string;
 
+  model: Schema.Types.ObjectId;
+
   theme: string;
 
   category_id: Schema.Types.ObjectId;
@@ -12,8 +14,6 @@ export class ProductToCreateDto {
   production_type: string;
 
   provider_id?: Schema.Types.ObjectId;
-
-  production_cost: number;
 
   production_procedure: [
     {
@@ -44,9 +44,9 @@ export class ProductToCreateDto {
     expiration_time_in_days?: Number;
   };
 
-  videos_id?: Schema.Types.ObjectId[];
+  videos_link?: string[];
 
-  images_id: Schema.Types.ObjectId[];
+  images_link: string[];
 
   tax_information: {
     origin: number;
@@ -70,11 +70,10 @@ export class ProductToCreateDto {
     this.tags = body?.tags;
     this.production_type = body?.production_type;
     this.provider_id = body?.provider_id;
-    this.production_cost = body?.production_cost;
     this.production_procedure = body?.production_procedure;
     this.datasheet = body?.datasheet;
-    this.videos_id = body?.videos_id;
-    this.images_id = body?.images_id;
+    this.videos_link = body?.videos_link;
+    this.images_link = body?.images_link;
     this.tax_information = body?.tax_information;
   }
 }
